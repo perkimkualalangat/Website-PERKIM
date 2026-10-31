@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berita | PERKIM Kuala Langat (draf)</title>
+  <meta name="description" content="Indeks tajuk berita PERKIM Kebangsaan dengan pautan ke laman rasmi.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1f7a34">
+  <link rel="icon" href="/assets/img/logo-perkim-64.png" sizes="64x64" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/img/logo-perkim-180.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Langkau ke kandungan</a>
+
+  <div class="draft-banner" role="note">
+    <div class="container draft-banner__inner">
+      <strong>Indeks</strong>
+      <span>Hanya tajuk, tarikh, kategori dan pautan disimpan. Teks penuh artikel tidak disalin
+        ke laman ini.</span>
+    </div>
+  </div>
+
+  <div id="site-header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Jejak navigasi">
+          <ol>
+            <li><a href="/">Utama</a></li>
+            <li><span aria-current="page">Berita</span></li>
+          </ol>
+        </nav>
+        <h1>Berita &amp; Media</h1>
+        <p>Indeks tajuk terkini daripada laman rasmi PERKIM. Klik tajuk untuk membaca artikel
+           penuh di sumber asal.</p>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="notice" role="note">
+        <strong>Bukan arkib penuh.</strong> Senarai ini diambil daripada halaman utama dan bar
+        sisi laman rasmi, bukan semua ratusan artikel. Arkib penuh boleh diambil dengan
+        <code>tools/scrape_perkim.py</code>.
+      </div>
+
+      <div class="chips" id="berita-filter" aria-label="Penapis kategori"></div>
+      <p class="card__meta" data-berita-count aria-live="polite"></p>
+      <p class="field__hint" id="arkib-ringkasan" hidden></p>
+
+      <ul class="news-list" id="berita-list"></ul>
+
+      <div class="source-note">
+        <p><strong>Hak cipta.</strong> Tajuk berita dan pautan ialah rujukan kepada laman rasmi
+          PERKIM (<a href="https://eng.perkim.net.my/" target="_blank" rel="noopener noreferrer">eng.perkim.net.my</a>).
+          Teks penuh tidak disalin. Untuk penerbitan semula, hubungi
+          <a href="mailto:info@perkim.net.my">info@perkim.net.my</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>

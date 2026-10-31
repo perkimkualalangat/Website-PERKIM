@@ -1,0 +1,139 @@
+{
+  "tajuk": "Buku Teks Kelas Pengajian Islam PERKIM",
+  "sumber": "PERKIM Kebangsaan · Edisi Pertama",
+  "kumpulan": [
+    {
+      "id": "fardu-ain",
+      "tajuk": "Bimbingan Asas Fardhu ‘Ain",
+      "keterangan": "Modul asas ibadah untuk peserta baharu.",
+      "buku": [
+        {
+          "id": "fardu-ain",
+          "tajuk": "Bimbingan Asas Fardhu ‘Ain",
+          "keterangan": "86 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/fardu-ain.jpg",
+          "pdf": "/assets/books/kelas-perkim/fardu-ain.pdf"
+        }
+      ]
+    },
+    {
+      "id": "pra-asas",
+      "tajuk": "Kelas Pra Asas",
+      "keterangan": "Pengenalan sebelum memasuki tahap Asas.",
+      "buku": [
+        {
+          "id": "pra-asas",
+          "tajuk": "Pengajian Islam — Tahap Pra Asas",
+          "keterangan": "46 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/pra-asas.jpg",
+          "pdf": "/assets/books/kelas-perkim/pra-asas.pdf"
+        }
+      ]
+    },
+    {
+      "id": "asas",
+      "tajuk": "Kelas Asas",
+      "keterangan": "Empat subjek teras pada tahap permulaan.",
+      "buku": [
+        {
+          "id": "asas-akhlak",
+          "tajuk": "Akhlak — Tahap Asas",
+          "keterangan": "66 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/asas-akhlak.jpg",
+          "pdf": "/assets/books/kelas-perkim/asas-akhlak.pdf"
+        },
+        {
+          "id": "asas-akidah",
+          "tajuk": "Akidah — Tahap Asas",
+          "keterangan": "92 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/asas-akidah.jpg",
+          "pdf": "/assets/books/kelas-perkim/asas-akidah.pdf"
+        },
+        {
+          "id": "asas-fekah",
+          "tajuk": "Fekah — Tahap Asas",
+          "keterangan": "456 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/asas-fekah.jpg",
+          "pdf": "/assets/books/kelas-perkim/asas-fekah.pdf"
+        },
+        {
+          "id": "asas-sirah",
+          "tajuk": "Sirah — Tahap Asas",
+          "keterangan": "44 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/asas-sirah.jpg",
+          "pdf": "/assets/books/kelas-perkim/asas-sirah.pdf"
+        }
+      ]
+    },
+    {
+      "id": "pertengahan",
+      "tajuk": "Kelas Pertengahan",
+      "keterangan": "Subjek yang sama, dibincangkan lebih mendalam.",
+      "buku": [
+        {
+          "id": "pertengahan-akhlak",
+          "tajuk": "Akhlak — Tahap Pertengahan",
+          "keterangan": "149 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/pertengahan-akhlak.jpg",
+          "pdf": "/assets/books/kelas-perkim/pertengahan-akhlak.pdf"
+        },
+        {
+          "id": "pertengahan-akidah",
+          "tajuk": "Akidah — Tahap Pertengahan",
+          "keterangan": "74 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/pertengahan-akidah.jpg",
+          "pdf": "/assets/books/kelas-perkim/pertengahan-akidah.pdf"
+        },
+        {
+          "id": "pertengahan-fekah",
+          "tajuk": "Fekah — Tahap Pertengahan",
+          "keterangan": "266 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/pertengahan-fekah.jpg",
+          "pdf": "/assets/books/kelas-perkim/pertengahan-fekah.pdf"
+        },
+        {
+          "id": "pertengahan-sirah",
+          "tajuk": "Sirah — Tahap Pertengahan",
+          "keterangan": "59 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/pertengahan-sirah.jpg",
+          "pdf": "/assets/books/kelas-perkim/pertengahan-sirah.pdf"
+        }
+      ]
+    },
+    {
+      "id": "lanjutan",
+      "tajuk": "Kelas Lanjutan",
+      "keterangan": "Tahap tertinggi dalam kurikulum kelas pengajian.",
+      "buku": [
+        {
+          "id": "lanjutan-akhlak",
+          "tajuk": "Akhlak — Tahap Lanjutan",
+          "keterangan": "109 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/lanjutan-akhlak.jpg",
+          "pdf": "/assets/books/kelas-perkim/lanjutan-akhlak.pdf"
+        },
+        {
+          "id": "lanjutan-akidah",
+          "tajuk": "Akidah — Tahap Lanjutan",
+          "keterangan": "131 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/lanjutan-akidah.jpg",
+          "pdf": "/assets/books/kelas-perkim/lanjutan-akidah.pdf"
+        },
+        {
+          "id": "lanjutan-fekah",
+          "tajuk": "Fekah — Tahap Lanjutan",
+          "keterangan": "114 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/lanjutan-fekah.jpg",
+          "pdf": "/assets/books/kelas-perkim/lanjutan-fekah.pdf"
+        },
+        {
+          "id": "lanjutan-sirah",
+          "tajuk": "Sirah — Tahap Lanjutan",
+          "keterangan": "156 halaman · Edisi Pertama",
+          "cover": "/assets/books/covers/lanjutan-sirah.jpg",
+          "pdf": "/assets/books/kelas-perkim/lanjutan-sirah.pdf"
+        }
+      ]
+    }
+  ]
+}

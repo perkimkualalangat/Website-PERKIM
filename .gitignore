@@ -1,0 +1,16 @@
+# Fail sampah Windows
+Thumbs.db
+desktop.ini
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*~
+.vscode/
+.idea/
+
+# Log setempat
+*.log

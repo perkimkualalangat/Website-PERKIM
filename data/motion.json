@@ -1,0 +1,488 @@
+{
+  "versi": "1.0",
+  "dikemas_kini": "2026-10-31",
+  "prinsip": [
+    "Satu gerakan per tindakan.",
+    "Hanya transform dan opacity untuk gerakan; warna dan sempadan untuk isyarat.",
+    "Tiada durasi melebihi 400ms di luar lapisan penuh.",
+    "Lantunan maksimum 4%; skala tekan tidak lebih kecil daripada 0.97.",
+    "Setiap keadaan ada isyarat warna, bukan gerakan semata-mata.",
+    "Semua sasaran sentuh sekurang-kurangnya 44px pada skrin mudah alih."
+  ],
+  "token": {
+    "durasi": {
+      "instant": "90ms",
+      "fast": "160ms",
+      "base": "240ms",
+      "slow": "380ms"
+    },
+    "lengkung": {
+      "out": "cubic-bezier(0.22, 1, 0.36, 1)",
+      "in-out": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "press": "cubic-bezier(0.34, 1.4, 0.64, 1)"
+    },
+    "jarak": {
+      "press-scale": 0.97,
+      "lift-y": "1px",
+      "slide-x": "2px"
+    }
+  },
+  "komponen": [
+    {
+      "id": "nav-pautan",
+      "keluarga": "Navigasi",
+      "komponen": "Pautan navigasi utama",
+      "pemilih": ".mainnav a",
+      "picu": ["hover", "fokus", "semasa"],
+      "gerakan": {
+        "hover": "garis bawah 2px berkembang dari tengah",
+        "fokus": "cincin fokus 2px, tiada anjakan"
+      },
+      "kurang_gerakan": "garis bawah muncul terus, tiada perkembangan",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "nav-dropdown",
+      "keluarga": "Navigasi",
+      "komponen": "Menu jatuh (dropdown)",
+      "pemilih": ".nav__caret",
+      "picu": ["buka", "tutup", "fokus"],
+      "gerakan": {
+        "buka": "pudar 0-1 + luncur 4px ke bawah",
+        "tutup": "pudar 1-0, 160ms"
+      },
+      "kurang_gerakan": "pudar sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "nav-toggle",
+      "keluarga": "Navigasi",
+      "komponen": "Butang Menu mudah alih",
+      "pemilih": ".nav-toggle",
+      "picu": ["tekan", "buka", "tutup"],
+      "gerakan": {
+        "tekan": "skala 0.97, 90ms",
+        "buka": "tiga bar bertukar menjadi X, 240ms"
+      },
+      "kurang_gerakan": "warna sahaja, ikon bertukar serta-merta",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "skip-link",
+      "keluarga": "Navigasi",
+      "komponen": "Pautan langkau ke kandungan",
+      "pemilih": ".skip-link",
+      "picu": ["fokus"],
+      "gerakan": {
+        "fokus": "turun 8px ke dalam skrin, 160ms"
+      },
+      "kurang_gerakan": "muncul serta-merta",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "carian-buka",
+      "keluarga": "Carian",
+      "komponen": "Butang buka carian",
+      "pemilih": ".nav-search",
+      "picu": ["hover", "tekan", "fokus"],
+      "gerakan": {
+        "hover": "latar lembut, 160ms",
+        "tekan": "skala 0.97"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "carian-dialog",
+      "keluarga": "Carian",
+      "komponen": "Dialog carian",
+      "pemilih": ".search-dialog",
+      "picu": ["buka", "tutup"],
+      "gerakan": {
+        "buka": "pudar + naik 8px, 240ms, @starting-style",
+        "tutup": "pudar 160ms"
+      },
+      "kurang_gerakan": "pudar sahaja, tiada anjakan",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "carian-medan",
+      "keluarga": "Carian",
+      "komponen": "Medan carian",
+      "pemilih": ".search-dialog__field",
+      "picu": ["fokus", "taip"],
+      "gerakan": {
+        "fokus": "sempadan bertukar hijau, 160ms"
+      },
+      "kurang_gerakan": "perubahan warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "carian-hasil",
+      "keluarga": "Carian",
+      "komponen": "Baris hasil carian",
+      "pemilih": ".search-result",
+      "picu": ["hover", "fokus", "masuk"],
+      "gerakan": {
+        "masuk": "pudar + naik 4px, berturutan 20ms",
+        "hover": "latar lembut"
+      },
+      "kurang_gerakan": "muncul terus tanpa turutan",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "butang-utama",
+      "keluarga": "Butang",
+      "komponen": "Butang utama (.btn)",
+      "pemilih": ".btn",
+      "picu": ["hover", "tekan", "lepas", "fokus"],
+      "gerakan": {
+        "hover": "naik 1px + bayang halus",
+        "tekan": "skala 0.97, 90ms",
+        "lepas": "balik 1.00 dengan lantunan 4%, 380ms"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "butang-hantu",
+      "keluarga": "Butang",
+      "komponen": "Butang garis (.btn--ghost)",
+      "pemilih": ".btn--ghost",
+      "picu": ["hover", "tekan", "fokus"],
+      "gerakan": {
+        "hover": "latar hijau lembut 8%",
+        "tekan": "skala 0.97"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "butang-emas",
+      "keluarga": "Butang",
+      "komponen": "Butang emas (.btn--gold)",
+      "pemilih": ".btn--gold",
+      "picu": ["hover", "tekan", "fokus"],
+      "gerakan": {
+        "hover": "naik 1px, kilau halus pada sempadan",
+        "tekan": "skala 0.97"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "butang-kecil",
+      "keluarga": "Butang",
+      "komponen": "Butang kecil (.btn--sm)",
+      "pemilih": ".btn--sm",
+      "picu": ["hover", "tekan", "fokus"],
+      "gerakan": {
+        "tekan": "skala 0.98 sahaja (teks kecil, elak kabur)"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "butang-peta",
+      "keluarga": "Pautan luar",
+      "komponen": "Butang buka Google Maps",
+      "pemilih": ".btn-map",
+      "picu": ["hover", "tekan", "lepas", "fokus", "memuat", "gagal"],
+      "gerakan": {
+        "hover": "naik 1px, ikon pin naik 2px, sempadan hijau",
+        "tekan": "skala 0.97, isi hijau pekat, 90ms",
+        "lepas": "balik dengan lantunan 4%, 380ms",
+        "memuat": "label bertukar, anak panah bergeser 4px",
+        "gagal": "toast masuk dari bawah, 240ms"
+      },
+      "kurang_gerakan": "warna dan sempadan sahaja, tiada skala atau anjakan",
+      "sasaran_px": 48,
+      "status": "siap"
+    },
+    {
+      "id": "pautan-sosial",
+      "keluarga": "Pautan luar",
+      "komponen": "Ikon media sosial footer",
+      "pemilih": ".footer__social",
+      "picu": ["hover", "fokus", "tekan"],
+      "gerakan": {
+        "hover": "bulatan terang + ikon naik 1px",
+        "tekan": "skala 0.94"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "link-chip",
+      "keluarga": "Pautan luar",
+      "komponen": "Cip pautan bahagian PERKIM",
+      "pemilih": ".link-chip",
+      "picu": ["hover", "tekan", "fokus"],
+      "gerakan": {
+        "hover": "sempadan hijau + naik 1px",
+        "tekan": "skala 0.98"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "kad-status",
+      "keluarga": "Kad",
+      "komponen": "Kad status laman",
+      "pemilih": ".card",
+      "picu": ["hover", "fokus"],
+      "gerakan": {
+        "hover": "naik 2px + bayang meluas, 240ms",
+        "fokus": "cincin fokus pada pautan dalam"
+      },
+      "kurang_gerakan": "sempadan sahaja, tiada naik",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "kad-buku",
+      "keluarga": "Kad",
+      "komponen": "Kad buku (rak PDF)",
+      "pemilih": ".book-card",
+      "picu": ["hover", "tekan", "fokus", "buka"],
+      "gerakan": {
+        "hover": "kulit condong 0deg -> -1deg, naik 2px",
+        "tekan": "skala 0.98",
+        "buka": "lapisan pembaca masuk 240ms"
+      },
+      "kurang_gerakan": "naik dibuang, hanya sempadan",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "berita-baris",
+      "keluarga": "Kad",
+      "komponen": "Baris berita",
+      "pemilih": ".news-item",
+      "picu": ["hover", "fokus"],
+      "gerakan": {
+        "hover": "tajuk bergaris bawah, baris tidak bergerak"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "kad-kepimpinan",
+      "keluarga": "Kad",
+      "komponen": "Kad kepimpinan",
+      "pemilih": ".lead-card",
+      "picu": ["hover", "fokus"],
+      "gerakan": {
+        "hover": "sempadan hijau lembut, tiada naik (kad besar)"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "pembaca-pdf",
+      "keluarga": "Media",
+      "komponen": "Lapisan pembaca PDF",
+      "pemilih": ".book-overlay",
+      "picu": ["buka", "tutup", "muat", "gagal"],
+      "gerakan": {
+        "buka": "pudar 240ms, kandungan naik 8px",
+        "muat": "rangka halaman berdenyut halus",
+        "gagal": "mesej masuk 240ms"
+      },
+      "kurang_gerakan": "pudar sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "pembaca-pemilih",
+      "keluarga": "Media",
+      "komponen": "Pemilih buku dalam pembaca",
+      "pemilih": ".book-overlay__select",
+      "picu": ["fokus", "tukar"],
+      "gerakan": {
+        "tukar": "pudar kandungan 160ms sebelum halaman baharu"
+      },
+      "kurang_gerakan": "tukar serta-merta",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "borang-medan",
+      "keluarga": "Borang",
+      "komponen": "Medan borang",
+      "pemilih": ".field",
+      "picu": ["fokus", "tidak sah", "sah"],
+      "gerakan": {
+        "fokus": "sempadan hijau + cincin 3px 12%",
+        "tidak sah": "sempadan merah, gegaran 2px x3 (240ms)"
+      },
+      "kurang_gerakan": "warna sahaja, tiada gegaran",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "borang-status",
+      "keluarga": "Borang",
+      "komponen": "Mesej status borang",
+      "pemilih": ".form__status",
+      "picu": ["masuk", "tukar"],
+      "gerakan": {
+        "masuk": "pudar + naik 4px, 240ms"
+      },
+      "kurang_gerakan": "muncul terus",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "penapis-chip",
+      "keluarga": "Penapis",
+      "komponen": "Cip penapis berita",
+      "pemilih": ".chip",
+      "picu": ["hover", "tekan", "aktif"],
+      "gerakan": {
+        "hover": "latar lembut 160ms",
+        "aktif": "isi hijau, teks putih, 200ms",
+        "tekan": "skala 0.97"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "footer-pautan",
+      "keluarga": "Navigasi",
+      "komponen": "Pautan footer",
+      "pemilih": ".footer__links",
+      "picu": ["hover", "fokus"],
+      "gerakan": {
+        "hover": "warna bertukar + garis bawah 1px"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "footer-peta",
+      "keluarga": "Pautan luar",
+      "komponen": "Pautan peta dalam footer",
+      "pemilih": ".footer__map",
+      "picu": ["hover", "fokus", "tekan"],
+      "gerakan": {
+        "hover": "anak panah bergeser 2px",
+        "tekan": "tiada skala (pautan teks)"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "remah-roti",
+      "keluarga": "Navigasi",
+      "komponen": "Jejak navigasi (breadcrumb)",
+      "pemilih": ".breadcrumb",
+      "picu": ["hover", "fokus"],
+      "gerakan": {
+        "hover": "warna sahaja"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 44,
+      "status": "menunggu"
+    },
+    {
+      "id": "banner-draf",
+      "keluarga": "Makluman",
+      "komponen": "Banner draf",
+      "pemilih": ".draft-banner",
+      "picu": ["muat"],
+      "gerakan": {
+        "muat": "tiada gerakan; warna tetap"
+      },
+      "kurang_gerakan": "tidak berubah",
+      "sasaran_px": 0,
+      "status": "lulus"
+    },
+    {
+      "id": "ticker-item",
+      "keluarga": "Navigasi",
+      "komponen": "Pemutar maklumat rawak di topbar",
+      "pemilih": ".ticker__item",
+      "picu": ["bertukar", "hover", "fokus", "jeda"],
+      "gerakan": {
+        "bertukar": "pudar + luncur 4px, 240ms"
+      },
+      "kurang_gerakan": "teks bertukar serta-merta",
+      "sasaran_px": 0,
+      "status": "siap"
+    },
+    {
+      "id": "ticker-nav",
+      "keluarga": "Navigasi",
+      "komponen": "Butang navigasi pemutar (sebelum / seterusnya)",
+      "pemilih": ".ticker__btn",
+      "picu": ["hover", "tekan", "fokus"],
+      "gerakan": {
+        "hover": "latar hijau, ikon putih",
+        "tekan": "skala 0.98"
+      },
+      "kurang_gerakan": "warna sahaja",
+      "sasaran_px": 24,
+      "status": "siap"
+    },
+    {
+      "id": "utiliti-tactile",
+      "keluarga": "Utiliti",
+      "komponen": "Kelas .m-tactile",
+      "pemilih": ".m-tactile",
+      "picu": ["hover", "tekan"],
+      "gerakan": {
+        "hover": "naik 1px (tetikus sahaja)",
+        "tekan": "skala 0.97, 90ms"
+      },
+      "kurang_gerakan": "tiada anjakan atau skala",
+      "sasaran_px": 44,
+      "status": "siap"
+    },
+    {
+      "id": "utiliti-rise",
+      "keluarga": "Utiliti",
+      "komponen": "Kelas .m-rise",
+      "pemilih": ".m-rise",
+      "picu": ["masuk"],
+      "gerakan": {
+        "masuk": "pudar + naik 6px, 240ms"
+      },
+      "kurang_gerakan": "muncul terus",
+      "sasaran_px": 0,
+      "status": "siap"
+    },
+    {
+      "id": "utiliti-focus",
+      "keluarga": "Utiliti",
+      "komponen": "Kelas .m-focus",
+      "pemilih": ".m-focus",
+      "picu": ["fokus"],
+      "gerakan": {
+        "fokus": "cincin 2px + offset 3px, 120ms"
+      },
+      "kurang_gerakan": "sama",
+      "sasaran_px": 0,
+      "status": "siap"
+    }
+  ]
+}

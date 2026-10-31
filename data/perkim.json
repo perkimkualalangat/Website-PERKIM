@@ -1,0 +1,74 @@
+{
+  "sumber": "https://eng.perkim.net.my/",
+  "diambil": "2026-10-30",
+  "organisasi": {
+    "nama": "PERKIM (Pertubuhan Kebajikan Islam Malaysia / Muslim Welfare Organisation Malaysia)",
+    "pengasas": "Tunku Abdul Rahman Putra Al-Haj",
+    "tarikh_daftar": "1960-08-19",
+    "nota_sejarah": "Tunku menjadi penasihat sehingga 1971 dan Presiden sehingga 1989.",
+    "struktur": [
+      "Ibu pejabat kebangsaan (sekretariat) menyalurkan peruntukan kepada Bahagian, termasuk bantuan pengajian kakitangan dan aktiviti tertentu.",
+      "PERKIM Bahagian di peringkat negeri, diketuai Pengerusi Bahagian yang dipilih dalam Mesyuarat Agung Bahagian. Laman menyebut Bahagian wujud di seluruh negara kecuali Sabah.",
+      "Cawangan di peringkat daerah, diketuai Pengerusi Cawangan yang dipilih dalam Mesyuarat Agung Cawangan, dan melapor kepada Bahagian.",
+      "Wanita PERKIM Kebangsaan, sayap wanita dengan ahli di seluruh Malaysia."
+    ],
+    "lambang": "Kubah dan menara masjid hijau tua dengan bintang lima penjuru, di dalam bulan sabit, dengan nama organisasi dalam tulisan Jawi.",
+    "moto": "Persaudaraan dalam Islam (Brotherhood in Islam)"
+  },
+  "visi": "Menjadikan PERKIM sebuah NGO dakwah antarabangsa.",
+  "misi": "Menjadikan PERKIM NGO terkemuka yang menyokong institusi Islam di Malaysia dan peringkat antarabangsa.",
+  "lima_teras": [
+    { "nama": "Dakwah", "ringkas": "Mempergiat aktiviti dakwah kepada rakyat Malaysia dan masyarakat antarabangsa." },
+    { "nama": "Pendidikan", "ringkas": "Meningkatkan kefahaman Islam melalui pendidikan terancang." },
+    { "nama": "Kebajikan", "ringkas": "Memastikan kebajikan masyarakat diurus dengan teratur." },
+    { "nama": "Kerjasama", "ringkas": "Mempertingkat kerjasama dengan agensi kerajaan dan badan berkaitan." },
+    { "nama": "Lain-lain", "ringkas": "Membina sistem pengurusan dan pentadbiran yang mampu mencapai semua matlamat PERKIM." }
+  ],
+  "hubungi": {
+    "alamat": "Ibu Pejabat PERKIM, Tingkat 4 & 6, Bangunan PERKIM, 150 Jalan Sultan Azlan Shah (Jalan Ipoh), 51200 Kuala Lumpur, Malaysia",
+    "telefon": ["03-4041 2482", "03-4042 6224"],
+    "faks": "03-4042 7403",
+    "emel": "info@perkim.net.my"
+  },
+  "media_sosial": {
+    "facebook": "https://www.facebook.com/PERKIM.HQ/",
+    "x": "https://twitter.com/perkimHQ",
+    "youtube": "https://www.youtube.com/user/webmasterperkim/videos",
+    "instagram": "https://www.instagram.com/perkimkebangsaan/",
+    "tiktok": "https://www.tiktok.com/@perkimkebangsaanofficial"
+  },
+  "pautan_kerajaan": [
+    "https://www.jpm.gov.my/ms/",
+    "JAKIM (logo, tiada pautan dikesan)"
+  ],
+  "badan_gabungan": [
+    { "nama": "MACMA", "url": "http://macma.my/main/" },
+    { "nama": "USIA", "url": "https://www.facebook.com/usiaofficial/" },
+    { "nama": "HIKMAH", "url": "http://www.hikmah.org.my/" },
+    { "nama": "Darul Fitrah", "url": "https://www.facebook.com/darulfitrah/" }
+  ],
+  "bahagian_fb": {
+    "Perlis": "https://www.facebook.com/profile.php?id=61572903187058",
+    "Kedah": "https://www.facebook.com/profile.php?id=100086543838126",
+    "Pulau Pinang": "https://www.facebook.com/PERKIMPENANG",
+    "Perak": "https://www.facebook.com/profile.php?id=61555577014895",
+    "Selangor": "https://www.facebook.com/PerkimNegeriSelangor",
+    "Wilayah Persekutuan": "https://www.facebook.com/perkimbahagianwilayah",
+    "Negeri Sembilan": "https://www.facebook.com/perkimnegerisembilan",
+    "Melaka": "https://www.facebook.com/perkim.melaka.rasmi",
+    "Johor": "https://www.facebook.com/perkim.bahagian.johor",
+    "Pahang": "https://www.facebook.com/perkimpahang",
+    "Terengganu": "https://www.facebook.com/perkimtrg",
+    "Kelantan": "https://www.facebook.com/perkimkelantan",
+    "Sarawak": "https://www.facebook.com/profile.php?id=100082341454487"
+  },
+  "pendidikan_institusi": [
+    { "nama": "IDIP-KB", "url": "https://www.idip.edu.my/" },
+    { "nama": "IDIP KL", "url": "http://idipkl.wordpress.com" },
+    { "nama": "Tadika PERKIM Kampung Koh", "url": "https://eng.perkim.net.my/tadika-perkim-kampung-koh/" }
+  ],
+  "program_luar": [
+    { "nama": "International Waqf Da'wah Convention 2026 (IWDC)", "url": "https://iwdc2026.perkim.net.my/" },
+    { "nama": "Tasputra PERKIM", "url": "https://tasputra.com/" }
+  ]
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ikon draf PERKIM Kuala Langat">
+  <rect width="64" height="64" rx="14" fill="#0f5132"/>
+  <rect x="4" y="4" width="56" height="56" rx="11" fill="none" stroke="#e0a800" stroke-width="2"/>
+  <path d="M22 46V18h11c5.6 0 9 3.2 9 8.1 0 5-3.5 8.2-9.1 8.2h-4.3V46z" fill="#ffffff"/>
+  <circle cx="43" cy="43" r="4" fill="#e0a800"/>
+</svg>

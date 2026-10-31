@@ -1,0 +1,11 @@
+{
+  "arkib": false,
+  "artikel": 0,
+  "halaman": 0,
+  "video": 0,
+  "tarikh_awal": null,
+  "tarikh_akhir": null,
+  "diambil": null,
+  "sumber": "https://eng.perkim.net.my/",
+  "nota": "Fail ini ialah placeholder. Jalankan tools/scrape_perkim.py untuk mengisi arkib sebenar; fail ini akan ditulis ganti secara automatik."
+}

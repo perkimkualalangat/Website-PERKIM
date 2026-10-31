@@ -1,0 +1,46 @@
+[
+  {
+    "seksyen": "Organisation",
+    "halaman": [
+      "/latar-belakang/", "/objektif/", "/tunku-dan-perkim/",
+      "/ahli-majlis/", "/ahli-majlis/ucapan-yang-dipertua/", "/ahli-majlis/ucapan-sua/",
+      "/ahli-majlis/ahli-majlis-kebangsaan/", "/category/mesyuarat-agung-perkim-kebangsaan/",
+      "/buku-laporan-agm/", "/ahli-majlis/anugerah/",
+      "/pemimpin-lalu/", "/kakitangan-perkim/", "/badan-gabungan-perkim/"
+    ]
+  },
+  {
+    "seksyen": "Da'wah",
+    "halaman": [
+      "/category/dakwah/", "/category/aktiviti-dakwah/", "/syahadah/",
+      "/prosedur-pengislaman/", "/menukar-kad-pengenalan/", "/fardhu-ain/"
+    ]
+  },
+  {
+    "seksyen": "Welfare",
+    "halaman": [
+      "/category/aktiviti-kebajikan/", "/category/perkampungan-orang-asli/",
+      "/score-perkim/", "/asdaf/", "/asrama-datar-perkim/", "/donation/"
+    ]
+  },
+  {
+    "seksyen": "Education",
+    "halaman": [
+      "/category/pendidikan/", "/kelas-perkim/", "/surau-perkim/", "/tadika-perkim-kampung-koh/"
+    ]
+  },
+  {
+    "seksyen": "Cooperation",
+    "halaman": [
+      "/category/kerjasama/", "/ahli-jawatankuasa-wanita-perkim/", "/latar-belakang-wanita/",
+      "/bahagian-cawangan/", "/category/aktiviti-wanita-perkim/"
+    ]
+  },
+  {
+    "seksyen": "Media",
+    "halaman": [
+      "/category/islamic-herald/", "/category/keratan-akhbar/",
+      "/category/pamplet/", "/category/buku-majalah/"
+    ]
+  }
+]

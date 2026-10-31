@@ -1,0 +1,63 @@
+{
+  "organisasi": "PERKIM Cawangan Kuala Langat",
+  "sesi": "2026–2028",
+  "dikemaskini": "30 Oktober 2026",
+  "sumber": "Rekod dalaman (Versi A) dan draf surat kepada Setiausaha Kehormat.",
+  "peringatan": "Nama hanya dipaparkan selepas disahkan. Jangan isi nama tekaan dalam fail ini.",
+  "jawatan": [
+    {
+      "jawatan": "Pengerusi",
+      "nama": "Ustaz Aiman Azim bin Azafri",
+      "status": "disahkan",
+      "nota": "Mengikut rekod Versi A."
+    },
+    {
+      "jawatan": "Timbalan Pengerusi 1",
+      "nama": "Encik Abdul Alim Hafez bin Bahru",
+      "status": "disahkan",
+      "nota": "Mengikut rekod Versi A."
+    },
+    {
+      "jawatan": "Timbalan Pengerusi 2",
+      "nama": null,
+      "status": "menunggu",
+      "nota": "Ditetapkan dalam Mesyuarat Agung/AJK. Nama belum dikeluarkan."
+    },
+    {
+      "jawatan": "Naib Pengerusi",
+      "nama": null,
+      "status": "menunggu",
+      "nota": "Mungkin jawatan yang sama dengan Timbalan Pengerusi. Sahkan sebelum memaparkan kedua-duanya."
+    },
+    {
+      "jawatan": "Setiausaha",
+      "nama": "Cik Puan Faridah Hanim binti Mohd Ayub",
+      "status": "disahkan",
+      "nota": "Mengikut rekod Versi A."
+    },
+    {
+      "jawatan": "AJK Kanan",
+      "nama": "Tuan Hamdan bin Yaacob",
+      "status": "disahkan",
+      "nota": "Rekod dalaman menyebut AJK Kanan, bukan Naib Pengerusi."
+    },
+    {
+      "jawatan": "AJK Kanan",
+      "nama": "Tuan Salim Yusof",
+      "status": "disahkan",
+      "nota": "Rekod dalaman menyebut AJK Kanan, bukan Naib Pengerusi."
+    },
+    {
+      "jawatan": "AJK Cawangan Utama",
+      "nama": null,
+      "status": "menunggu",
+      "nota": "11 wakil. Senarai nama belum dikeluarkan oleh Setiausaha."
+    },
+    {
+      "jawatan": "AJK Sayap Belia",
+      "nama": null,
+      "status": "menunggu",
+      "nota": "3 wakil, diselia bersama MBPS. Nama belum dikeluarkan."
+    }
+  ]
+}

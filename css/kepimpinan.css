@@ -1,0 +1,149 @@
+/* ==========================================================================
+   kepimpinan.css — kad jawatan dan status pengesahan
+   ========================================================================== */
+
+.lead-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.lead-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--c-border);
+  background: #fff;
+  font-size: 0.85rem;
+  color: var(--c-text-soft);
+}
+
+.lead-stat strong {
+  font-size: 1.05rem;
+  color: var(--c-primary-dark);
+}
+
+.lead-stat--ok {
+  background: var(--c-primary-soft);
+  border-color: #b9d8c6;
+}
+
+.lead-stat--pending {
+  background: #fff8e6;
+  border-color: #eed9a0;
+}
+
+.lead-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.lead-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.2rem 1.25rem;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--c-primary);
+}
+
+.lead-card--pending {
+  border-top-color: var(--c-draft-border);
+  background: repeating-linear-gradient(
+    -45deg,
+    #fffdf6,
+    #fffdf6 10px,
+    #fffaeb 10px,
+    #fffaeb 20px
+  );
+}
+
+.lead-card__role {
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.lead-card__name {
+  margin: 0.4rem 0 0.2rem;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--c-primary-dark);
+  line-height: 1.35;
+}
+
+.lead-card--pending .lead-card__name {
+  font-weight: 600;
+  color: #7a651f;
+  font-style: italic;
+}
+
+.lead-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+}
+
+.lead-card__status--ok {
+  background: var(--c-primary-soft);
+  color: #14532d;
+}
+
+.lead-card__status--pending {
+  background: #fff1c9;
+  color: #6b5200;
+}
+
+.lead-card__note {
+  margin: 0.6rem 0 0;
+  font-size: 0.82rem;
+  color: var(--c-text-soft);
+}
+
+.lead-card__initials {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--c-primary-soft);
+  color: var(--c-primary);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.lead-card--pending .lead-card__initials {
+  background: #fff1c9;
+  color: #8a6d00;
+}
+
+.lead-card__initials:empty {
+  display: none;
+}
+
+.lead-note {
+  margin-top: 2rem;
+}
+
+@media (max-width: 560px) {
+  .lead-card__initials {
+    display: none;
+  }
+}

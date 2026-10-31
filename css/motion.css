@@ -1,0 +1,124 @@
+/* ==========================================================================
+   motion.css — sistem gerakan PERKIM Kuala Langat
+   Satu sumber untuk durasi, lengkung dan jarak gerakan.
+   Prinsip: satu gerakan per tindakan, GPU sahaja (transform/opacity),
+   lantunan minima, dan fallback penuh untuk reduced-motion.
+   ========================================================================== */
+
+:root {
+  /* ---- Durasi asas ------------------------------------------------------ */
+  --dur-instant: 90ms;   /* sentuhan / tekan */
+  --dur-fast: 160ms;     /* hover, warna, sempadan */
+  --dur-base: 240ms;     /* panel kecil, kad, dialog */
+  --dur-slow: 380ms;     /* lapisan penuh, halaman */
+
+  /* ---- Faktor gerakan ---------------------------------------------------
+     1   = biasa
+     2–4 = perlahan (hanya untuk dev/motion-lab.html)
+     0   = tiada gerakan (reduced-motion)
+     Warna tidak terjejas oleh faktor ini. */
+  --motion-move: 1;
+
+  /* ---- Durasi terbitan -------------------------------------------------- */
+  --t-press: calc(var(--dur-instant) * var(--motion-move));
+  --t-hover: calc(var(--dur-fast) * var(--motion-move));
+  --t-base: calc(var(--dur-base) * var(--motion-move));
+  --t-panel: calc(var(--dur-slow) * var(--motion-move));
+  --t-color: var(--dur-fast);
+
+  /* ---- Lengkung --------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-press: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  /* ---- Jarak gerakan ---------------------------------------------------- */
+  --press-scale: 0.97;
+  --press-scale-sm: 0.98;
+  --lift-y: 1px;
+  --slide-x: 2px;
+}
+
+/* Togol manual: digunakan oleh makmal untuk simulasi tanpa ubah tetapan OS. */
+html.reduce-motion {
+  --motion-move: 0;
+  --press-scale: 1;
+  --press-scale-sm: 1;
+  --lift-y: 0px;
+  --slide-x: 0px;
+}
+
+/* ==========================================================================
+   Fallback sistem
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-move: 0;
+    --press-scale: 1;
+    --press-scale-sm: 1;
+    --lift-y: 0px;
+    --slide-x: 0px;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Utiliti
+   ========================================================================== */
+
+/* Butang/kad yang memberi maklum balas sentuhan. */
+.m-tactile {
+  transition:
+    transform var(--t-press) var(--ease-out),
+    background-color var(--t-color) var(--ease-out),
+    border-color var(--t-color) var(--ease-out),
+    color var(--t-color) var(--ease-out),
+    box-shadow var(--t-color) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .m-tactile:hover {
+    transform: translateY(calc(var(--lift-y) * -1));
+  }
+}
+
+.m-tactile:active {
+  transform: translateY(0) scale(var(--press-scale));
+  transition-duration: var(--t-press);
+}
+
+/* Cincin fokus yang konsisten. */
+.m-focus:focus-visible {
+  outline: 2px solid var(--c-primary, #1f7a34);
+  outline-offset: 3px;
+  border-radius: inherit;
+}
+
+/* Kemunculan lembut untuk kandungan yang dimuatkan. */
+.m-rise {
+  animation: m-rise var(--t-base) var(--ease-out) both;
+}
+
+@keyframes m-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Pudar ringkas. */
+.m-fade {
+  transition: opacity var(--t-base) var(--ease-out);
+}

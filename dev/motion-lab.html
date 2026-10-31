@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Makmal Gerak | PERKIM Kuala Langat (dalaman)</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="description" content="Alat dalaman untuk menyemak micro-interaction laman PERKIM Kuala Langat.">
+  <link rel="icon" href="/assets/img/logo-perkim-64.png" sizes="64x64" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/dev/motion-lab.css">
+</head>
+<body class="lab">
+  <header class="lab__head">
+    <div class="lab__head-inner">
+      <div>
+        <p class="lab__eyebrow">Alat dalaman · noindex</p>
+        <h1>Makmal Gerak</h1>
+        <p class="lab__lead">
+          Setiap interaksi di laman ini diuji di sini secara berasingan. Gunakan kawalan
+          kelajuan untuk melihat lengkung sebenar, dan togol “kurang gerakan” untuk sahkan
+          fallback.
+        </p>
+      </div>
+      <div class="lab__controls" role="group" aria-label="Kawalan makmal">
+        <div class="lab__control">
+          <span class="lab__control-label" id="speed-label">Kelajuan</span>
+          <div class="lab__segmented" role="radiogroup" aria-labelledby="speed-label" id="speed">
+            <button type="button" role="radio" aria-checked="false" data-speed="4">0.25&times;</button>
+            <button type="button" role="radio" aria-checked="false" data-speed="2">0.5&times;</button>
+            <button type="button" role="radio" aria-checked="true" data-speed="1">1&times;</button>
+          </div>
+        </div>
+        <div class="lab__control">
+          <span class="lab__control-label" id="reduce-label">Kurang gerakan</span>
+          <button type="button" class="lab__switch" id="reduce" role="switch" aria-checked="false"
+                  aria-labelledby="reduce-label">
+            <span class="lab__switch-track"><span class="lab__switch-thumb"></span></span>
+            <span class="lab__switch-text">Mati</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="lab__main">
+    <section class="lab__section" aria-labelledby="tokens-title">
+      <h2 id="tokens-title">Token</h2>
+      <p class="lab__note">
+        Semua nilai ini dibaca daripada <code>css/motion.css</code>. Tiada durasi melebihi
+        400&nbsp;ms di luar lapisan penuh.
+      </p>
+      <div class="lab__grid lab__grid--4">
+        <article class="lab__card">
+          <h3>Durasi</h3>
+          <dl class="lab__list">
+            <div><dt>Sentuhan</dt><dd><code>90ms</code></dd></div>
+            <div><dt>Hover / warna</dt><dd><code>160ms</code></dd></div>
+            <div><dt>Panel kecil</dt><dd><code>240ms</code></dd></div>
+            <div><dt>Lapisan penuh</dt><dd><code>380ms</code></dd></div>
+          </dl>
+        </article>
+        <article class="lab__card">
+          <h3>Lengkung</h3>
+          <dl class="lab__list">
+            <div><dt>Masuk</dt><dd><code>cubic-bezier(.22, 1, .36, 1)</code></dd></div>
+            <div><dt>Seimbang</dt><dd><code>cubic-bezier(.4, 0, .2, 1)</code></dd></div>
+            <div><dt>Tekan</dt><dd><code>cubic-bezier(.34, 1.4, .64, 1)</code></dd></div>
+          </dl>
+        </article>
+        <article class="lab__card">
+          <h3>Jarak</h3>
+          <dl class="lab__list">
+            <div><dt>Skala tekan</dt><dd><code>0.97</code></dd></div>
+            <div><dt>Angkat hover</dt><dd><code>1px</code></dd></div>
+            <div><dt>Slide</dt><dd><code>2px</code></dd></div>
+          </dl>
+        </article>
+        <article class="lab__card">
+          <h3>Prinsip</h3>
+          <ul class="lab__bullets">
+            <li>Satu gerakan per tindakan.</li>
+            <li>Hanya <code>transform</code> dan <code>opacity</code>.</li>
+            <li>Lantunan maksimum 4%.</li>
+            <li>Isyarat warna sentiasa disertakan.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="lab__section" aria-labelledby="maps-title">
+      <h2 id="maps-title">Butang Google Maps</h2>
+      <p class="lab__note">
+        Tujuh keadaan penuh. Pratonton peta mini dimuat hanya bila butang hovered atau difokus
+        (OpenStreetMap, tanpa kunci API). Klik butang di bawah untuk mencuba; dalam pelayar
+        sebenar ia membuka Google Maps.
+      </p>
+
+      <div class="lab__map-stage">
+        <div class="lab__map-demo">
+          <p class="lab__demo-label">Butang sebenar</p>
+          <a class="btn-map"
+             href="https://www.google.com/maps/search/?api=1&query=PERKIM+Kuala+Langat+Lot+2029+Jalan+Haji+Darini+Banting"
+             target="_blank" rel="noopener noreferrer"
+             data-map-label="Buka Google Maps"
+             data-map-hint="Arahkan ke pejabat kami"
+             data-map-address="Lot 2029, Jalan Haji Darini, Kampung Sungai Lang Baru, 42700 Banting"
+             data-map-bbox="101.5024,2.7926,101.5075,2.7964"
+             data-map-marker="2.7945,101.5049">Buka Google Maps</a>
+        </div>
+
+        <div class="lab__map-states">
+          <p class="lab__demo-label">Keadaan (dipaksa dengan CSS)</p>
+          <ul class="lab__states">
+            <li><span class="lab__state-name">Rehat</span><span class="lab__swatch" data-state="idle"></span></li>
+            <li><span class="lab__state-name">Hover</span><span class="lab__swatch" data-state="hover"></span></li>
+            <li><span class="lab__state-name">Tekan</span><span class="lab__swatch" data-state="press"></span></li>
+            <li><span class="lab__state-name">Fokus</span><span class="lab__swatch" data-state="focus"></span></li>
+            <li><span class="lab__state-name">Memuat</span><span class="lab__swatch" data-state="loading"></span></li>
+            <li><span class="lab__state-name">Gagal</span><span class="lab__swatch" data-state="error"></span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab__section" aria-labelledby="components-title">
+      <h2 id="components-title">Komponen</h2>
+      <p class="lab__note">
+        Setiap komponen dipaparkan dengan keadaan rehat dan hover. Hover Workforce: alihkan
+        tetikus ke atas kad untuk melihat gerakan sebenar.
+      </p>
+      <div class="lab__grid lab__grid--3" id="components"></div>
+    </section>
+
+    <section class="lab__section" aria-labelledby="score-title">
+      <h2 id="score-title">Papan skor</h2>
+      <p class="lab__note">
+        Inventori daripada <code>data/motion.json</code>. Status <em>siap</em> bermaksud
+        komponen sudah menggunakan token gerakan dan mempunyai fallback.
+      </p>
+      <div class="lab__score-summary" id="score-summary">Memuatkan inventori…</div>
+      <div class="lab__table-wrap">
+        <table class="lab__table">
+          <thead>
+            <tr>
+              <th scope="col">Komponen</th>
+              <th scope="col">Keluarga</th>
+              <th scope="col">Picu</th>
+              <th scope="col">Fallback kurang gerakan</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody id="score-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lab__foot">
+    <p>
+      Halaman dalaman sahaja — tidak dipautkan dari nav, footer atau sitemap, dan tetap
+      <code>noindex</code>. Jalankan <code>node tools/check-motion.mjs</code> untuk audit
+      penuh.
+    </p>
+  </footer>
+
+  <script type="module" src="/dev/motion-lab.js"></script>
+</body>
+</html>

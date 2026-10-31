@@ -1,0 +1,191 @@
+[
+  {
+    "tajuk": "Utama",
+    "url": "/",
+    "jenis": "Halaman",
+    "keterangan": "Status laman, ringkasan cawangan dan pautan utama.",
+    "kata_kunci": "utama home perkim kuala langat banting"
+  },
+  {
+    "tajuk": "Tentang Cawangan",
+    "url": "/pages/tentang.html",
+    "jenis": "Halaman",
+    "keterangan": "Profil, visi, misi dan maklumat rasmi cawangan.",
+    "kata_kunci": "tentang profil visi misi alamat pejabat"
+  },
+  {
+    "tajuk": "PERKIM Kebangsaan",
+    "url": "/pages/latar-belakang.html",
+    "jenis": "Halaman",
+    "keterangan": "Sejarah, visi, misi dan lima teras PERKIM Kebangsaan.",
+    "kata_kunci": "sejarah kebangsaan lima teras dakwah pendidikan kebajikan"
+  },
+  {
+    "tajuk": "Kepimpinan 2026–2028",
+    "url": "/pages/kepimpinan.html",
+    "jenis": "Halaman",
+    "keterangan": "Senarai jawatan dan status pengesahan AJK cawangan.",
+    "kata_kunci": "kepimpinan pengerusi setiausaha ajk jawatan"
+  },
+  {
+    "tajuk": "Berita",
+    "url": "/pages/berita.html",
+    "jenis": "Halaman",
+    "keterangan": "Indeks berita dan pengumuman terpilih.",
+    "kata_kunci": "berita pengumuman aktiviti program"
+  },
+  {
+    "tajuk": "Bahan Bacaan",
+    "url": "/pages/bahan-bacaan.html",
+    "jenis": "Halaman",
+    "keterangan": "Buku Teks Kelas Pengajian Islam PERKIM — 14 buku dalam lima peringkat.",
+    "kata_kunci": "bahan bacaan pdf buku teks rak perpustakaan kelas pengajian islam"
+  },
+  {
+    "tajuk": "Hubungi Cawangan",
+    "url": "/pages/hubungi.html",
+    "jenis": "Halaman",
+    "keterangan": "Alamat, telefon, e-mel, waktu pejabat dan media sosial.",
+    "kata_kunci": "hubungi telefon alamat emel whatsapp facebook tiktok"
+  },
+  {
+    "tajuk": "Bimbingan Asas Fardhu ‘Ain",
+    "url": "/pages/bahan-bacaan.html?buku=fardu-ain",
+    "jenis": "Buku teks",
+    "keterangan": "86 halaman · modul asas ibadah untuk peserta baharu.",
+    "kata_kunci": "fardhu ain fardu asas ibadah solat buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Pengajian Islam — Tahap Pra Asas",
+    "url": "/pages/bahan-bacaan.html?buku=pra-asas",
+    "jenis": "Buku teks",
+    "keterangan": "46 halaman · pengenalan sebelum memasuki tahap Asas.",
+    "kata_kunci": "pra asas pengajian islam buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Akhlak — Tahap Asas",
+    "url": "/pages/bahan-bacaan.html?buku=asas-akhlak",
+    "jenis": "Buku teks",
+    "keterangan": "66 halaman · akhlak pada tahap permulaan.",
+    "kata_kunci": "akhlak asas buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Akidah — Tahap Asas",
+    "url": "/pages/bahan-bacaan.html?buku=asas-akidah",
+    "jenis": "Buku teks",
+    "keterangan": "92 halaman · akidah pada tahap permulaan.",
+    "kata_kunci": "akidah asas tauhid buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Fekah — Tahap Asas",
+    "url": "/pages/bahan-bacaan.html?buku=asas-fekah",
+    "jenis": "Buku teks",
+    "keterangan": "456 halaman · fekah pada tahap permulaan.",
+    "kata_kunci": "fekah fiqh asas buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Sirah — Tahap Asas",
+    "url": "/pages/bahan-bacaan.html?buku=asas-sirah",
+    "jenis": "Buku teks",
+    "keterangan": "44 halaman · sirah pada tahap permulaan.",
+    "kata_kunci": "sirah asas sejarah nabi buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Akhlak — Tahap Pertengahan",
+    "url": "/pages/bahan-bacaan.html?buku=pertengahan-akhlak",
+    "jenis": "Buku teks",
+    "keterangan": "149 halaman · akhlak pada tahap pertengahan.",
+    "kata_kunci": "akhlak pertengahan buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Akidah — Tahap Pertengahan",
+    "url": "/pages/bahan-bacaan.html?buku=pertengahan-akidah",
+    "jenis": "Buku teks",
+    "keterangan": "74 halaman · akidah pada tahap pertengahan.",
+    "kata_kunci": "akidah pertengahan tauhid buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Fekah — Tahap Pertengahan",
+    "url": "/pages/bahan-bacaan.html?buku=pertengahan-fekah",
+    "jenis": "Buku teks",
+    "keterangan": "266 halaman · fekah pada tahap pertengahan.",
+    "kata_kunci": "fekah fiqh pertengahan buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Sirah — Tahap Pertengahan",
+    "url": "/pages/bahan-bacaan.html?buku=pertengahan-sirah",
+    "jenis": "Buku teks",
+    "keterangan": "59 halaman · sirah pada tahap pertengahan.",
+    "kata_kunci": "sirah pertengahan sejarah nabi buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Akhlak — Tahap Lanjutan",
+    "url": "/pages/bahan-bacaan.html?buku=lanjutan-akhlak",
+    "jenis": "Buku teks",
+    "keterangan": "109 halaman · akhlak pada tahap lanjutan.",
+    "kata_kunci": "akhlak lanjutan buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Akidah — Tahap Lanjutan",
+    "url": "/pages/bahan-bacaan.html?buku=lanjutan-akidah",
+    "jenis": "Buku teks",
+    "keterangan": "131 halaman · akidah pada tahap lanjutan.",
+    "kata_kunci": "akidah lanjutan tauhid buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Fekah — Tahap Lanjutan",
+    "url": "/pages/bahan-bacaan.html?buku=lanjutan-fekah",
+    "jenis": "Buku teks",
+    "keterangan": "114 halaman · fekah pada tahap lanjutan.",
+    "kata_kunci": "fekah fiqh lanjutan buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Sirah — Tahap Lanjutan",
+    "url": "/pages/bahan-bacaan.html?buku=lanjutan-sirah",
+    "jenis": "Buku teks",
+    "keterangan": "156 halaman · sirah pada tahap lanjutan.",
+    "kata_kunci": "sirah lanjutan sejarah nabi buku teks kelas pengajian islam perkim"
+  },
+  {
+    "tajuk": "Ringkasan jawatan",
+    "url": "/pages/kepimpinan.html#kepimpinan-summary",
+    "jenis": "Bahagian",
+    "keterangan": "Statistik jawatan yang disahkan dan menunggu pengesahan.",
+    "kata_kunci": "ringkasan statistik jawatan disahkan menunggu kepimpinan"
+  },
+  {
+    "tajuk": "Menunggu pengesahan",
+    "url": "/pages/kepimpinan.html#menunggu-title",
+    "jenis": "Bahagian",
+    "keterangan": "Senarai jawatan dan maklumat yang belum disahkan secara bertulis.",
+    "kata_kunci": "menunggu pengesahan belum disahkan draf jawatan"
+  },
+  {
+    "tajuk": "Tapis berita mengikut kategori",
+    "url": "/pages/berita.html#berita-filter",
+    "jenis": "Bahagian",
+    "keterangan": "Tapis senarai berita mengikut kategori aktiviti.",
+    "kata_kunci": "tapis kategori filter berita dakwah kebajikan pendidikan"
+  },
+  {
+    "tajuk": "Borang mesej",
+    "url": "/pages/hubungi.html#mesej",
+    "jenis": "Bahagian",
+    "keterangan": "Borang draf untuk menghantar mesej kepada pejabat (tidak dihantar).",
+    "kata_kunci": "borang mesej hubungi hantar e-mel whatsapp"
+  },
+  {
+    "tajuk": "Lokasi pejabat di peta",
+    "url": "/pages/hubungi.html#lokasi",
+    "jenis": "Bahagian",
+    "keterangan": "Alamat pejabat, waktu operasi dan pratonton peta.",
+    "kata_kunci": "lokasi peta alamat GOOGLE MAPS banting jalan"
+  },
+  {
+    "tajuk": "Media sosial rasmi",
+    "url": "/pages/hubungi.html#media-sosial",
+    "jenis": "Bahagian",
+    "keterangan": "Facebook, Instagram, YouTube, TikTok dan Linktree cawangan.",
+    "kata_kunci": "media sosial facebook instagram youtube tiktok linktree"
+  }
+]

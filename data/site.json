@@ -1,0 +1,66 @@
+{
+  "organisasi": {
+    "nama": "PERKIM Cawangan Kuala Langat",
+    "nama_penuh": "Pertubuhan Kebajikan Islam Malaysia",
+    "nama_inggeris": "Muslim Welfare Organisation Malaysia",
+    "nama_arab": "الجمعية الخيرية الإسلامية بماليزيا",
+    "cawangan": "Cawangan Kuala Langat",
+    "ringkas": "Pejabat pengurusan organisasi bukan kerajaan yang menjalankan aktiviti dakwah, pendidikan, kebajikan, kemasyarakatan dan kerjasama di Kuala Langat."
+  },
+  "hubungi": {
+    "alamat": [
+      "Lot 2029, Jalan Haji Darini, Lorong 4,",
+      "Kampung Sungai Lang Baru,",
+      "42700 Banting, Selangor"
+    ],
+    "alamat_satu_baris": "Lot 2029, Jalan Haji Darini, Lorong 4, Kampung Sungai Lang Baru, 42700 Banting, Selangor",
+    "penanda_aras": "Pejabat di kawasan Masjid Sungai Lang Baru",
+    "telefon": "016-353 6126",
+    "telefon_href": "+60163536126",
+    "whatsapp": "https://wa.me/60163536126",
+    "emel": "perkimkualalangat@gmail.com",
+    "waktu": "Isnin–Khamis: 10:00 pagi – 4:00 petang",
+    "waktu_nota": "Jumaat: 9:00 pagi – 12:00 tengah hari · Sabtu & Ahad tutup",
+    "waktu_penuh": [
+      { "hari": "Isnin – Khamis", "masa": "10:00 pagi – 4:00 petang", "buka": true },
+      { "hari": "Jumaat", "masa": "9:00 pagi – 12:00 tengah hari", "buka": true },
+      { "hari": "Sabtu", "masa": "Tutup", "buka": false },
+      { "hari": "Ahad", "masa": "Tutup", "buka": false }
+    ],
+    "waktu_sumber": "Google Business Profile, disemak 30 Oktober 2026.",
+    "peta": "https://www.google.com/maps/search/?api=1&query=PERKIM+Kuala+Langat+Lot+2029+Jalan+Haji+Darini+Banting"
+  },
+  "media_sosial": {
+    "facebook": {
+      "url": "https://www.facebook.com/share/16Yvm8zzpv/?mibextid=wwXIfr",
+      "label": "Facebook PERKIM Kuala Langat",
+      "ringkas": "Facebook"
+    },
+    "instagram": {
+      "url": "https://www.instagram.com/perkimkualalangat",
+      "label": "Instagram PERKIM Kuala Langat",
+      "ringkas": "Instagram"
+    },
+    "youtube": {
+      "url": "https://youtube.com/@perkimkualalangat",
+      "label": "YouTube PERKIM Kuala Langat",
+      "ringkas": "YouTube"
+    },
+    "tiktok": {
+      "url": "https://www.tiktok.com/@perkimkebangsaanofficial",
+      "label": "TikTok PERKIM Kebangsaan",
+      "ringkas": "TikTok (Kebangsaan)",
+      "nota": "Akaun TikTok rasmi cawangan belum tersedia. Pautan ini ke akaun PERKIM Kebangsaan."
+    },
+    "whatsapp": {
+      "url": "https://wa.me/60163536126",
+      "label": "WhatsApp PERKIM Kuala Langat",
+      "ringkas": "WhatsApp"
+    }
+  },
+  "pautan_lain": {
+    "linktree": "https://linktr.ee/PERKIMKualaLangat"
+  },
+  "pengumuman": "Maklumat cawangan, kepimpinan dan bahan bacaan PERKIM Kuala Langat.",
+  "status": "draf"
+}
