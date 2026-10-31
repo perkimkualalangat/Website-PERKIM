@@ -412,6 +412,42 @@ popup disekat. Panel pratonton dicipta malas pada hover/fokus pertama dan berpus
 
 ---
 
+## 7a. Git (kawalan versi)
+
+Repo git setempat disediakan 31 Oktober 2026. Skop: folder ini sahaja — termasuk 15 PDF dalam
+`assets/books/` (~22 MB). Folder induk (`assets/pdf/lain`, 634 MB) dan `_archive/` **tidak**
+dimasukkan.
+
+| Perkara | Nilai |
+| --- | --- |
+| Alat | MinGit 2.56.0 mudah alih — `%LOCALAPPDATA%\Programs\MinGit` |
+| Cawangan | `main` |
+| Identiti komit | PERKIM Kuala Langat `<perkimkualalangat@gmail.com>` (setempat sahaja) |
+| `.git/` | Tidak disajikan oleh `tools/serve.mjs` (pulangan 404) |
+
+Arahan harian:
+
+```powershell
+git status
+git diff
+git add -A
+git commit -m "Kemas kini ..."
+git log --oneline
+git restore <fail>                 # buang perubahan yang belum dikomit
+git checkout <hash> -- <fail>      # pulihkan versi lama satu fail
+```
+
+Sandaran di luar cakera (repo ini tiada remote):
+
+```powershell
+git bundle create ..\perkim-2026-10-31.bundle --all
+```
+
+Nota: `git` hanya muncul dalam terminal **baharu** selepas PATH dikemas kini. Jika belum,
+gunakan laluan penuh `%LOCALAPPDATA%\Programs\MinGit\cmd\git.exe`.
+
+---
+
 ## 8. Lesen
 
 Kod templat ditulis untuk projek ini. Pustaka pihak ketiga:

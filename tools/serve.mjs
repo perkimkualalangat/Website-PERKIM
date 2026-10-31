@@ -68,6 +68,12 @@ const server = http.createServer(async (req, res) => {
     let pathname = decodeURIComponent(url.pathname);
     if (pathname.endsWith('/')) pathname += 'index.html';
 
+    // Fail tersembunyi (.git, .env, dsb.) tidak pernah disajikan.
+    if (pathname.split('/').some((segment) => segment.startsWith('.'))) {
+      res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+      return res.end(NOT_FOUND);
+    }
+
     const file = path.resolve(root, '.' + pathname);
     if (file !== root && !file.startsWith(root + path.sep)) {
       res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
