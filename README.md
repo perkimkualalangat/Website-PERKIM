@@ -448,6 +448,46 @@ gunakan laluan penuh `%LOCALAPPDATA%\Programs\MinGit\cmd\git.exe`.
 
 ---
 
+## 7b. Hos GitHub Pages
+
+Pratonton dalaman: <https://perkimkualalangat.github.io/Website-PERKIM/>
+
+Repo dihoskan sebagai **project site**, iaitu laman berada dalam subfolder `/Website-PERKIM/`,
+bukan di akar domain. Kerana itu **semua rujukan dalaman mesti relatif**:
+
+| Salah | Betul |
+| --- | --- |
+| `href="/css/style.css"` | `href="css/style.css"` (akar) atau `../css/style.css` (subfolder) |
+| `fetch('/data/site.json')` | `fetch(siteUrl('data/site.json'))` |
+| `"cover": "/assets/x.jpg"` dalam JSON | `"cover": "assets/x.jpg"` |
+
+Pembantu di `js/paths.js` mengira akar laman daripada lokasi modul itu sendiri, jadi kod yang
+sama berfungsi di `localhost:8081/` dan di `/Website-PERKIM/`:
+
+```js
+import { siteHref, siteUrl } from '../paths.js';
+img.src = siteHref('assets/img/logo.png');   // -> .../Website-PERKIM/assets/img/logo.png
+await fetch(siteUrl('data/site.json'));      // -> .../Website-PERKIM/data/site.json
+```
+
+Fail `.nojekyll` di akar repo mematikan pemprosesan Jekyll GitHub Pages.
+
+**Pratonton subfolder secara tempatan** (meniru keadaan GitHub Pages):
+
+```powershell
+$site = "$PWD"
+$prev = "$env:TEMP\opencode\preview"
+New-Item -ItemType Directory -Force -Path "$prev\tools" | Out-Null
+New-Item -ItemType Junction -Path "$prev\Website-PERKIM" -Target $site
+Copy-Item "$site\tools\serve.mjs" "$prev\tools\serve.mjs"
+Set-Location $prev; node tools\serve.mjs 8082
+# buka http://localhost:8082/Website-PERKIM/
+```
+
+Jangan simpan token GitHub dalam repo atau dalam `.git/config`.
+
+---
+
 ## 8. Lesen
 
 Kod templat ditulis untuk projek ini. Pustaka pihak ketiga:

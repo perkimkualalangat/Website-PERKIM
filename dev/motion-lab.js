@@ -4,6 +4,7 @@
  * Tidak dipautkan dari mana-mana halaman awam.
  */
 import { esc } from '../js/modules/utils.js';
+import { siteUrl } from '../js/paths.js';
 
 /* ---------- Kawalan ---------- */
 
@@ -136,7 +137,7 @@ const summary = document.getElementById('score-summary');
 const body = document.getElementById('score-body');
 
 try {
-  const res = await fetch('/data/motion.json', { headers: { Accept: 'application/json' } });
+  const res = await fetch(siteUrl('data/motion.json'), { headers: { Accept: 'application/json' } });
   const data = await res.json();
   const items = Array.isArray(data.komponen) ? data.komponen : [];
 

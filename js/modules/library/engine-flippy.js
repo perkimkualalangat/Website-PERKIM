@@ -13,9 +13,10 @@
  */
 
 import { Flipbook, setWorkerSrc } from '../../vendor/flippy/index.js';
+import { siteHref } from '../../paths.js';
 
 // PDF.js memerlukan worker. Hos sendiri supaya tiada permintaan CDN.
-setWorkerSrc('/js/vendor/pdfjs/pdf.worker.min.mjs');
+setWorkerSrc(siteHref('js/vendor/pdfjs/pdf.worker.min.mjs'));
 
 export async function open(container, url, options = {}) {
   const flipbook = new Flipbook({ container, ...options });

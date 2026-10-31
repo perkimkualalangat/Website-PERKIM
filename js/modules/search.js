@@ -1,13 +1,15 @@
 /**
  * search.js — carian ringkas merentas halaman dan bahan bacaan.
- * Indeks statik: /data/search-index.json
+ * Indeks statik: data/search-index.json
  */
+
+import { siteHref, siteUrl } from '../paths.js';
 
 let indexPromise;
 
 function loadIndex() {
   if (!indexPromise) {
-    indexPromise = fetch('/data/search-index.json', { cache: 'no-store' })
+    indexPromise = fetch(siteUrl('data/search-index.json'), { cache: 'no-store' })
       .then((response) => {
         if (!response.ok) throw new Error(`search-index.json ${response.status}`);
         return response.json();
@@ -80,7 +82,7 @@ export function initSearch() {
     results.innerHTML = matches
       .map(
         ({ item }) => `<li>
-          <a class="search-result" href="${esc(item.url)}">
+          <a class="search-result" href="${siteHref(item.url)}">
             <span class="search-result__type">${esc(item.jenis || 'Halaman')}</span>
             <strong>${esc(item.tajuk || '')}</strong>
             <span>${esc(item.keterangan || '')}</span>

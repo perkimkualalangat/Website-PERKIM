@@ -1,7 +1,11 @@
 /** utils.js — pembantu kecil yang dikongsi antara modul. */
 
+import { siteUrl } from '../paths.js';
+
 export async function getJSON(url) {
-  const res = await fetch(url, { headers: { Accept: 'application/json' } });
+  // Laluan dalaman diselesaikan terhadap akar laman supaya berfungsi juga
+  // apabila laman dihoskan dalam subfolder (cth. GitHub Pages /Website-PERKIM/).
+  const res = await fetch(siteUrl(url), { headers: { Accept: 'application/json' } });
   if (!res.ok) throw new Error(`Gagal memuatkan ${url} (${res.status})`);
   return res.json();
 }
@@ -10,7 +14,7 @@ export async function getJSON(url) {
 export const esc = (value = '') =>
   String(value).replace(
     /[&<>"']/g,
-    (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]
+    (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch])
   );
 
 /** Tarikh ISO (YYYY-MM-DD) -> "30 Oktober 2026". */

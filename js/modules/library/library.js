@@ -9,6 +9,7 @@
  */
 
 import { esc, getJSON } from '../utils.js';
+import { siteHref } from '../../paths.js';
 
 const ENGINE_PATH = './engine-flippy.js';
 
@@ -56,7 +57,7 @@ export async function initLibrary() {
   const card = (book) => `
       <button class="book-card" type="button" data-id="${esc(book.id)}">
         <span class="book-card__cover">
-          <img src="${esc(book.cover)}" alt="Kulit buku ${esc(book.tajuk)}"
+          <img src="${esc(siteHref(book.cover))}" alt="Kulit buku ${esc(book.tajuk)}"
                loading="lazy" width="600" height="800">
           <span class="book-card__badge">PDF</span>
         </span>
@@ -153,7 +154,7 @@ export async function initLibrary() {
       const { open } = await loadEngine();
       if (myToken !== token) return;
 
-      const instance = await open(viewer, book.pdf);
+      const instance = await open(viewer, siteHref(book.pdf));
       if (myToken !== token) {
         instance.destroy?.();
         return;

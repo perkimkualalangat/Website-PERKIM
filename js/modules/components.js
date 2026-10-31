@@ -1,7 +1,9 @@
 /**
  * components.js — topbar, masthead, navigasi dan footer dikongsi semua halaman.
- * Data hubungan dan media sosial diambil daripada /data/site.json.
+ * Data hubungan dan media sosial diambil daripada data/site.json.
  */
+
+import { siteHref, siteUrl } from '../paths.js';
 
 export const MENU = [
   { label: 'Utama', href: '/' },
@@ -129,8 +131,8 @@ function esc(value = '') {
 
 function isCurrent(href) {
   const path = location.pathname.replace(/\/index\.html$/, '/');
-  const [target, hash] = String(href).split('#');
-  if (target === '/') return path === '/';
+  const [raw, hash] = String(href).split('#');
+  const target = siteUrl(raw || 'index.html').pathname.replace(/\/index\.html$/, '/');
   if (path !== target) return false;
   // Pautan dengan #: aktif hanya jika bahagian itu sedang dipaparkan.
   if (!hash) return true;
@@ -143,14 +145,14 @@ function menuItem(item) {
   if (!item.sub) {
     const current = isCurrent(item.href);
     return `<li${current ? ' class="is-current"' : ''}>
-      <a href="${item.href}"${current ? ' aria-current="page"' : ''}>${item.label}</a>
+      <a href="${siteHref(item.href)}"${current ? ' aria-current="page"' : ''}>${item.label}</a>
     </li>`;
   }
 
   const children = item.sub
     .map(
       (child) =>
-        `<li><a href="${child.href}"${
+        `<li><a href="${siteHref(child.href)}"${
           isCurrent(child.href) ? ' aria-current="page"' : ''
         }>${child.label}</a></li>`
     )
@@ -163,7 +165,7 @@ function menuItem(item) {
   // submenu. Jadi pengguna tetap boleh terus ke halaman tanpa mencari menu.
   return `<li class="has-sub${active ? ' is-current' : ''}">
     <div class="nav__split">
-      <a href="${item.href}"${current ? ' aria-current="page"' : ''}>${item.label}</a>
+      <a href="${siteHref(item.href)}"${current ? ' aria-current="page"' : ''}>${item.label}</a>
       <button type="button" class="nav__caret-btn" aria-expanded="false"
               aria-label="Tunjuk submenu ${esc(item.label)}" aria-haspopup="true">
         ${caret}
@@ -246,7 +248,7 @@ function footerContact(site) {
 
 async function loadSite() {
   try {
-    const response = await fetch('/data/site.json', { cache: 'no-store' });
+    const response = await fetch(siteUrl('data/site.json'), { cache: 'no-store' });
     if (!response.ok) throw new Error(`site.json ${response.status}`);
     return await response.json();
   } catch (error) {
@@ -280,8 +282,8 @@ export async function mountHeaderFooter() {
 
       <header class="masthead">
         <div class="container masthead__inner">
-          <a class="masthead__brand" href="/" aria-label="${esc(org.nama)} — Utama">
-            <img class="masthead__logo" src="/assets/img/logo-perkim-180.png"
+          <a class="masthead__brand" href="${siteHref('index.html')}" aria-label="${esc(org.nama)} — Utama">
+            <img class="masthead__logo" src="${siteHref('assets/img/logo-perkim-180.png')}"
                  alt="Logo PERKIM" width="82" height="82" decoding="async">
             <span class="masthead__wordmark">
               <span class="masthead__org">${esc(org.nama_penuh)}</span>
@@ -340,8 +342,8 @@ export async function mountHeaderFooter() {
         <div class="container">
           <div class="footer__top">
             <div class="footer__brand">
-              <a class="footer__brand-link" href="/">
-                <img src="/assets/img/logo-perkim-128.png" alt="" width="54" height="54">
+              <a class="footer__brand-link" href="${siteHref('index.html')}">
+                <img src="${siteHref('assets/img/logo-perkim-128.png')}" alt="" width="54" height="54">
                 <span>
                   <strong>${esc(org.nama_penuh)}</strong>
                   <span>${esc(org.nama_inggeris)}</span>
@@ -362,7 +364,7 @@ export async function mountHeaderFooter() {
               <h2 class="footer__title">Pautan</h2>
               <ul class="footer__links">
                 ${FOOTER_LINKS.map(
-                  (item) => `<li><a href="${item.href}">${item.label}</a></li>`
+                  (item) => `<li><a href="${siteHref(item.href)}">${item.label}</a></li>`
                 ).join('')}
               </ul>
             </div>
