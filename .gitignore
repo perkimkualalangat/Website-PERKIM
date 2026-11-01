@@ -14,3 +14,11 @@ Desktop.ini
 
 # Log setempat
 *.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Folder staging/salinan lama (sumber sebenar: data/ dan tools/)
+/database_lokasi/
+/ascii globe perkim (2)/

@@ -1,0 +1,196 @@
+{
+  "ringkasan": {
+    "dunia": "Jaringan kolaborasi PERKIM dengan negara luar. Pilih lokasi untuk lihat peranannya.",
+    "malaysia": "Cawangan PERKIM di setiap negeri. Pilih lokasi untuk zum dan lihat butirannya."
+  },
+  "lokasi": [
+    {
+      "id": "ibu-pejabat",
+      "nama": "Ibu Pejabat PERKIM",
+      "jenis": "ibu_pejabat",
+      "negara": "Kuala Lumpur",
+      "lat": 3.139,
+      "lon": 101.687,
+      "peranan": "Pusat penyelarasan cawangan dan jaringan antarabangsa.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-selangor",
+      "nama": "PERKIM Selangor",
+      "jenis": "negeri",
+      "negara": "Shah Alam, Selangor",
+      "lat": 3.073,
+      "lon": 101.518,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "kuala-langat",
+      "nama": "PERKIM Kuala Langat",
+      "jenis": "daerah",
+      "negara": "Banting, Selangor",
+      "lat": 2.816,
+      "lon": 101.5,
+      "peranan": "Pejabat pengurusan aktiviti dakwah, pendidikan, kebajikan dan kemasyarakatan di daerah Kuala Langat.",
+      "contoh": true,
+      "alamat": "Lot 2029, Jalan Haji Darini, Lorong 4, Kampung Sungai Lang Baru, 42700 Banting, Selangor",
+      "telefon": "016-353 6126",
+      "infra": [
+        {
+          "kategori": "bangunan",
+          "butiran": "Pejabat pengurusan di alamat cawangan. Status milikan (milik/sewa/pinjam) belum diisi."
+        }
+      ]
+    },
+    {
+      "id": "rakan-jakarta",
+      "nama": "Jakarta",
+      "jenis": "antarabangsa",
+      "negara": "Indonesia",
+      "lat": -6.209,
+      "lon": 106.846,
+      "peranan": "CONTOH sahaja. Gantikan dengan rakan kolaborasi sebenar.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-perlis",
+      "nama": "PERKIM Perlis",
+      "jenis": "negeri",
+      "negara": "Kangar, Perlis",
+      "lat": 6.443,
+      "lon": 100.204,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-kedah",
+      "nama": "PERKIM Kedah",
+      "jenis": "negeri",
+      "negara": "Alor Setar, Kedah",
+      "lat": 6.121,
+      "lon": 100.367,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-pulau-pinang",
+      "nama": "PERKIM Pulau Pinang",
+      "jenis": "negeri",
+      "negara": "George Town, Pulau Pinang",
+      "lat": 5.414,
+      "lon": 100.329,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-perak",
+      "nama": "PERKIM Perak",
+      "jenis": "negeri",
+      "negara": "Ipoh, Perak",
+      "lat": 4.597,
+      "lon": 101.09,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-putrajaya",
+      "nama": "PERKIM Putrajaya",
+      "jenis": "negeri",
+      "negara": "Putrajaya",
+      "lat": 2.926,
+      "lon": 101.696,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-negeri-sembilan",
+      "nama": "PERKIM Negeri Sembilan",
+      "jenis": "negeri",
+      "negara": "Seremban, Negeri Sembilan",
+      "lat": 2.726,
+      "lon": 101.938,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-melaka",
+      "nama": "PERKIM Melaka",
+      "jenis": "negeri",
+      "negara": "Melaka",
+      "lat": 2.196,
+      "lon": 102.25,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-johor",
+      "nama": "PERKIM Johor",
+      "jenis": "negeri",
+      "negara": "Johor Bahru, Johor",
+      "lat": 1.493,
+      "lon": 103.742,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-pahang",
+      "nama": "PERKIM Pahang",
+      "jenis": "negeri",
+      "negara": "Kuantan, Pahang",
+      "lat": 3.807,
+      "lon": 103.326,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-terengganu",
+      "nama": "PERKIM Terengganu",
+      "jenis": "negeri",
+      "negara": "Kuala Terengganu, Terengganu",
+      "lat": 5.33,
+      "lon": 103.137,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-kelantan",
+      "nama": "PERKIM Kelantan",
+      "jenis": "negeri",
+      "negara": "Kota Bharu, Kelantan",
+      "lat": 6.126,
+      "lon": 102.238,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-sarawak",
+      "nama": "PERKIM Sarawak",
+      "jenis": "negeri",
+      "negara": "Kuching, Sarawak",
+      "lat": 1.553,
+      "lon": 110.359,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-sabah",
+      "nama": "PERKIM Sabah",
+      "jenis": "negeri",
+      "negara": "Kota Kinabalu, Sabah",
+      "lat": 5.98,
+      "lon": 116.073,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    },
+    {
+      "id": "perkim-labuan",
+      "nama": "PERKIM Labuan",
+      "jenis": "negeri",
+      "negara": "Labuan",
+      "lat": 5.283,
+      "lon": 115.23,
+      "peranan": "Cawangan PERKIM peringkat negeri.",
+      "contoh": true
+    }
+  ]
+}

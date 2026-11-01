@@ -16,6 +16,10 @@ export const MENU = [
     ],
   },
   {
+    label: 'Jaringan',
+    href: '/pages/jaringan.html',
+  },
+  {
     label: 'Kepimpinan',
     href: '/pages/kepimpinan.html',
     sub: [
@@ -58,6 +62,7 @@ const FOOTER_LINKS = [
   { label: 'Utama', href: '/' },
   { label: 'Tentang cawangan', href: '/pages/tentang.html' },
   { label: 'PERKIM Kebangsaan', href: '/pages/latar-belakang.html' },
+  { label: 'Jaringan', href: '/pages/jaringan.html' },
   { label: 'Kepimpinan', href: '/pages/kepimpinan.html' },
   { label: 'Berita', href: '/pages/berita.html' },
   { label: 'Bahan Bacaan', href: '/pages/bahan-bacaan.html' },

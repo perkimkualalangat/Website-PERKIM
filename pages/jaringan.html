@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jaringan PERKIM | PERKIM Kuala Langat (draf)</title>
+  <meta name="description" content="Peta dunia ASCII jaringan PERKIM: cawangan negeri, cawangan daerah dan rakan antarabangsa.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1f7a34">
+  <link rel="icon" href="../assets/img/logo-perkim-64.png" sizes="64x64" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/logo-perkim-180.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="module" src="../js/main.js"></script>
+  <script src="../js/ascii-globe-land.js" defer></script>
+  <script src="../js/ascii-globe.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Langkau ke kandungan</a>
+
+  <div class="draft-banner" role="note">
+    <div class="container draft-banner__inner">
+      <strong>Data contoh</strong>
+      <span>Koordinat bandar adalah tepat, tetapi senarai rakan antarabangsa dan teks peranan
+        masih penanda tempat. Setiap entri bertanda “contoh” sehingga disahkan.</span>
+    </div>
+  </div>
+
+  <div id="site-header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Jejak navigasi">
+          <ol>
+            <li><a href="../index.html">Utama</a></li>
+            <li><span aria-current="page">Jaringan</span></li>
+          </ol>
+        </nav>
+        <h1>Jaringan PERKIM</h1>
+        <p>Peta bumi ASCII dengan cawangan negeri, cawangan daerah dan jaringan antarabangsa
+           PERKIM. Pilih penanda atau nama dalam senarai untuk zum ke lokasi.</p>
+      </div>
+    </section>
+
+    <section class="container section" aria-labelledby="peta-title">
+      <h2 class="section__title" id="peta-title">Peta jaringan</h2>
+      <p class="section__lead">Butang <em>Dunia</em> memaparkan bumi berputar bersama rakan luar
+        negara. Butang <em>Malaysia</em> mengezum ke Semenanjung, Sabah dan Sarawak.</p>
+
+      <div class="ag" data-ascii-globe data-src="../data/perkim-network.json">
+        <p>Memuatkan peta jaringan…</p>
+      </div>
+
+      <noscript>
+        <p class="notice" role="note">Peta memerlukan JavaScript. Senarai lokasi boleh dikemas
+          kini dalam <code>data/perkim-network.json</code>.</p>
+      </noscript>
+    </section>
+
+    <section class="section section--alt" aria-labelledby="nota-peta-title">
+      <div class="container">
+        <h2 class="section__title" id="nota-peta-title">Status data</h2>
+        <div class="prose">
+          <p>Peta ini berfungsi sebagai komponen draf. Sumber tunggal ialah
+            <code>data/database_lokasi_perkim.md</code>. Selepas menyuntingnya, jalankan
+            <code>python tools/bina_lokasi.py semak</code> dan
+            <code>python tools/bina_lokasi.py bina</code> untuk menjana
+            <code>data/perkim-network.json</code>. Jangan sunting fail JSON itu secara manual.</p>
+          <p>Untuk laman awam, gunakan <code>bina --awam</code> supaya hanya rekod berstatus
+            <code>disahkan</code> dipaparkan. Halaman mesti dibuka melalui pelayan tempatan
+            (<code>start.bat</code>) atau hos statik, kerana data dimuat melalui
+            <code>fetch</code>.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn--ghost btn--sm" href="hubungi.html">Hubungi pejabat</a>
+          <a class="btn btn--ghost btn--sm" href="../index.html">Kembali ke utama</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>

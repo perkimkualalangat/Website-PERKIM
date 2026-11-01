@@ -112,6 +112,7 @@ perkim-kuala-langat/
 │   ├── kepimpinan.html         Jadual jawatan + status pengesahan
 │   ├── berita.html             Indeks berita (tajuk + pautan sahaja)
 │   ├── bahan-bacaan.html       Rak buku PDF
+│   ├── jaringan.html           Peta dunia cawangan & jaringan antarabangsa
 │   └── hubungi.html            Alamat, e-mel, borang draf
 ├── css/
 │   ├── style.css               Import semua CSS
@@ -121,6 +122,7 @@ perkim-kuala-langat/
 │   ├── mapbtn.css              Butang "Buka Google Maps" + pratonton peta
 │   ├── kepimpinan.css          Kad jawatan & status
 │   ├── library.css             Rak buku + pembaca PDF
+│   ├── ascii-globe.css         Gaya peta bumi ASCII
 │   └── vendor/flippy.css       Gaya enjin flippy-pdf
 ├── js/
 │   ├── main.js
@@ -137,6 +139,8 @@ perkim-kuala-langat/
 │   │   ├── library/library.js  Rak buku
 │   │   ├── library/engine-flippy.js
 │   │   └── utils.js
+│   ├── ascii-globe.js          Komponen peta (canvas, penanda, panel)
+│   ├── ascii-globe-land.js     Data darat Natural Earth (dimuat dahulu)
 │   └── vendor/                 flippy-pdf + PDF.js (MIT/Apache-2.0)
 ├── dev/
 │   └── motion-lab.html         Makmal gerakan (dalaman, noindex, tiada dalam nav)
@@ -148,7 +152,9 @@ perkim-kuala-langat/
 │   ├── perkim.json             Maklumat PERKIM Kebangsaan
 │   ├── sitemap.json            Struktur menu laman rasmi
 │   ├── berita.json             Indeks 17 berita terpilih
-│   └── books.json              Buku teks (5 kumpulan, 14 buku)
+│   ├── books.json              Buku teks (5 kumpulan, 14 buku)
+│   ├── database_lokasi_perkim.md  Sumber tunggal lokasi (sunting di sini)
+│   └── perkim-network.json     Dijana oleh bina_lokasi.py (jangan sunting)
 ├── assets/
 │   ├── img/                    Logo PERKIM (512/180/128/64/sumber)
 │   ├── icons/favicon.svg       Ikon draf lama (tidak digunakan)
@@ -163,12 +169,36 @@ perkim-kuala-langat/
     ├── prepare-logo.py         Jana saiz logo daripada sumber
     ├── create-letter.py        Jana surat DOCX
     ├── scrape_perkim.py        Ambil kandungan laman rasmi
+    ├── bina_lokasi.py          Semak & jana peta daripada database_lokasi_perkim.md
     └── check-site.py           Semak pautan, aset, JSON, tag
 ```
 
 > Arkib penuh (`data/perkim/`) dan surat dalaman (`surat/`) **tidak** disalin ke folder aktif
 > ini. Kedua-duanya kekal dalam `_archive/perkim-kuala-langat/` supaya tidak terdedah semasa
 > ujian pelayan.
+
+---
+
+## 3a. Pangkalan data lokasi & peta jaringan
+
+Sumber tunggal lokasi ialah `data/database_lokasi_perkim.md`. Jangan sunting
+`data/perkim-network.json` secara manual — fail itu dijana semula.
+
+```powershell
+python tools/bina_lokasi.py semak          # semak sahaja
+python tools/bina_lokasi.py bina           # jana untuk ujian (kecuali "ditarik")
+python tools/bina_lokasi.py bina --awam    # jana untuk laman awam (hanya "disahkan")
+```
+
+Setiap rekod ialah blok ` ```rekod ` dengan baris `kunci: nilai`. Jenis yang diterima:
+`ibu_pejabat`, `negeri`, `daerah`, `antarabangsa` dan `infra` (paut ke cawangan melalui
+`induk`). Sejarah dan kolaborasi ditulis sebagai `tahun | keterangan`.
+
+Status bergerak `draf` → `menunggu` → `disahkan`, dan `ditarik` apabila tidak lagi sah.
+Rekod hanya boleh `disahkan` jika ada `disahkan_oleh`, `tarikh_sah` dan sekurang-kurangnya
+satu `sumber`. Dalam mod ujian, rekod belum disahkan ditanda `contoh: true`; pada laman
+awam gunakan `--awam`. Komponen peta juga menyokong `data-hide-contoh` untuk menyembunyikan
+entri contoh tanpa menjana semula JSON.
 
 ---
 
