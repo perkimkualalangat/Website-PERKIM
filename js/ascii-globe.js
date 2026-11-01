@@ -447,10 +447,11 @@
           ? (m.jenis === 'antarabangsa' || m.jenis === 'ibu_pejabat')
           : (m.jenis !== 'antarabangsa');
         if (!show) return;
-        var li = h('li'), b = h('button', null, m.nama);
+        var li = h('li'), b = h('button');
         b.type = 'button';
         b.setAttribute('aria-pressed', String(selected === m));
-        b.appendChild(h('span', null, m.negara || JENIS[m.jenis]));
+        b.appendChild(h('span', 'ag-name', m.nama));
+        b.appendChild(h('span', 'ag-sub', m.negara || JENIS[m.jenis]));
         b.addEventListener('click', function () { select(m.id); });
         li.appendChild(b); list.appendChild(li);
       });
