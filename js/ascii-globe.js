@@ -108,7 +108,7 @@
     modes.setAttribute('aria-label', 'Paparan peta');
     var btnDunia = h('button', null, 'Dunia'); btnDunia.type = 'button';
     var btnMy = h('button', null, 'Malaysia'); btnMy.type = 'button';
-    modes.appendChild(btnDunia); modes.appendChild(btnMy);
+    modes.appendChild(btnMy); modes.appendChild(btnDunia);
     var stats = h('p', 'ag-stats');
     var legend = h('ul', 'ag-legend');
     [['hq', 'Ibu pejabat'], ['cawangan', 'Cawangan'], ['antarabangsa', 'Jaringan luar negara']].forEach(function (k) {
@@ -125,7 +125,7 @@
 
     // ---- keadaan ----
     var data = null, byId = {}, hq = null, arcs = [];
-    var mode = 'dunia', selected = null, hovered = null;
+    var mode = 'malaysia', selected = null, hovered = null;
     var cam = { lon: 101.7, lat: 12, zoom: 1 };
     var tgt = { lon: 101.7, lat: 12, zoom: 1 };
     var size = 0, dpr = 1, ink = '#111', accent = '#0b7a4b';
@@ -476,7 +476,7 @@
       var n = data.lokasi.filter(function (m) { return m.jenis === 'negeri'; }).length;
       var i = data.lokasi.filter(function (m) { return m.jenis === 'antarabangsa'; }).length;
       stats.textContent = n + ' cawangan negeri · ' + i + ' jaringan antarabangsa';
-      setMode('dunia');
+      setMode('malaysia');
       resize();
       start();
     }

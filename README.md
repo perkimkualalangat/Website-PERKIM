@@ -12,6 +12,11 @@ branding, menu dan kandungan baharu.
 carian, dan footer empat kolum. Data hubungan dan media sosial kini berpusat dalam
 `data/site.json`.
 
+**Kemas kini 2 November 2026:** halaman Aktiviti Cawangan ditambah sebagai arkib berkurasi
+untuk laporan yang asalnya diterbitkan di Facebook. Setiap program disimpan dalam
+`program/<slug>/` bersama `caption.md` dan gambarnya; `data/aktiviti.json` dijana daripada
+sumber tersebut.
+
 ---
 
 ## 1. Entiti yang digunakan
@@ -81,7 +86,9 @@ start.bat --no-open  :: jangan buka pelayar
 
 `start.bat` menggunakan Node.js (`tools/serve.mjs`) jika ada, dan jatuh balik kepada Python
 jika Node tiada. `tools/serve.mjs` menyokong `Range` (perlu untuk pembaca PDF) dan menetapkan
-`Content-Type` yang betul untuk `.pdf`, `.mjs`, `.woff2` dan sebagainya.
+`Content-Type` yang betul untuk `.pdf`, `.mjs`, `.woff2` dan sebagainya. Jika Python tersedia,
+`start.bat` menjalankan `tools/bina_aktiviti.py` sebelum pelayan dibuka supaya folder program
+dan `data/aktiviti.json` sentiasa segerak.
 
 Secara manual:
 
@@ -103,7 +110,7 @@ menunjuk ke projek MADANI, bukan projek ini.
 ## 3. Struktur
 
 ```
-perkim-kuala-langat/
+perkim-web/
 ├── start.bat                   Pelayan pralihat (Node atau Python)
 ├── index.html                  Utama + status laman
 ├── pages/
@@ -111,6 +118,7 @@ perkim-kuala-langat/
 │   ├── latar-belakang.html     PERKIM Kebangsaan: sejarah, visi, teras
 │   ├── kepimpinan.html         Jadual jawatan + status pengesahan
 │   ├── berita.html             Indeks berita (tajuk + pautan sahaja)
+│   ├── aktiviti.html           Laporan program cawangan daripada Facebook
 │   ├── bahan-bacaan.html       Rak buku PDF
 │   ├── jaringan.html           Peta dunia cawangan & jaringan antarabangsa
 │   └── hubungi.html            Alamat, e-mel, borang draf
@@ -120,6 +128,7 @@ perkim-kuala-langat/
 │   ├── motion.css              Token gerakan + utiliti .m-tactile/.m-focus/.m-rise
 │   ├── base.css, layout.css, components.css
 │   ├── mapbtn.css              Butang "Buka Google Maps" + pratonton peta
+│   ├── aktiviti.css            Kad, penapis dan butiran laporan aktiviti
 │   ├── kepimpinan.css          Kad jawatan & status
 │   ├── library.css             Rak buku + pembaca PDF
 │   ├── ascii-globe.css         Gaya peta bumi ASCII
@@ -135,6 +144,7 @@ perkim-kuala-langat/
 │   │   ├── kepimpinan.js       Render jawatan daripada JSON
 │   │   ├── perkim.js           Render maklumat kebangsaan
 │   │   ├── berita.js           Indeks berita + penapis
+│   │   ├── aktiviti.js         Senarai, butiran dan aktiviti terkini
 │   │   ├── forms.js            Borang draf
 │   │   ├── library/library.js  Rak buku
 │   │   ├── library/engine-flippy.js
@@ -144,6 +154,10 @@ perkim-kuala-langat/
 │   └── vendor/                 flippy-pdf + PDF.js (MIT/Apache-2.0)
 ├── dev/
 │   └── motion-lab.html         Makmal gerakan (dalaman, noindex, tiada dalam nav)
+├── program/
+│   ├── README.md               Aliran menambah program
+│   ├── _template/caption.md    Templat metadata + caption penuh
+│   └── <slug>/                 Satu subfolder bagi setiap program dan gambarnya
 ├── data/
 │   ├── site.json               Alamat, telefon, waktu, media sosial
 │   ├── search-index.json       Indeks carian
@@ -152,6 +166,7 @@ perkim-kuala-langat/
 │   ├── perkim.json             Maklumat PERKIM Kebangsaan
 │   ├── sitemap.json            Struktur menu laman rasmi
 │   ├── berita.json             Indeks 17 berita terpilih
+│   ├── aktiviti.json           Dijana daripada program/*/caption.md
 │   ├── books.json              Buku teks (5 kumpulan, 14 buku)
 │   ├── database_lokasi_perkim.md  Sumber tunggal lokasi (sunting di sini)
 │   └── perkim-network.json     Dijana oleh bina_lokasi.py (jangan sunting)
@@ -170,6 +185,8 @@ perkim-kuala-langat/
     ├── create-letter.py        Jana surat DOCX
     ├── scrape_perkim.py        Ambil kandungan laman rasmi
     ├── bina_lokasi.py          Semak & jana peta daripada database_lokasi_perkim.md
+    ├── bina_aktiviti.py        Jana aktiviti daripada folder program
+    ├── check-aktiviti.py       Semak struktur, sumber dan imej aktiviti
     └── check-site.py           Semak pautan, aset, JSON, tag
 ```
 
@@ -313,6 +330,80 @@ salin folder itu ke hosting awam dan jangan salin teks ke halaman laman.
 
 ---
 
+## 5a. Aktiviti Cawangan daripada Facebook
+
+`pages/aktiviti.html` ialah halaman berasingan daripada Berita Kebangsaan. Ia membaca fail
+janaan `data/aktiviti.json`, menyediakan penapis kategori dan menggunakan URL
+`pages/aktiviti.html?slug=<slug>` untuk paparan caption penuh serta galeri. Halaman utama hanya
+memaparkan tiga rekod terkini berstatus `disahkan`; halaman Aktiviti turut memaparkan rekod
+`draf` dengan lencana yang jelas. Rekod `ditarik` tidak dimasukkan ke JSON janaan. Modul
+carian menggabungkan rekod aktiviti secara automatik dengan `data/search-index.json`.
+
+Facebook kekal sebagai sumber asal. Laman ini tidak menggunakan scraping, embed langsung,
+API atau token Facebook. Caption penuh hanya disimpan untuk post milik cawangan dan semua
+gambar memerlukan kebenaran yang sesuai.
+
+### Struktur satu program
+
+```text
+program/slug-program/
+|-- caption.md
+|-- gambar-01.jpg
+`-- gambar-02.jpg
+```
+
+Salin `program/_template/` untuk memulakan rekod. `caption.md` mengandungi metadata di antara
+dua baris `---`, kemudian caption penuh di bawahnya:
+
+```markdown
+---
+id: slug-program
+slug: slug-program
+tarikh: 2026-11-02
+tajuk: Tajuk program yang telah disemak
+kategori: Kebajikan
+ringkas: Ringkasan pendek untuk kad aktiviti.
+lokasi: null
+facebook_url: https://www.facebook.com/.../posts/...
+status: draf
+sumber: Facebook PERKIM Kuala Langat
+disahkan_oleh: null
+disahkan_tarikh: null
+gambar: ["gambar-01.jpg", "gambar-02.jpg"]
+gambar_alt: ["Penerangan gambar pertama", "Penerangan gambar kedua"]
+gambar_kapsyen: [null, null]
+---
+
+Caption lengkap post Facebook diletakkan di sini.
+```
+
+Nama folder mesti sama dengan `slug`. Susunan `gambar_alt` mesti sepadan dengan `gambar`;
+`gambar_kapsyen` boleh kosong atau mempunyai bilangan item yang sama. Caption dipaparkan
+sebagai teks selamat dengan pecahan baris asal, bukan sebagai HTML.
+
+Aliran kemas kini:
+
+1. Salin `_template`, namakan folder mengikut slug dan masukkan URL post Facebook kanonik.
+2. Letakkan caption penuh, ringkasan, tarikh dan lokasi tanpa mereka maklumat.
+3. Letakkan gambar yang dibenarkan dalam folder program yang sama dan lengkapkan teks
+   alternatif. Jangan guna gambar kanak-kanak atau individu rentan tanpa kebenaran.
+4. Kekalkan `status: draf`, `disahkan_oleh: null` dan `disahkan_tarikh: null` semasa semakan.
+5. Jana dan semak laman:
+
+```powershell
+python tools\bina_aktiviti.py
+python tools\check-site.py
+```
+
+6. Tukar kepada `disahkan` hanya selepas mengisi peranan pengesah dan tarikh sebenar. Jangan
+   gunakan nama peribadi sebagai pengesah.
+
+Jangan sunting `data/aktiviti.json` secara manual. `check-site.py` menjalankan
+`bina_aktiviti.py --semak` dan `check-aktiviti.py`, termasuk memastikan JSON segerak dengan
+folder sumber. URL `/share/` menghasilkan amaran supaya diganti dengan URL post kanonik.
+
+---
+
 ## 6. Bahan bacaan PDF
 
 Rak buku menggunakan `flippy-pdf` + PDF.js yang dihoskan sendiri dalam `js/vendor/`.
@@ -407,17 +498,18 @@ Kekal sebagai alat dalaman untuk menguji komponen baharu.
 
 ### Navigasi dropdown
 
-Setiap item menu (Tentang, Kepimpinan, Berita, Bahan Bacaan, Hubungi) guna corak **split
+Setiap item menu (Tentang, Kepimpinan, Berita, Aktiviti, Bahan Bacaan, Hubungi) guna corak **split
 button**: label menuju terus ke halaman, anak panah membuka submenu. Latar hijau ialah satu
 unit — tiada jurang antara label dan anak panah. Pada skrin ≤880px submenu dibuka *inline*
 (`position: static`) di dalam menu mudah alih.
 
 ### Pemutar berita (topbar)
 
-`js/modules/ticker.js` mengocok kesemua 17 item `data/berita.json` dan bertukar secara rawak
-setiap 6 saat. Butang **sebelum / seterusnya** menggantikan togol jeda. Pemutar berhenti
-semasa hover, fokus atau tab tersembunyi. Tiada `aria-live` supaya pembaca skrin tidak
-terganggu; senarai penuh ada di `/pages/berita.html`.
+`js/modules/ticker.js` mengocok kesemua 17 item `data/berita.json` bersama laporan cawangan
+berstatus `disahkan` daripada `data/aktiviti.json`, kemudian bertukar secara rawak setiap 6
+saat. Butang **sebelum / seterusnya** menggantikan togol jeda. Pemutar berhenti semasa hover,
+fokus atau tab tersembunyi. Tiada `aria-live` supaya pembaca skrin tidak terganggu; senarai
+penuh ada di `/pages/berita.html` dan `/pages/aktiviti.html`.
 
 ### Butang peta
 
@@ -435,10 +527,12 @@ popup disekat. Panel pratonton dicipta malas pada hover/fokus pertama dan berpus
 3. Alamat, telefon, e-mel dan waktu pejabat disemak. *(Alamat dan waktu sudah disahkan
    30 Oktober 2026; sahkan semula jika ada perubahan.)*
 4. Pautan Facebook, Instagram, YouTube dan TikTok cawangan disemak.
-5. Kebenaran nama dan logo diperoleh.
-6. Tukar warna/tema jika panduan korporat rasmi berbeza.
-7. Uji pada telefon dan komputer, termasuk carian dan menu mudah alih.
-8. Barulah buang banner draf dan `noindex` — dengan kebenaran pihak cawangan.
+5. Semua laporan aktiviti, URL post, imej dan kebenaran subjek disemak; tiada rekod `draf`
+   diterbitkan.
+6. Kebenaran nama dan logo diperoleh.
+7. Tukar warna/tema jika panduan korporat rasmi berbeza.
+8. Uji pada telefon dan komputer, termasuk carian dan menu mudah alih.
+9. Barulah buang banner draf dan `noindex` — dengan kebenaran pihak cawangan.
 
 ---
 

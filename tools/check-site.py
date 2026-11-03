@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
@@ -105,10 +106,15 @@ for html in sorted(ROOT.rglob('*.html')):
         if target:
             check(target, f"{html.relative_to(ROOT)} [{attr}]")
 
-    # Elemen penting untuk JavaScript
-    for required in ('id="site-header"', 'id="site-footer"', 'id="main"'):
-        if required not in text:
-            errors.append(f"STRUKTUR {html.relative_to(ROOT)} tiada {required}")
+    # Alat dalam dev/ berdiri sendiri; halaman laman utama menggunakan shell dikongsi.
+    relative = html.relative_to(ROOT)
+    if relative.parts[0] == 'dev':
+        if '<main' not in text:
+            errors.append(f"STRUKTUR {relative} tiada elemen main")
+    else:
+        for required in ('id="site-header"', 'id="site-footer"', 'id="main"'):
+            if required not in text:
+                errors.append(f"STRUKTUR {relative} tiada {required}")
 
     if '<html lang="ms"' not in text:
         errors.append(f"STRUKTUR {html.relative_to(ROOT)} tiada lang=\"ms\"")
@@ -136,6 +142,36 @@ for js in sorted(ROOT.rglob('*.json')):
         print(f"  OK  {js.relative_to(ROOT)} ({count} entri)")
     except json.JSONDecodeError as exc:
         errors.append(f"JSON     {js.relative_to(ROOT)}: {exc}")
+
+print("Menyemak sumber program…")
+source_check = subprocess.run(
+    [sys.executable, str(ROOT / 'tools' / 'bina_aktiviti.py'), '--semak'],
+    cwd=ROOT,
+    capture_output=True,
+    text=True,
+    check=False,
+)
+if source_check.stdout.strip():
+    print("  " + source_check.stdout.strip().replace("\n", "\n  "))
+if source_check.stderr.strip():
+    print("  " + source_check.stderr.strip().replace("\n", "\n  "))
+if source_check.returncode:
+    errors.append("PROGRAM semakan sumber gagal; lihat butiran di atas")
+
+print("Menyemak data aktiviti…")
+activity_check = subprocess.run(
+    [sys.executable, str(ROOT / 'tools' / 'check-aktiviti.py')],
+    cwd=ROOT,
+    capture_output=True,
+    text=True,
+    check=False,
+)
+if activity_check.stdout.strip():
+    print("  " + activity_check.stdout.strip().replace("\n", "\n  "))
+if activity_check.stderr.strip():
+    print("  " + activity_check.stderr.strip().replace("\n", "\n  "))
+if activity_check.returncode:
+    errors.append("AKTIVITI semakan data gagal; lihat butiran di atas")
 
 print(f"\n{checked} rujukan disemak.")
 

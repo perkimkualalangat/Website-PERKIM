@@ -1,7 +1,8 @@
 /**
  * ticker.js — pemutar maklumat rawak di bar atas (topbar).
  *
- * Memuat semua tajuk daripada data/berita.json, mengesyut susunan supaya
+ * Memuat berita kebangsaan dan laporan aktiviti cawangan yang disahkan,
+ * kemudian mengesyut susunan supaya
  * setiap paparan menunjukkan item berbeza, kemudian bertukar secara rawak
  * setiap 6 saat. Pengguna boleh melompat ke tajuk sebelum atau selepas
  * melalui butang navigasi.
@@ -9,7 +10,7 @@
  * Aksesibiliti:
  *   - Auto-putar berhenti apabila tetikus di atas atau fokus di dalam.
  *   - Pemutar tidak menggunakan aria-live supaya pembaca skrin tidak
- *     diinterrupt setiap 6 saat; senarai penuh ada di /pages/berita.html.
+ *     diinterrupt setiap 6 saat; senarai penuh ada pada halaman Berita dan Aktiviti.
  *   - Pemutar berhenti apabila tab disembunyikan.
  *   - Butang navigasi mempunyai label yang jelas untuk pembaca skrin.
  */
@@ -52,14 +53,34 @@ export async function initTicker() {
     host.querySelector('.topbar__announce-fallback')?.textContent?.trim() || '';
   let items = [];
 
-  try {
-    const news = await getJSON('/data/berita.json');
-    if (Array.isArray(news) && news.length > 0) {
-      items = shuffle(news);
-    }
-  } catch (error) {
-    console.error('Ticker: gagal memuat berita —', error.message);
-  }
+  const [news, activities] = await Promise.all([
+    getJSON('/data/berita.json').catch((error) => {
+      console.error('Ticker: gagal memuat berita -', error.message);
+      return [];
+    }),
+    getJSON('/data/aktiviti.json').catch((error) => {
+      console.error('Ticker: gagal memuat aktiviti -', error.message);
+      return [];
+    }),
+  ]);
+
+  const localActivities = Array.isArray(activities)
+    ? activities
+        .filter(
+          (item) =>
+            item?.status === 'disahkan' &&
+            typeof item.facebook_url === 'string' &&
+            /^https:\/\/(?:[^/]+\.)?facebook\.com\//i.test(item.facebook_url)
+        )
+        .map((item) => ({
+          tarikh: item.tarikh,
+          kategori: 'Aktiviti',
+          tajuk: item.tajuk,
+          url: item.facebook_url,
+        }))
+    : [];
+
+  items = shuffle([...(Array.isArray(news) ? news : []), ...localActivities]);
 
   // Tiada berita: kekalkan teks asal.
   if (items.length === 0) {
@@ -74,8 +95,8 @@ export async function initTicker() {
     `<a class="ticker__item" href="${esc(items[0].url || '#')}" target="_blank" rel="noopener noreferrer">${renderItem(items[0])}</a>` +
     '</div>' +
     '<div class="ticker__nav">' +
-    `<button class="ticker__btn" type="button" data-ticker-prev aria-label="Tajuk berita sebelumnya">${PREV_ICON}</button>` +
-    `<button class="ticker__btn" type="button" data-ticker-next aria-label="Tajuk berita seterusnya">${NEXT_ICON}</button>` +
+    `<button class="ticker__btn" type="button" data-ticker-prev aria-label="Maklumat sebelumnya">${PREV_ICON}</button>` +
+    `<button class="ticker__btn" type="button" data-ticker-next aria-label="Maklumat seterusnya">${NEXT_ICON}</button>` +
     '</div>';
 
   const link = host.querySelector('.ticker__item');

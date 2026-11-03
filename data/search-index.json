@@ -42,6 +42,13 @@
     "kata_kunci": "berita pengumuman aktiviti program"
   },
   {
+    "tajuk": "Aktiviti Cawangan",
+    "url": "pages/aktiviti.html",
+    "jenis": "Halaman",
+    "keterangan": "Laporan ringkas program dan acara cawangan dengan pautan ke post Facebook asal.",
+    "kata_kunci": "aktiviti program acara laporan cawangan facebook"
+  },
+  {
     "tajuk": "Bahan Bacaan",
     "url": "pages/bahan-bacaan.html",
     "jenis": "Halaman",
@@ -173,6 +180,13 @@
     "jenis": "Bahagian",
     "keterangan": "Tapis senarai berita mengikut kategori aktiviti.",
     "kata_kunci": "tapis kategori filter berita dakwah kebajikan pendidikan"
+  },
+  {
+    "tajuk": "Tapis aktiviti cawangan",
+    "url": "pages/aktiviti.html#aktiviti-filter",
+    "jenis": "Bahagian",
+    "keterangan": "Tapis laporan program cawangan mengikut kategori.",
+    "kata_kunci": "tapis kategori aktiviti program laporan cawangan"
   },
   {
     "tajuk": "Borang mesej",

@@ -39,6 +39,15 @@ export const MENU = [
     ],
   },
   {
+    label: 'Aktiviti',
+    href: '/pages/aktiviti.html',
+    sub: [
+      { label: 'Semua aktiviti', href: '/pages/aktiviti.html' },
+      { label: 'Tapis mengikut kategori', href: '/pages/aktiviti.html#aktiviti-filter' },
+      { label: 'Sumber Facebook', href: '/pages/aktiviti.html#sumber-facebook' },
+    ],
+  },
+  {
     label: 'Bahan Bacaan',
     href: '/pages/bahan-bacaan.html',
     sub: [
@@ -65,6 +74,7 @@ const FOOTER_LINKS = [
   { label: 'Jaringan', href: '/pages/jaringan.html' },
   { label: 'Kepimpinan', href: '/pages/kepimpinan.html' },
   { label: 'Berita', href: '/pages/berita.html' },
+  { label: 'Aktiviti', href: '/pages/aktiviti.html' },
   { label: 'Bahan Bacaan', href: '/pages/bahan-bacaan.html' },
   { label: 'Hubungi', href: '/pages/hubungi.html' },
 ];

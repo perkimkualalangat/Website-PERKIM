@@ -36,6 +36,28 @@ echo    URL    : %URL%
 echo    Henti  : Ctrl+C
 echo.
 
+set "PYTHON_CMD="
+where py >nul 2>nul
+if not errorlevel 1 set "PYTHON_CMD=py"
+if not defined PYTHON_CMD (
+  where python >nul 2>nul
+  if not errorlevel 1 set "PYTHON_CMD=python"
+)
+
+if defined PYTHON_CMD (
+  echo   Menjana indeks aktiviti daripada folder program...
+  %PYTHON_CMD% "tools\bina_aktiviti.py"
+  if errorlevel 1 (
+    echo.
+    echo   Ralat: data aktiviti tidak dijana. Betulkan mesej di atas dahulu.
+    pause
+    exit /b 1
+  )
+) else (
+  echo   Amaran: Python tiada; guna data\aktiviti.json sedia ada.
+)
+echo.
+
 if "%OPEN%"=="1" start "" "%URL%"
 
 where node >nul 2>nul

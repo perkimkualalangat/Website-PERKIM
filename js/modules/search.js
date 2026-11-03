@@ -1,6 +1,6 @@
 /**
- * search.js — carian ringkas merentas halaman dan bahan bacaan.
- * Indeks statik: data/search-index.json
+ * search.js — carian ringkas merentas halaman, bahan bacaan dan aktiviti.
+ * Indeks asas statik digabungkan dengan data/aktiviti.json semasa dimuat.
  */
 
 import { siteHref, siteUrl } from '../paths.js';
@@ -9,15 +9,42 @@ let indexPromise;
 
 function loadIndex() {
   if (!indexPromise) {
-    indexPromise = fetch(siteUrl('data/search-index.json'), { cache: 'no-store' })
-      .then((response) => {
-        if (!response.ok) throw new Error(`search-index.json ${response.status}`);
+    const fetchList = (path) =>
+      fetch(siteUrl(path), { cache: 'no-store' }).then((response) => {
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
         return response.json();
-      })
-      .catch((error) => {
+      });
+
+    indexPromise = Promise.all([
+      fetchList('data/search-index.json').catch((error) => {
         console.error('Gagal memuatkan indeks carian:', error);
         return [];
-      });
+      }),
+      fetchList('data/aktiviti.json').catch((error) => {
+        console.error('Gagal memuatkan indeks aktiviti:', error);
+        return [];
+      }),
+    ]).then(([base, activities]) => {
+      const activityItems = Array.isArray(activities)
+        ? activities
+            .filter((item) => item?.status !== 'ditarik' && (item?.slug || item?.id))
+            .map((item) => ({
+              tajuk: item.tajuk,
+              url: `pages/aktiviti.html?slug=${encodeURIComponent(item.slug || item.id)}`,
+              jenis: item.status === 'disahkan' ? 'Aktiviti' : 'Aktiviti (draf)',
+              keterangan: item.ringkas,
+              kata_kunci: [
+                item.kategori,
+                item.lokasi,
+                item.caption,
+                'aktiviti program facebook',
+              ]
+                .filter(Boolean)
+                .join(' '),
+            }))
+        : [];
+      return [...(Array.isArray(base) ? base : []), ...activityItems];
+    });
   }
   return indexPromise;
 }
