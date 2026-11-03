@@ -334,10 +334,11 @@ salin folder itu ke hosting awam dan jangan salin teks ke halaman laman.
 
 `pages/aktiviti.html` ialah halaman berasingan daripada Berita Kebangsaan. Ia membaca fail
 janaan `data/aktiviti.json`, menyediakan penapis kategori dan menggunakan URL
-`pages/aktiviti.html?slug=<slug>` untuk paparan caption penuh serta galeri. Halaman utama hanya
-memaparkan tiga rekod terkini berstatus `disahkan`; halaman Aktiviti turut memaparkan rekod
-`draf` dengan lencana yang jelas. Rekod `ditarik` tidak dimasukkan ke JSON janaan. Modul
-carian menggabungkan rekod aktiviti secara automatik dengan `data/search-index.json`.
+`pages/aktiviti.html?slug=<slug>` untuk paparan caption penuh serta galeri. Halaman utama
+memaparkan program yang diberi nombor `sorotan` dalam bahagian Sorotan Program; halaman
+Aktiviti turut memaparkan rekod `draf` dengan lencana yang jelas. Rekod `ditarik` tidak
+dimasukkan ke JSON janaan. Modul carian menggabungkan rekod aktiviti secara automatik dengan
+`data/search-index.json`.
 
 Facebook kekal sebagai sumber asal. Laman ini tidak menggunakan scraping, embed langsung,
 API atau token Facebook. Caption penuh hanya disimpan untuk post milik cawangan dan semua
@@ -364,6 +365,12 @@ tajuk: Tajuk program yang telah disemak
 kategori: Kebajikan
 ringkas: Ringkasan pendek untuk kad aktiviti.
 lokasi: null
+masa: null
+kehadiran: null
+laporan: null
+petikan: null
+petikan_oleh: null
+sorotan: null
 facebook_url: https://www.facebook.com/.../posts/...
 status: draf
 sumber: Facebook PERKIM Kuala Langat
@@ -381,10 +388,17 @@ Nama folder mesti sama dengan `slug`. Susunan `gambar_alt` mesti sepadan dengan 
 `gambar_kapsyen` boleh kosong atau mempunyai bilangan item yang sama. Caption dipaparkan
 sebagai teks selamat dengan pecahan baris asal, bukan sebagai HTML.
 
+Medan `masa`, `kehadiran`, `laporan`, `petikan` dan `petikan_oleh` mengisi kad Sorotan
+Program di halaman utama. `laporan` ialah laluan relatif kepada fail Markdown dalam folder
+program. `sorotan` ialah nombor unik; program bernombor dipaparkan dalam pemilih `01`, `02`
+dan seterusnya, dan nombor yang dipilih menentukan set gambar slaid. Biarkan `null` jika
+program tidak perlu dipaparkan sebagai sorotan.
+
 Aliran kemas kini:
 
 1. Salin `_template`, namakan folder mengikut slug dan masukkan URL post Facebook kanonik.
-2. Letakkan caption penuh, ringkasan, tarikh dan lokasi tanpa mereka maklumat.
+2. Letakkan caption penuh, ringkasan, tarikh, masa, kehadiran dan lokasi tanpa mereka
+   maklumat. Isi `laporan` jika fail laporan disimpan dalam folder program.
 3. Letakkan gambar yang dibenarkan dalam folder program yang sama dan lengkapkan teks
    alternatif. Jangan guna gambar kanak-kanak atau individu rentan tanpa kebenaran.
 4. Kekalkan `status: draf`, `disahkan_oleh: null` dan `disahkan_tarikh: null` semasa semakan.

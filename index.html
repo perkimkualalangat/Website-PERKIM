@@ -31,45 +31,62 @@
       <div class="container">
         <div class="sorotan__inner">
           <div class="sorotan__info">
-            <p class="sorotan__kicker"><span class="card__tag">Sorotan program</span></p>
-            <h2 class="sorotan__title" id="sorotan-title">Volunteer Gathering 1.0 2026 — Edisi Srikandi (Muslimah)</h2>
+            <div class="sorotan__kicker-row">
+              <p class="sorotan__kicker"><span class="card__tag">Sorotan program</span></p>
+              <div class="sorotan__picker" data-sorotan-picker
+                role="group" aria-label="Pilih sorotan program"></div>
+            </div>
+            <h2 class="sorotan__title" id="sorotan-title" data-sorotan-title>Volunteer Gathering 1.0 2026 — Edisi Srikandi (Muslimah)</h2>
             <dl class="sorotan__facts">
-              <div class="sorotan__fact">
+              <div class="sorotan__fact" data-sorotan-fact="tarikh">
                 <dt>Tarikh</dt>
-                <dd><time datetime="2026-10-31">31 Oktober 2026 (Sabtu)</time></dd>
+                <dd><time datetime="2026-10-31" data-sorotan-date>31 Oktober 2026 (Sabtu)</time></dd>
               </div>
-              <div class="sorotan__fact">
+              <div class="sorotan__fact" data-sorotan-fact="masa">
                 <dt>Masa</dt>
-                <dd>10.00 pagi – 12.00 tengah hari</dd>
+                <dd data-sorotan-time>10.00 pagi – 12.00 tengah hari</dd>
               </div>
-              <div class="sorotan__fact">
+              <div class="sorotan__fact" data-sorotan-fact="tempat">
                 <dt>Tempat</dt>
-                <dd>Pejabat PERKIM Kuala Langat, Masjid Sungai Lang Baru</dd>
+                <dd data-sorotan-place>Pejabat PERKIM Kuala Langat, Masjid Sungai Lang Baru</dd>
               </div>
-              <div class="sorotan__fact">
+              <div class="sorotan__fact" data-sorotan-fact="kehadiran">
                 <dt>Kehadiran</dt>
-                <dd>8 peserta baharu · 4 orang AJK</dd>
+                <dd data-sorotan-attendance>8 peserta baharu · 4 orang AJK</dd>
               </div>
             </dl>
-            <button type="button" class="sorotan__toggle" data-sorotan-toggle
-              aria-expanded="false" aria-controls="sorotan-details">
-              <span data-sorotan-toggle-label>Butiran program</span>
-              <span class="sorotan__toggle-icon" aria-hidden="true"></span>
-            </button>
+            <div class="sorotan__actions">
+              <button type="button" class="sorotan__toggle" data-sorotan-toggle
+                aria-expanded="false" aria-controls="sorotan-details">
+                <span data-sorotan-toggle-label>Butiran program</span>
+                <span class="sorotan__toggle-icon" aria-hidden="true"></span>
+              </button>
+              <div class="sorotan__pager" data-sorotan-pager hidden
+                role="group" aria-label="Navigasi sorotan program">
+                <button type="button" class="sorotan__pager-btn" data-sorotan-program-prev
+                  aria-label="Sorotan program sebelumnya" title="Sorotan program sebelumnya">
+                  <span aria-hidden="true">←</span>
+                </button>
+                <button type="button" class="sorotan__pager-btn" data-sorotan-program-next
+                  aria-label="Sorotan program seterusnya" title="Sorotan program seterusnya">
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </div>
             <div class="sorotan__details" id="sorotan-details" data-sorotan-details>
               <div class="sorotan__details-inner">
-                <p class="sorotan__lead">Alhamdulillah, program sulung sukarelawan muslimah
+                <p class="sorotan__lead" data-sorotan-lead>Alhamdulillah, program sulung sukarelawan muslimah
                   cawangan ini menjadi platform memperkenalkan gerak kerja kesukarelawanan,
                   dakwah, kebajikan dan kemasyarakatan kepada peserta baharu.</p>
-                <p class="sorotan__text">Sepanjang program, peserta mengikuti sesi suai kenal dan
+                <p class="sorotan__text" data-sorotan-text>Sepanjang program, peserta mengikuti sesi suai kenal dan
                   perkongsian pengalaman dakwah, kuiz berhadiah serta sesi mengenal minat dan
                   potensi diri — diakhiri sesi bergambar kenangan dan jamuan makan bersama.</p>
-                <blockquote class="sorotan__quote">
-                  <p>“Jika tidak dapat ambil semua, jangan tinggal semua.”</p>
-                  <cite>Ustazah Norhazanah, Timbalan Pengerusi II PERKIM Kuala Langat</cite>
+                <blockquote class="sorotan__quote" data-sorotan-quote>
+                  <p data-sorotan-quote-text>“Jika tidak dapat ambil semua, jangan tinggal semua.”</p>
+                  <cite data-sorotan-quote-cite>Ustazah Norhazanah, Timbalan Pengerusi II PERKIM Kuala Langat</cite>
                 </blockquote>
-                <div class="btn-row">
-                  <a class="btn" href="program/volunteer-gathering-2026/laporan.md"
+                <div class="btn-row" data-sorotan-report-row>
+                  <a class="btn" href="program/volunteer-gathering-2026/laporan.md" data-sorotan-report
                      target="_blank" rel="noopener">Baca laporan penuh</a>
                 </div>
               </div>

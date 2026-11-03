@@ -6,6 +6,12 @@ tajuk: Tajuk program yang telah disemak
 kategori: Kebajikan
 ringkas: Ringkasan pendek untuk kad aktiviti.
 lokasi: null
+masa: null
+kehadiran: null
+laporan: null
+petikan: null
+petikan_oleh: null
+sorotan: null
 facebook_url: https://www.facebook.com/.../posts/...
 status: draf
 sumber: Facebook PERKIM Kuala Langat

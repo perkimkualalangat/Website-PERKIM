@@ -32,6 +32,7 @@ def main() -> int:
 
     ids: set[str] = set()
     slugs: set[str] = set()
+    sorotan_seen: set[int] = set()
 
     for position, item in enumerate(items, start=1):
         label = f"rekod {position}"
@@ -78,6 +79,31 @@ def main() -> int:
 
         if status not in STATUS:
             errors.append(f"{label}: status mesti salah satu {sorted(STATUS)}")
+
+        sorotan = item.get("sorotan")
+        if sorotan is not None:
+            if not isinstance(sorotan, int) or isinstance(sorotan, bool) or sorotan < 1:
+                errors.append(f"{label}: sorotan mesti integer positif")
+            elif sorotan in sorotan_seen:
+                errors.append(f"{label}: nombor sorotan berulang ({sorotan})")
+            else:
+                sorotan_seen.add(sorotan)
+
+        for field in ("masa", "kehadiran", "laporan", "petikan", "petikan_oleh"):
+            value = item.get(field)
+            if value is not None and (not isinstance(value, str) or not value.strip()):
+                errors.append(f"{label}: {field} mesti teks bukan kosong atau null")
+
+        laporan = item.get("laporan")
+        if isinstance(laporan, str) and laporan.strip():
+            laporan_path = Path(laporan)
+            target = (ROOT / laporan_path).resolve()
+            if laporan_path.is_absolute() or ".." in laporan_path.parts:
+                errors.append(f"{label}: laporan mesti laluan relatif")
+            elif target.suffix.lower() != ".md":
+                errors.append(f"{label}: laporan mesti fail Markdown (.md)")
+            elif not target.is_file():
+                errors.append(f"{label}: fail laporan tidak ditemui ({laporan})")
 
         confirmation = item.get("disahkan")
         if not isinstance(confirmation, dict):

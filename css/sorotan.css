@@ -8,6 +8,10 @@
   overflow-x: clip;
 }
 
+.sorotan [hidden] {
+  display: none !important;
+}
+
 .sorotan__inner {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
@@ -30,8 +34,60 @@
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.03);
 }
 
+.sorotan__kicker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 0.85rem;
+}
+
 .sorotan__kicker {
-  margin: 0 0 0.7rem;
+  margin: 0;
+}
+
+.sorotan__picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.sorotan__pick {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.8rem;
+  height: 1.8rem;
+  padding: 0 0.4rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--c-text-soft);
+  font: inherit;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    background-color var(--t-color) var(--ease-out),
+    border-color var(--t-color) var(--ease-out),
+    color var(--t-color) var(--ease-out);
+}
+
+.sorotan__pick:hover {
+  border-color: var(--c-primary);
+  color: var(--c-primary);
+}
+
+.sorotan__pick[aria-pressed="true"] {
+  border-color: var(--c-primary);
+  background: var(--c-primary);
+  color: #fff;
+}
+
+.sorotan__pick:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 2px;
 }
 
 .sorotan__kicker .card__tag {
@@ -75,17 +131,31 @@
   color: var(--c-text);
 }
 
-/* Butang buka/tutup butiran program. */
-.sorotan__toggle {
+/* Baris tindakan: butiran program + navigasi sorotan. */
+.sorotan__actions {
   display: none;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  width: 100%;
   margin: 1.15rem 0 0;
   padding: 0.7rem 0 0;
-  border: 0;
   border-top: 1px solid var(--c-border);
+}
+
+html.js-ready .sorotan__actions {
+  display: flex;
+}
+
+/* Butang buka/tutup butiran program. */
+.sorotan__toggle {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0;
+  border: 0;
   border-radius: 0;
   background: transparent;
   color: var(--c-primary);
@@ -96,10 +166,6 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: color var(--t-color) var(--ease-out);
-}
-
-html.js-ready .sorotan__toggle {
-  display: inline-flex;
 }
 
 .sorotan__toggle:hover {
@@ -122,6 +188,49 @@ html.js-ready .sorotan__toggle {
 
 .sorotan.is-open .sorotan__toggle-icon {
   transform: rotate(-135deg);
+}
+
+/* Butang previous/next untuk tukar program sorotan. */
+.sorotan__pager {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.sorotan__pager-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 0;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--c-primary-dark);
+  font: inherit;
+  font-size: 0.72rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform var(--t-hover) var(--ease-out),
+    background-color var(--t-color) var(--ease-out),
+    border-color var(--t-color) var(--ease-out),
+    color var(--t-color) var(--ease-out);
+}
+
+.sorotan__pager-btn:hover {
+  border-color: var(--c-primary);
+  background: var(--c-primary);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.sorotan__pager-btn:active {
+  transform: scale(0.96);
+}
+
+.sorotan__pager-btn:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 2px;
 }
 
 /* Panel butiran yang boleh dibuka/tutup. */
@@ -169,6 +278,7 @@ html.js-ready .sorotan.is-open .sorotan__details {
   font-size: 0.92rem;
   line-height: 1.7;
   text-wrap: pretty;
+  white-space: pre-line;
 }
 
 .sorotan__quote {

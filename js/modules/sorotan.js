@@ -3,7 +3,11 @@
  *
  * Tiga kad kelihatan pada satu masa. Kad hadapan bergerak keluar untuk
  * mendedahkan kad di belakang; keterangan gambar dipaparkan di bawah slaid.
+ * Program sorotan bernombor diambil daripada data/aktiviti.json.
  */
+
+import { getJSON, formatDate } from './utils.js';
+import { siteHref } from '../paths.js';
 
 const DEFAULT_INTERVAL = 7000;
 const ANIMATION_MS = 560;
@@ -14,9 +18,18 @@ function formatSpeed(value) {
   return `${value}×`;
 }
 
+function formatProgramDate(iso) {
+  if (!iso) return '';
+  const date = new Date(`${iso}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return String(iso);
+  const weekday = new Intl.DateTimeFormat('ms-MY', { weekday: 'long' }).format(date);
+  return `${formatDate(iso)} (${weekday})`;
+}
+
 function setupSlideshow(root) {
-  const slides = Array.from(root.querySelectorAll('[data-sorotan-slide]'));
-  if (!slides.length) return;
+  if (!root) return null;
+
+  let slides = Array.from(root.querySelectorAll('[data-sorotan-slide]'));
 
   const stage = root.querySelector('[data-sorotan-stage]');
   const caption = root.querySelector('[data-sorotan-caption]');
@@ -45,6 +58,12 @@ function setupSlideshow(root) {
   }
 
   function paint() {
+    if (!slides.length) {
+      if (caption) caption.textContent = '';
+      if (count) count.textContent = '';
+      return;
+    }
+
     slides.forEach((slide, position) => {
       const offset = (position - index + slides.length) % slides.length;
       slide.classList.toggle('is-front', offset === 0);
@@ -122,6 +141,16 @@ function setupSlideshow(root) {
     } else {
       caption?.setAttribute('aria-live', 'polite');
     }
+  }
+
+  function setSlides(nextSlides) {
+    slides = Array.isArray(nextSlides) ? nextSlides : [];
+    if (stage) stage.replaceChildren(...slides);
+    index = 0;
+    busy = false;
+    window.clearTimeout(timer);
+    paint();
+    schedule();
   }
 
   prevButton?.addEventListener('click', () => go(-1));
@@ -207,13 +236,118 @@ function setupSlideshow(root) {
   updateSpeedButton();
   paint();
   schedule();
+
+  return { setSlides };
+}
+
+function createSlide(image, index) {
+  const figure = document.createElement('figure');
+  figure.className = 'sorotan__slide';
+  if (index === 0) figure.classList.add('is-front');
+  else if (index === 1) figure.classList.add('is-mid');
+  else if (index === 2) figure.classList.add('is-back');
+  figure.dataset.sorotanSlide = '';
+  figure.dataset.caption = image.kapsyen || image.alt || '';
+  figure.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+
+  const img = document.createElement('img');
+  img.src = siteHref(image.src);
+  img.alt = image.alt || '';
+  img.width = 1080;
+  img.height = 1350;
+  img.decoding = 'async';
+  img.draggable = false;
+  if (index === 0) {
+    img.setAttribute('fetchpriority', 'high');
+  } else {
+    img.loading = 'lazy';
+  }
+
+  figure.appendChild(img);
+  return figure;
+}
+
+function applyProgram(section, slideshow, panel, record) {
+  const setText = (selector, value) => {
+    const element = section.querySelector(selector);
+    if (element) element.textContent = value || '';
+  };
+
+  setText('[data-sorotan-title]', record.tajuk);
+
+  const date = section.querySelector('[data-sorotan-date]');
+  if (date) {
+    date.textContent = formatProgramDate(record.tarikh);
+    if (record.tarikh) date.setAttribute('datetime', record.tarikh);
+    else date.removeAttribute('datetime');
+  }
+  const dateFact = section.querySelector('[data-sorotan-fact="tarikh"]');
+  if (dateFact) dateFact.hidden = !record.tarikh;
+
+  const factValues = {
+    masa: record.masa,
+    tempat: record.lokasi,
+    kehadiran: record.kehadiran,
+  };
+  const factSelectors = {
+    masa: '[data-sorotan-time]',
+    tempat: '[data-sorotan-place]',
+    kehadiran: '[data-sorotan-attendance]',
+  };
+
+  Object.entries(factValues).forEach(([key, value]) => {
+    setText(factSelectors[key], value);
+    const fact = section.querySelector(`[data-sorotan-fact="${key}"]`);
+    if (fact) fact.hidden = !value;
+  });
+
+  const captionText = String(record.caption || '').trim();
+  const paragraphs = captionText
+    ? captionText.split(/\n\s*\n/).map((part) => part.trim()).filter(Boolean)
+    : [];
+
+  setText('[data-sorotan-lead]', record.ringkas || paragraphs[0] || '');
+  const detailsText = paragraphs.slice(1, 3).join('\n\n');
+  const details = section.querySelector('[data-sorotan-text]');
+  if (details) {
+    details.textContent = detailsText;
+    details.hidden = !detailsText;
+  }
+
+  const quote = section.querySelector('[data-sorotan-quote]');
+  if (quote) {
+    quote.hidden = !record.petikan;
+    setText('[data-sorotan-quote-text]', record.petikan);
+    setText('[data-sorotan-quote-cite]', record.petikan_oleh);
+  }
+
+  const reportRow = section.querySelector('[data-sorotan-report-row]');
+  const reportLink = section.querySelector('[data-sorotan-report]');
+  if (reportRow && reportLink) {
+    if (record.laporan) {
+      reportLink.href = siteHref(record.laporan);
+      reportRow.hidden = false;
+    } else {
+      reportRow.hidden = true;
+    }
+  }
+
+  const gallery = Array.isArray(record.gambar)
+    ? record.gambar.filter((image) => image && image.src)
+    : [];
+  slideshow.setSlides(gallery.map(createSlide));
+
+  const region = section.querySelector('[data-sorotan-slideshow]');
+  if (region) region.setAttribute('aria-label', `Galeri gambar ${record.tajuk || ''}`);
+
+  panel.setOpen(false);
 }
 
 function setupProgramPanel(section) {
   const toggle = section.querySelector('[data-sorotan-toggle]');
   const details = section.querySelector('[data-sorotan-details]');
   const label = section.querySelector('[data-sorotan-toggle-label]');
-  if (!toggle || !details) return;
+  if (!toggle || !details) return { setOpen() {} };
 
   function setOpen(open) {
     section.classList.toggle('is-open', open);
@@ -235,9 +369,92 @@ function setupProgramPanel(section) {
   });
 
   setOpen(section.classList.contains('is-open'));
+
+  return { setOpen };
+}
+
+function setupFeatured(section, slideshow, panel) {
+  const picker = section.querySelector('[data-sorotan-picker]');
+  if (!picker) return;
+
+  const pager = section.querySelector('[data-sorotan-pager]');
+  const prevProgram = section.querySelector('[data-sorotan-program-prev]');
+  const nextProgram = section.querySelector('[data-sorotan-program-next]');
+  let currentIndex = 0;
+
+  getJSON('/data/aktiviti.json')
+    .then((items) => {
+      if (!Array.isArray(items)) return;
+
+      const featured = items
+        .filter(
+          (item) =>
+            item &&
+            item.status !== 'ditarik' &&
+            Number.isInteger(item.sorotan) &&
+            item.sorotan > 0 &&
+            Array.isArray(item.gambar) &&
+            item.gambar.length
+        )
+        .sort((a, b) => a.sorotan - b.sorotan);
+
+      if (!featured.length) return;
+
+      picker.replaceChildren();
+      featured.forEach((record) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'sorotan__pick';
+        button.dataset.sorotan = String(record.sorotan);
+        button.textContent = String(record.sorotan).padStart(2, '0');
+        button.title = record.tajuk || '';
+        button.setAttribute(
+          'aria-label',
+          `Sorotan ${record.sorotan}: ${record.tajuk || ''}`
+        );
+        button.setAttribute('aria-pressed', 'false');
+        button.addEventListener('click', () => activate(record));
+        picker.appendChild(button);
+      });
+
+      function activate(record) {
+        const index = featured.indexOf(record);
+        if (index !== -1) currentIndex = index;
+
+        picker.querySelectorAll('button').forEach((button) => {
+          button.setAttribute(
+            'aria-pressed',
+            String(button.dataset.sorotan === String(record.sorotan))
+          );
+        });
+        applyProgram(section, slideshow, panel, record);
+      }
+
+      function step(direction) {
+        currentIndex = (currentIndex + direction + featured.length) % featured.length;
+        activate(featured[currentIndex]);
+      }
+
+      if (featured.length > 1) {
+        pager?.removeAttribute('hidden');
+        prevProgram?.addEventListener('click', () => step(-1));
+        nextProgram?.addEventListener('click', () => step(1));
+      }
+
+      activate(featured[0]);
+    })
+    .catch((error) => {
+      console.error('Sorotan: gagal memuat data -', error.message);
+    });
 }
 
 export function initSorotan() {
-  document.querySelectorAll('[data-sorotan-slideshow]').forEach(setupSlideshow);
-  document.querySelectorAll('[data-sorotan]').forEach(setupProgramPanel);
+  const section = document.querySelector('[data-sorotan]');
+  if (!section) return;
+
+  const slideshow = setupSlideshow(section.querySelector('[data-sorotan-slideshow]'));
+  const panel = setupProgramPanel(section);
+  if (!slideshow) return;
+
+  setupFeatured(section, slideshow, panel);
 }

@@ -36,6 +36,12 @@ KNOWN = REQUIRED_TEXT | {
     "gambar",
     "gambar_alt",
     "gambar_kapsyen",
+    "sorotan",
+    "masa",
+    "kehadiran",
+    "laporan",
+    "petikan",
+    "petikan_oleh",
 }
 
 
@@ -51,6 +57,8 @@ def parse_value(raw: str, label: str, errors: list[str]):
         except json.JSONDecodeError as exc:
             errors.append(f"{label}: nilai JSON tidak sah ({exc.msg})")
             return None
+    if re.fullmatch(r"-?\d+", value):
+        return int(value)
     return value
 
 
@@ -148,6 +156,41 @@ def build_record(folder: Path) -> tuple[dict | None, list[str], list[str]]:
     if status not in STATUS:
         errors.append(f"{label}: status mesti salah satu {sorted(STATUS)}")
 
+    sorotan = metadata.get("sorotan")
+    if sorotan is not None and (
+        not isinstance(sorotan, int) or isinstance(sorotan, bool) or sorotan < 1
+    ):
+        errors.append(f"{label}: sorotan mesti integer positif")
+
+    for key in ("masa", "kehadiran", "petikan", "petikan_oleh"):
+        value = metadata.get(key)
+        if value is not None and (not isinstance(value, str) or not value.strip()):
+            errors.append(f"{label}: {key} mesti teks bukan kosong")
+
+    if metadata.get("petikan_oleh") and not metadata.get("petikan"):
+        warnings.append(f"{label}: petikan_oleh diisi tanpa petikan")
+
+    laporan = None
+    laporan_value = metadata.get("laporan")
+    if laporan_value is not None:
+        if not isinstance(laporan_value, str) or not laporan_value.strip():
+            errors.append(f"{label}: laporan mesti teks bukan kosong")
+        else:
+            relative = Path(laporan_value)
+            target = (folder / relative).resolve()
+            if (
+                relative.is_absolute()
+                or ".." in relative.parts
+                or not target.is_relative_to(folder.resolve())
+            ):
+                errors.append(f"{label}: laluan laporan tidak sah ({laporan_value})")
+            elif target.suffix.lower() != ".md":
+                errors.append(f"{label}: laporan mesti fail Markdown (.md)")
+            elif not target.is_file():
+                errors.append(f"{label}: laporan tidak ditemui ({laporan_value})")
+            else:
+                laporan = target.relative_to(ROOT).as_posix()
+
     facebook_url = metadata.get("facebook_url")
     if isinstance(facebook_url, str):
         parsed_url = urlparse(facebook_url)
@@ -243,6 +286,12 @@ def build_record(folder: Path) -> tuple[dict | None, list[str], list[str]]:
         "ringkas": metadata["ringkas"],
         "caption": caption,
         "lokasi": metadata.get("lokasi"),
+        "masa": metadata.get("masa"),
+        "kehadiran": metadata.get("kehadiran"),
+        "laporan": laporan,
+        "petikan": metadata.get("petikan"),
+        "petikan_oleh": metadata.get("petikan_oleh"),
+        "sorotan": sorotan,
         "facebook_url": facebook_url,
         "gambar": gallery,
         "status": status,
@@ -268,6 +317,7 @@ def collect() -> tuple[list[dict], list[str], list[str], int]:
     )
     seen_ids: set[str] = set()
     seen_slugs: set[str] = set()
+    seen_sorotan: set[int] = set()
 
     for folder in folders:
         if not (folder / "caption.md").is_file():
@@ -284,6 +334,12 @@ def collect() -> tuple[list[dict], list[str], list[str], int]:
             errors.append(f"program/{folder.name}: slug berulang ({record['slug']})")
         seen_ids.add(record["id"])
         seen_slugs.add(record["slug"])
+        if record["sorotan"] is not None:
+            if record["sorotan"] in seen_sorotan:
+                errors.append(
+                    f"program/{folder.name}: nombor sorotan berulang ({record['sorotan']})"
+                )
+            seen_sorotan.add(record["sorotan"])
         if record["status"] == "ditarik":
             withdrawn += 1
         else:
@@ -324,10 +380,8 @@ def main() -> int:
         return 1
 
     if not args.semak:
-        OUTPUT.write_text(
-            json.dumps(records, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
-        )
+        with OUTPUT.open("w", encoding="utf-8", newline="\n") as handle:
+            handle.write(json.dumps(records, ensure_ascii=False, indent=2) + "\n")
         print(f"Dijana: {OUTPUT.relative_to(ROOT)}")
 
     action = "disemak" if args.semak else "dijana"
