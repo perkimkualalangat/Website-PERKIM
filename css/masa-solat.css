@@ -1,0 +1,625 @@
+/* ==========================================================================
+   masa-solat.css — dwikalendar topbar dan bar waktu solat bersama
+   ========================================================================== */
+
+.topbar__date {
+  display: flex;
+  align-items: center;
+  gap: 0.36rem;
+}
+
+.topbar__date-separator {
+  color: var(--c-border);
+}
+
+.topbar__hijrah {
+  color: var(--c-text-soft);
+  font-size: 0.72rem;
+}
+
+.prayerbar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: calc(var(--z-header) - 1);
+  border-bottom: 1px solid rgba(31, 122, 52, 0.14);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--c-text);
+  box-shadow: 0 10px 26px rgba(8, 51, 31, 0.07);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+
+.prayerbar[data-state="warning"] {
+  border-bottom-color: var(--c-draft-border);
+}
+
+.prayerbar[data-state="error"] {
+  border-bottom-color: #c65b50;
+}
+
+.prayerbar__inner {
+  min-width: 0;
+}
+
+.prayerbar__mobile-date {
+  display: none;
+}
+
+.prayerbar__summary {
+  min-height: 52px;
+  padding-block: 0.2rem;
+}
+
+.prayerbar__next,
+.prayerbar__meta p,
+.prayerbar__status {
+  margin: 0;
+}
+
+.prayerbar__next {
+  display: flex;
+  grid-column: 2;
+  align-items: flex-end;
+  flex-direction: column;
+  min-width: 0;
+  color: var(--c-text-soft);
+  line-height: 1.1;
+  text-align: right;
+}
+
+.prayerbar__next-time {
+  color: var(--c-primary-dark);
+  font-size: clamp(1.08rem, 0.98rem + 0.35vw, 1.3rem);
+  font-weight: 760;
+  font-variation-settings: "wght" 760;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.prayerbar__next-meta {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.28rem;
+  margin-top: 0.16rem;
+  min-width: 0;
+}
+
+.prayerbar__next-name,
+.prayerbar__next-azan,
+.prayerbar__countdown {
+  font-size: 0.64rem;
+  font-weight: 700;
+  font-variation-settings: "wght" 700;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.prayerbar__next-name {
+  color: var(--c-text-soft);
+}
+
+.prayerbar__next-azan {
+  color: var(--c-text-soft);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.prayerbar__countdown {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.24rem;
+  color: var(--c-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.prayerbar__countdown strong {
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+.prayerbar__countdown[hidden],
+.prayerbar__next-azan[hidden] {
+  display: none;
+}
+
+.prayerbar[data-state="loading"] .prayerbar__next {
+  color: var(--c-text-soft);
+}
+
+.prayerbar[data-state="loading"] .prayerbar__next-time {
+  color: var(--c-text-soft);
+}
+
+.prayerbar[data-state="error"] .prayerbar__next-time,
+.prayerbar[data-state="error"] .prayerbar__next-name {
+  color: #962d24;
+}
+
+.prayerbar__toggle,
+.prayerbar__refresh {
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--c-primary-dark);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.prayerbar__toggle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: clamp(0.65rem, 0.45rem + 0.55vw, 1rem);
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0.2rem 0;
+  border-radius: 10px;
+  text-align: left;
+  transition:
+    background-color var(--t-color) var(--ease-out);
+}
+
+.prayerbar__toggle-icon {
+  display: grid;
+  grid-column: 3;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  color: #fff;
+  box-shadow:
+    0 4px 14px rgba(31, 122, 52, 0.3),
+    0 1px 3px rgba(8, 51, 31, 0.18);
+  transition:
+    background-color var(--t-color) var(--ease-out),
+    box-shadow var(--t-color) var(--ease-out),
+    transform var(--t-hover) var(--ease-out);
+}
+
+.prayerbar__toggle-icon::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--t-hover) var(--ease-out);
+}
+
+.prayerbar__toggle[aria-expanded="true"] .prayerbar__toggle-icon::before {
+  transform: translateY(2px) rotate(225deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .prayerbar__toggle:hover {
+    background: rgba(232, 243, 234, 0.42);
+  }
+
+  .prayerbar__toggle:hover .prayerbar__toggle-icon {
+    background: var(--c-primary-dark);
+    box-shadow:
+      0 6px 18px rgba(31, 122, 52, 0.38),
+      0 2px 5px rgba(8, 51, 31, 0.2);
+    transform: translateY(-1px) scale(1.04);
+  }
+
+  .prayerbar__refresh:hover {
+    background: var(--c-primary-soft);
+    border-color: rgba(31, 122, 52, 0.3);
+    color: var(--c-primary);
+    box-shadow: 0 6px 18px rgba(8, 51, 31, 0.1);
+    transform: translateY(-1px);
+  }
+}
+
+.prayerbar__refresh:active {
+  transform: scale(var(--press-scale-sm));
+}
+
+.prayerbar__toggle:active .prayerbar__toggle-icon {
+  transform: scale(var(--press-scale-sm));
+}
+
+.prayerbar__toggle:disabled,
+.prayerbar__refresh:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.prayerbar__details[hidden] {
+  display: none;
+}
+
+.prayerbar__details {
+  position: relative;
+  padding: 1rem 0 1.05rem;
+  border-top: 1px solid rgba(31, 122, 52, 0.1);
+}
+
+.prayerbar__details-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.prayerbar__details-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  color: var(--c-primary-dark);
+  font-size: 0.75rem;
+  font-weight: 760;
+  font-variation-settings: "wght" 760;
+  letter-spacing: 0.085em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.prayerbar__details-title::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #48b75f, var(--c-primary));
+  box-shadow: 0 0 0 4px rgba(31, 122, 52, 0.1);
+}
+
+.prayerbar.is-open .prayerbar__details {
+  animation: prayer-details-in var(--t-base) var(--ease-out) both;
+}
+
+.prayerbar__times {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr));
+  gap: clamp(0.5rem, 0.35rem + 0.35vw, 0.78rem);
+  margin: 0;
+  perspective: 800px;
+}
+
+.prayerbar__time {
+  --prayer-index: 0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 92px;
+  padding: 0.88rem 0.55rem 0.76rem;
+  border: 1px solid rgba(31, 77, 43, 0.11);
+  border-radius: 16px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(246, 249, 246, 0.9));
+  box-shadow:
+    0 1px 1px rgba(8, 51, 31, 0.03),
+    0 7px 22px rgba(8, 51, 31, 0.055);
+  text-align: center;
+  transform: translateZ(0);
+  transition:
+    border-color var(--t-hover) var(--ease-out),
+    box-shadow var(--t-hover) var(--ease-out),
+    transform var(--t-hover) var(--ease-out);
+}
+
+.prayerbar__time::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -45%;
+  right: -25%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(72, 183, 95, 0.16), transparent 68%);
+  opacity: 0;
+  transform: scale(0.72);
+  transition:
+    opacity var(--t-hover) var(--ease-out),
+    transform var(--t-hover) var(--ease-out);
+}
+
+.prayerbar__time::after {
+  content: "";
+  position: absolute;
+  top: 0.65rem;
+  right: 0.68rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  box-shadow: 0 0 0 4px rgba(31, 122, 52, 0.11);
+  opacity: 0;
+}
+
+.prayerbar.is-open .prayerbar__time {
+  animation: prayer-card-in var(--t-base) var(--ease-out) both;
+  animation-delay: calc(var(--prayer-index) * 26ms);
+}
+
+.prayerbar__time:nth-child(2) { --prayer-index: 1; }
+.prayerbar__time:nth-child(3) { --prayer-index: 2; }
+.prayerbar__time:nth-child(4) { --prayer-index: 3; }
+.prayerbar__time:nth-child(5) { --prayer-index: 4; }
+.prayerbar__time:nth-child(6) { --prayer-index: 5; }
+.prayerbar__time:nth-child(7) { --prayer-index: 6; }
+.prayerbar__time:nth-child(8) { --prayer-index: 7; }
+
+@media (hover: hover) and (pointer: fine) {
+  .prayerbar__time:hover {
+    border-color: rgba(31, 122, 52, 0.28);
+    box-shadow:
+      0 2px 2px rgba(8, 51, 31, 0.025),
+      0 15px 30px rgba(8, 51, 31, 0.11);
+    transform: translateY(-3px) scale(1.012);
+  }
+
+  .prayerbar__time:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.prayerbar__time dt {
+  color: var(--c-text-soft);
+  font-size: 0.62rem;
+  font-weight: 700;
+  font-variation-settings: "wght" 700;
+  letter-spacing: 0.075em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.prayerbar__time dd {
+  margin: 0.38rem 0 0;
+  color: var(--c-text);
+  line-height: 1;
+}
+
+.prayerbar__time time {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.18rem;
+  white-space: nowrap;
+  font-feature-settings: "tnum" 1, "ss01" 1, "cv02" 1, "cv03" 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.prayerbar__time-clock {
+  font-size: clamp(1.02rem, 0.88rem + 0.45vw, 1.28rem);
+  font-weight: 720;
+  font-variation-settings: "wght" 720;
+  letter-spacing: -0.045em;
+}
+
+.prayerbar__time-period {
+  color: var(--c-text-soft);
+  font-size: 0.56rem;
+  font-weight: 720;
+  font-variation-settings: "wght" 720;
+  letter-spacing: 0.035em;
+}
+
+.prayerbar__time.is-next {
+  border-color: rgba(31, 122, 52, 0.42);
+  background:
+    linear-gradient(145deg, rgba(236, 248, 238, 0.98), rgba(218, 239, 222, 0.92));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 10px 28px rgba(31, 122, 52, 0.14);
+}
+
+.prayerbar__time.is-next::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.prayerbar__time.is-next::after {
+  opacity: 1;
+  animation: prayer-next-pop var(--t-panel) var(--ease-press) both;
+}
+
+.prayerbar__time.is-next dt,
+.prayerbar__time.is-next dd {
+  color: var(--c-primary-dark);
+}
+
+.prayerbar__time.is-next .prayerbar__time-period {
+  color: var(--c-primary);
+}
+
+.prayerbar__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 48px;
+  color: var(--c-text-soft);
+  font-size: 0.7rem;
+}
+
+.prayerbar__meta a {
+  color: var(--c-primary-dark);
+  font-weight: 650;
+}
+
+.prayerbar__refresh {
+  flex: 0 0 auto;
+  padding-inline: 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  transition:
+    background-color var(--t-color) var(--ease-out),
+    border-color var(--t-color) var(--ease-out),
+    box-shadow var(--t-color) var(--ease-out),
+    color var(--t-color) var(--ease-out),
+    transform var(--t-press) var(--ease-out);
+}
+
+.prayerbar__status {
+  padding: 0.6rem 0.75rem;
+  border-left: 3px solid var(--c-draft-border);
+  background: var(--c-draft-bg);
+  color: var(--c-draft-text);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+@keyframes prayer-details-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes prayer-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(7px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes prayer-next-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.prayerbar[data-state="error"] .prayerbar__status {
+  border-left-color: #b42318;
+  background: #fff1ef;
+  color: #73241d;
+}
+
+@media (max-width: 850px) {
+  .topbar__date > .topbar__date-separator:first-of-type,
+  .topbar__hijrah {
+    display: none;
+  }
+
+}
+
+@media (max-width: 720px) {
+  .topbar__date {
+    display: none;
+  }
+
+  .prayerbar__mobile-date {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    min-height: 34px;
+    padding-top: 0.35rem;
+    border-bottom: 1px solid #e2e9e3;
+    color: var(--c-text-soft);
+    font-size: 0.67rem;
+  }
+
+  .prayerbar__mobile-date [data-hijrah-date] {
+    color: var(--c-primary-dark);
+    font-weight: 600;
+  }
+
+  .prayerbar__summary {
+    padding-block: 0.28rem;
+  }
+
+  .prayerbar__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.7rem;
+    min-height: 52px;
+    padding-block: 0.18rem;
+  }
+
+  .prayerbar__next {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .prayerbar__next-meta {
+    justify-content: flex-end;
+  }
+
+  .prayerbar__toggle-icon {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .prayerbar__mobile-date [data-malaysia-time],
+  .prayerbar__mobile-date span:last-of-type {
+    display: none;
+  }
+
+  .prayerbar__next-time {
+    font-size: 1.05rem;
+  }
+
+  .prayerbar__next-name,
+  .prayerbar__next-azan,
+  .prayerbar__countdown {
+    font-size: 0.58rem;
+    letter-spacing: 0.03em;
+  }
+
+  .prayerbar__next-meta {
+    gap: 0.2rem;
+  }
+
+  .prayerbar__toggle-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .prayerbar__meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 0.45rem;
+  }
+}
+
+html.reduce-motion .prayerbar__toggle-icon,
+html.reduce-motion .prayerbar__toggle-icon::before {
+  transition: none;
+}
+
+html.reduce-motion .prayerbar__time.is-next::after {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prayerbar__toggle-icon,
+  .prayerbar__toggle-icon::before {
+    transition: none;
+  }
+
+  .prayerbar__time.is-next::after {
+    animation: none;
+  }
+}

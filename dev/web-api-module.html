@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Makmal Web API — PERKIM Kuala Langat</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .api-demo { max-width: 70rem; padding-block: 2rem 4rem; }
+    .api-demo__head { display: flex; gap: 1rem; align-items: end; justify-content: space-between; flex-wrap: wrap; }
+    .api-demo__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; margin-block: 1.5rem; }
+    .api-card { border: 1px solid var(--border, #d7dfd8); border-radius: .75rem; padding: 1.25rem; background: #fff; }
+    .api-card h2 { margin-top: 0; font-size: 1rem; color: var(--green-700, #1f6d31); }
+    .api-value { font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 750; margin: .35rem 0; }
+    .api-muted { color: #5c675f; font-size: .9rem; }
+    .api-prayer { width: 100%; border-collapse: collapse; }
+    .api-prayer th, .api-prayer td { text-align: left; padding: .6rem; border-bottom: 1px solid #e3e8e4; }
+    .api-status { border-left: .25rem solid #8a948c; padding: .75rem 1rem; background: #f5f7f5; }
+    .api-status[data-state="ok"] { border-color: #237a35; }
+    .api-status[data-state="error"] { border-color: #a9382c; }
+    .api-debug { overflow: auto; max-height: 22rem; padding: 1rem; background: #152019; color: #e6f4e8; border-radius: .5rem; font-size: .78rem; }
+  </style>
+</head>
+<body>
+  <main id="main" class="container api-demo">
+    <div class="api-demo__head">
+      <div>
+        <p class="eyebrow">Alat pembangunan dalaman</p>
+        <h1>Makmal masa, kalendar dan waktu solat</h1>
+        <p>Ujian langsung modul untuk zon <strong>SGR03 — Klang, Kuala Langat</strong>.</p>
+      </div>
+      <button id="api-refresh" class="btn" type="button">Muat semula API</button>
+    </div>
+
+    <p id="api-status" class="api-status" role="status">Memuatkan data…</p>
+
+    <section class="api-demo__grid" aria-label="Ringkasan tarikh dan masa">
+      <article class="api-card">
+        <h2>Masa Malaysia</h2>
+        <p id="api-clock" class="api-value">--:--:--</p>
+        <p id="api-gregorian" class="api-muted">—</p>
+      </article>
+      <article class="api-card">
+        <h2>Tarikh Hijrah</h2>
+        <p id="api-hijrah" class="api-value">—</p>
+        <p id="api-hijrah-source" class="api-muted">—</p>
+      </article>
+      <article class="api-card">
+        <h2>Sumber waktu solat</h2>
+        <p id="api-source" class="api-value">—</p>
+        <p id="api-zone" class="api-muted">—</p>
+      </article>
+    </section>
+
+    <section class="api-card" aria-labelledby="prayer-title">
+      <h2 id="prayer-title">Waktu solat hari ini</h2>
+      <table class="api-prayer">
+        <thead><tr><th>Waktu</th><th>Jam</th></tr></thead>
+        <tbody>
+          <tr><td>Imsak</td><td data-prayer="imsak">—</td></tr>
+          <tr><td>Subuh</td><td data-prayer="subuh">—</td></tr>
+          <tr><td>Syuruk</td><td data-prayer="syuruk">—</td></tr>
+          <tr><td>Dhuha</td><td data-prayer="dhuha">—</td></tr>
+          <tr><td>Zohor</td><td data-prayer="zohor">—</td></tr>
+          <tr><td>Asar</td><td data-prayer="asar">—</td></tr>
+          <tr><td>Maghrib</td><td data-prayer="maghrib">—</td></tr>
+          <tr><td>Isyak</td><td data-prayer="isyak">—</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <details>
+      <summary>Respons modul (JSON)</summary>
+      <pre id="api-debug" class="api-debug">{}</pre>
+    </details>
+  </main>
+  <script type="module" src="web-api-module-demo.js"></script>
+</body>
+</html>

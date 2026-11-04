@@ -1,6 +1,6 @@
 {
-  "versi": "1.0",
-  "dikemas_kini": "2026-10-31",
+  "versi": "1.1",
+  "dikemas_kini": "2026-11-03",
   "prinsip": [
     "Satu gerakan per tindakan.",
     "Hanya transform dan opacity untuk gerakan; warna dan sempadan untuk isyarat.",
@@ -442,6 +442,35 @@
       },
       "kurang_gerakan": "warna sahaja",
       "sasaran_px": 24,
+      "status": "siap"
+    },
+    {
+      "id": "bar-waktu-solat",
+      "keluarga": "Maklumat",
+      "komponen": "Togol dan muat semula bar waktu solat",
+      "pemilih": ".prayerbar__toggle, .prayerbar__refresh",
+      "picu": ["hover", "tekan", "fokus", "buka", "tutup"],
+      "gerakan": {
+        "tekan": "skala 0.98, 90ms",
+        "buka": "ikon anak panah berputar 180 darjah, 160ms"
+      },
+      "kurang_gerakan": "warna dan pertukaran ikon serta-merta",
+      "sasaran_px": 44,
+      "status": "siap"
+    },
+    {
+      "id": "kad-waktu-solat",
+      "keluarga": "Maklumat",
+      "komponen": "Kad waktu solat fluid dan penanda waktu seterusnya",
+      "pemilih": ".prayerbar__time",
+      "picu": ["masuk", "hover", "semasa"],
+      "gerakan": {
+        "masuk": "pudar + naik 7px secara berturutan, 240ms",
+        "hover": "naik 3px + skala 1.012, 160ms",
+        "semasa": "titik status muncul sekali, 380ms"
+      },
+      "kurang_gerakan": "kad muncul serta-merta; warna dan sempadan kekal",
+      "sasaran_px": 0,
       "status": "siap"
     },
     {

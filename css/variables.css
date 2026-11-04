@@ -58,7 +58,8 @@
   --container: 1180px;
   --topbar-h: 38px;
   --nav-h: 52px;
-  --header-h: var(--nav-h);
+  --prayerbar-h: 54px;
+  --header-h: calc(var(--nav-h) + var(--prayerbar-h));
   --space: 1rem;
   --section-y: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
 

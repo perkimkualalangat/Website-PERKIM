@@ -22,3 +22,6 @@ __pycache__/
 # Folder staging/salinan lama (sumber sebenar: data/ dan tools/)
 /database_lokasi/
 /ascii globe perkim (2)/
+
+# Backup folder (auto-generated)
+backups/

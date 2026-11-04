@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from datetime import date
@@ -18,6 +19,8 @@ OUTPUT = ROOT / "data" / "aktiviti.json"
 SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 STATUS = {"draf", "disahkan", "ditarik"}
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp", ".avif"}
+# Folder dokumentasi/rujukan yang tidak mengandungi caption.md program.
+EXCLUDED_FOLDERS = {"system references"}
 REQUIRED_TEXT = {
     "id",
     "slug",
@@ -121,14 +124,14 @@ def list_value(metadata: dict, key: str, label: str, errors: list[str]) -> list:
     return value
 
 
-def build_record(folder: Path) -> tuple[dict | None, list[str], list[str]]:
+def build_record(folder: Path) -> tuple[dict | None, list[str], list[str], dict]:
     source = folder / "caption.md"
     metadata, caption, errors = parse_caption(source)
     warnings: list[str] = []
     label = str(source.relative_to(ROOT))
 
     if errors and not metadata:
-        return None, errors, warnings
+        return None, errors, warnings, metadata
 
     unknown = sorted(set(metadata) - KNOWN)
     for key in unknown:
@@ -275,7 +278,7 @@ def build_record(folder: Path) -> tuple[dict | None, list[str], list[str]]:
         warnings.append(f"{label}: gambar belum disenaraikan ({unlisted})")
 
     if errors:
-        return None, errors, warnings
+        return None, errors, warnings, metadata
 
     record = {
         "id": item_id,
@@ -298,22 +301,65 @@ def build_record(folder: Path) -> tuple[dict | None, list[str], list[str]]:
         "sumber": metadata["sumber"],
         "disahkan": {"oleh": confirmed_by, "tarikh": confirmed_date},
     }
-    return record, errors, warnings
+    return record, errors, warnings, metadata
 
 
-def collect() -> tuple[list[dict], list[str], list[str], int]:
+def count_images(folder: Path) -> int:
+    return sum(
+        1
+        for path in folder.rglob("*")
+        if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
+    )
+
+
+def program_summary(
+    folder: Path,
+    metadata: dict,
+    record: dict | None,
+    errors: list[str],
+    warnings: list[str],
+) -> dict:
+    """Ringkasan satu folder untuk dipaparkan di halaman Tetapan."""
+    tajuk = metadata.get("tajuk")
+    tarikh = metadata.get("tarikh")
+    status = metadata.get("status")
+    sorotan = metadata.get("sorotan")
+    if not isinstance(sorotan, int) or isinstance(sorotan, bool):
+        sorotan = None
+    listed = metadata.get("gambar")
+    listed_count = len(listed) if isinstance(listed, list) else 0
+    return {
+        "folder": folder.name,
+        "tajuk": tajuk if isinstance(tajuk, str) else folder.name,
+        "tarikh": tarikh if isinstance(tarikh, str) else None,
+        "status": status if isinstance(status, str) else None,
+        "sorotan": sorotan,
+        "gambar": listed_count,
+        "gambar_tersedia": count_images(folder),
+        "sah": record is not None,
+        "ralat": len(errors),
+        "amaran": len(warnings),
+        "mesej_ralat": errors[:12],
+        "mesej_amaran": warnings[:12],
+    }
+
+
+def collect() -> tuple[list[dict], list[str], list[str], int, list[dict]]:
     records: list[dict] = []
     errors: list[str] = []
     warnings: list[str] = []
+    programs: list[dict] = []
     withdrawn = 0
 
     if not PROGRAM_ROOT.is_dir():
-        return [], ["folder program/ tidak ditemui"], [], 0
+        return [], ["folder program/ tidak ditemui"], [], 0, []
 
     folders = sorted(
         folder
         for folder in PROGRAM_ROOT.iterdir()
-        if folder.is_dir() and not folder.name.startswith(("_", "."))
+        if folder.is_dir()
+        and not folder.name.startswith(("_", "."))
+        and folder.name not in EXCLUDED_FOLDERS
     )
     seen_ids: set[str] = set()
     seen_slugs: set[str] = set()
@@ -321,11 +367,31 @@ def collect() -> tuple[list[dict], list[str], list[str], int]:
 
     for folder in folders:
         if not (folder / "caption.md").is_file():
-            errors.append(f"program/{folder.name}: caption.md tidak ditemui")
+            message = f"program/{folder.name}: caption.md tidak ditemui"
+            errors.append(message)
+            programs.append(
+                {
+                    "folder": folder.name,
+                    "tajuk": folder.name,
+                    "tarikh": None,
+                    "status": None,
+                    "sorotan": None,
+                    "gambar": 0,
+                    "gambar_tersedia": count_images(folder),
+                    "sah": False,
+                    "ralat": 1,
+                    "amaran": 0,
+                    "mesej_ralat": [message],
+                    "mesej_amaran": [],
+                }
+            )
             continue
-        record, record_errors, record_warnings = build_record(folder)
+        record, record_errors, record_warnings, metadata = build_record(folder)
         errors.extend(record_errors)
         warnings.extend(record_warnings)
+        programs.append(
+            program_summary(folder, metadata, record, record_errors, record_warnings)
+        )
         if not record:
             continue
         if record["id"] in seen_ids:
@@ -346,7 +412,16 @@ def collect() -> tuple[list[dict], list[str], list[str], int]:
             records.append(record)
 
     records.sort(key=lambda item: (item["tarikh"], item["slug"]), reverse=True)
-    return records, errors, warnings, withdrawn
+    programs.sort(key=lambda item: item["folder"])
+    return records, errors, warnings, withdrawn, programs
+
+
+def write_atomic(path: Path, payload: str) -> None:
+    """Tulis fail sementara dahulu, kemudian ganti fail asal secara atomik."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text(payload, encoding="utf-8", newline="\n")
+    os.replace(temporary, path)
 
 
 def main() -> int:
@@ -356,9 +431,19 @@ def main() -> int:
         action="store_true",
         help="semak sumber dan pastikan data/aktiviti.json telah dijana semula",
     )
+    parser.add_argument(
+        "--status",
+        action="store_true",
+        help="baca status sumber tanpa menulis atau membandingkan data/aktiviti.json",
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="cetak hasil sebagai satu objek JSON (untuk API Tetapan)",
+    )
     args = parser.parse_args()
 
-    records, errors, warnings, withdrawn = collect()
+    records, errors, warnings, withdrawn, programs = collect()
     if not errors and args.semak:
         try:
             current = json.loads(OUTPUT.read_text(encoding="utf-8"))
@@ -370,6 +455,37 @@ def main() -> int:
                     "data/aktiviti.json tidak segerak; jalankan python tools\\bina_aktiviti.py"
                 )
 
+    written = False
+    if not errors and not args.semak and not args.status:
+        payload = json.dumps(records, ensure_ascii=False, indent=2) + "\n"
+        try:
+            write_atomic(OUTPUT, payload)
+        except OSError as exc:
+            errors.append(f"gagal menulis {OUTPUT.relative_to(ROOT)} ({exc})")
+        else:
+            written = True
+
+    mode = "status" if args.status else ("semak" if args.semak else "jana")
+
+    if args.json:
+        print(
+            json.dumps(
+                {
+                    "ok": not errors,
+                    "mod": mode,
+                    "rekod": len(records),
+                    "ditarik": withdrawn,
+                    "ralat": errors,
+                    "amaran": warnings,
+                    "program": programs,
+                    "ditulis": written,
+                    "fail": str(OUTPUT.relative_to(ROOT)),
+                },
+                ensure_ascii=False,
+            )
+        )
+        return 1 if errors else 0
+
     for warning in warnings:
         print(f"AMARAN: {warning}")
     for error in errors:
@@ -379,12 +495,10 @@ def main() -> int:
         print(f"Aktiviti: {len(records)} sah, {len(errors)} ralat, {len(warnings)} amaran.")
         return 1
 
-    if not args.semak:
-        with OUTPUT.open("w", encoding="utf-8", newline="\n") as handle:
-            handle.write(json.dumps(records, ensure_ascii=False, indent=2) + "\n")
+    if written:
         print(f"Dijana: {OUTPUT.relative_to(ROOT)}")
 
-    action = "disemak" if args.semak else "dijana"
+    action = "status" if args.status else ("disemak" if args.semak else "dijana")
     print(
         f"Aktiviti: {len(records)} {action}, {withdrawn} ditarik, "
         f"0 ralat, {len(warnings)} amaran."

@@ -25,7 +25,7 @@ shift
 goto parse
 
 :run
-set "URL=http://localhost:%PORT%"
+set "URL=http://127.0.0.1:%PORT%"
 
 echo.
 echo   ==========================================
@@ -49,9 +49,9 @@ if defined PYTHON_CMD (
   %PYTHON_CMD% "tools\bina_aktiviti.py"
   if errorlevel 1 (
     echo.
-    echo   Ralat: data aktiviti tidak dijana. Betulkan mesej di atas dahulu.
-    pause
-    exit /b 1
+    echo   Amaran: data aktiviti tidak dijana.
+    echo   Betulkan ralat di atas, kemudian guna butang Kemaskini Program
+    echo   di halaman Tetapan selepas pelayan dibuka.
   )
 ) else (
   echo   Amaran: Python tiada; guna data\aktiviti.json sedia ada.
@@ -69,6 +69,7 @@ if not errorlevel 1 (
 where py >nul 2>nul
 if not errorlevel 1 (
   echo   Nota: Node.js tiada, guna Python.
+  echo   Halaman Tetapan hanya mod baca tanpa API Node.js.
   py -m http.server %PORT%
   goto done
 )
@@ -76,6 +77,7 @@ if not errorlevel 1 (
 where python >nul 2>nul
 if not errorlevel 1 (
   echo   Nota: Node.js tiada, guna Python.
+  echo   Halaman Tetapan hanya mod baca tanpa API Node.js.
   python -m http.server %PORT%
   goto done
 )

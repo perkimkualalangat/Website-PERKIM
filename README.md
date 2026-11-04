@@ -17,6 +17,11 @@ untuk laporan yang asalnya diterbitkan di Facebook. Setiap program disimpan dala
 `program/<slug>/` bersama `caption.md` dan gambarnya; `data/aktiviti.json` dijana daripada
 sumber tersebut.
 
+**Kemas kini 4 November 2026:** halaman **Tetapan** tempatan ditambah untuk mencipta program,
+mengimport gambar dan menjana semula `data/aktiviti.json` tanpa perlu menaip arahan Python.
+Menu Tetapan dalam dropdown **Lain-lain** hanya muncul pada `localhost`/`127.0.0.1`;
+GitHub Pages kekal baca sahaja.
+
 ---
 
 ## 1. Entiti yang digunakan
@@ -85,10 +90,16 @@ start.bat --no-open  :: jangan buka pelayar
 ```
 
 `start.bat` menggunakan Node.js (`tools/serve.mjs`) jika ada, dan jatuh balik kepada Python
-jika Node tiada. `tools/serve.mjs` menyokong `Range` (perlu untuk pembaca PDF) dan menetapkan
-`Content-Type` yang betul untuk `.pdf`, `.mjs`, `.woff2` dan sebagainya. Jika Python tersedia,
-`start.bat` menjalankan `tools/bina_aktiviti.py` sebelum pelayan dibuka supaya folder program
-dan `data/aktiviti.json` sentiasa segerak.
+jika Node tiada. `tools/serve.mjs` menyokong `Range` (perlu untuk pembaca PDF), menetapkan
+`Content-Type` yang betul untuk `.pdf`, `.mjs`, `.woff2` dan sebagainya, dan menyediakan API
+Tetapan. Pelayan hanya mendengar pada `127.0.0.1` supaya alat pentadbiran tidak terdedah kepada
+rangkaian. Jika Python tersedia, `start.bat` menjalankan `tools/bina_aktiviti.py` sebelum
+pelayan dibuka supaya folder program dan `data/aktiviti.json` sentiasa segerak. Jika penjanaan
+gagal, pelayan tetap dimulakan dan ralat boleh dilihat di halaman Tetapan.
+
+> Halaman **Tetapan** memerlukan Node.js kerana API `/api/tetapan/*` hanya ada dalam
+> `tools/serve.mjs`. Jika `start.bat` jatuh balik kepada Python, halaman Tetapan membuka dalam
+> mod baca sahaja.
 
 Secara manual:
 
@@ -121,17 +132,20 @@ perkim-web/
 │   ├── aktiviti.html           Laporan program cawangan daripada Facebook
 │   ├── bahan-bacaan.html       Rak buku PDF
 │   ├── jaringan.html           Peta dunia cawangan & jaringan antarabangsa
-│   └── hubungi.html            Alamat, e-mel, borang draf
+│   ├── hubungi.html            Alamat, e-mel, borang draf
+│   └── tetapan.html            Alat tempatan: cipta program, import gambar, jana data
 ├── css/
 │   ├── style.css               Import semua CSS
 │   ├── variables.css           Tema hijau/emas (warna draf, bukan rasmi)
 │   ├── motion.css              Token gerakan + utiliti .m-tactile/.m-focus/.m-rise
 │   ├── base.css, layout.css, components.css
+│   ├── masa-solat.css          Dwikalendar + bar waktu solat responsif
 │   ├── mapbtn.css              Butang "Buka Google Maps" + pratonton peta
 │   ├── aktiviti.css            Kad, penapis dan butiran laporan aktiviti
 │   ├── kepimpinan.css          Kad jawatan & status
 │   ├── library.css             Rak buku + pembaca PDF
 │   ├── ascii-globe.css         Gaya peta bumi ASCII
+│   ├── tetapan.css             Gaya halaman Tetapan (panel, tab, galeri)
 │   └── vendor/flippy.css       Gaya enjin flippy-pdf
 ├── js/
 │   ├── main.js
@@ -140,11 +154,13 @@ perkim-web/
 │   │   ├── nav.js              Menu mudah alih & submenu dropdown
 │   │   ├── ticker.js           Pemutar berita rawak di topbar (prev/next)
 │   │   ├── mapbtn.js           Butang peta: 7 keadaan + pratonton OSM
+│   │   ├── masa-solat-ui.js    Dwikalendar + bar waktu solat semua halaman
 │   │   ├── search.js           Carian halaman + bahan bacaan
 │   │   ├── kepimpinan.js       Render jawatan daripada JSON
 │   │   ├── perkim.js           Render maklumat kebangsaan
 │   │   ├── berita.js           Indeks berita + penapis
 │   │   ├── aktiviti.js         Senarai, butiran dan aktiviti terkini
+│   │   ├── tetapan.js          Alat tempatan: cipta program + import gambar
 │   │   ├── forms.js            Borang draf
 │   │   ├── library/library.js  Rak buku
 │   │   ├── library/engine-flippy.js
@@ -153,7 +169,15 @@ perkim-web/
 │   ├── ascii-globe-land.js     Data darat Natural Earth (dimuat dahulu)
 │   └── vendor/                 flippy-pdf + PDF.js (MIT/Apache-2.0)
 ├── dev/
-│   └── motion-lab.html         Makmal gerakan (dalaman, noindex, tiada dalam nav)
+│   ├── motion-lab.html         Makmal gerakan (dalaman, noindex, tiada dalam nav)
+│   └── web-api-module.html     Makmal masa, Hijrah dan waktu solat
+├── web-api-module/
+│   ├── index.js                API awam modul masa, kalendar dan waktu solat
+│   ├── modules/                Masa Malaysia, kalendar dan orkestrasi solat
+│   ├── providers/              Penyesuai e-Solat + fallback setempat
+│   ├── data/                   Jadual tahunan SGR03 yang dijana
+│   ├── scripts/                Penjana semula fallback tahunan
+│   └── tests/                  Ujian unit tanpa kebergantungan luar
 ├── program/
 │   ├── README.md               Aliran menambah program
 │   ├── _template/caption.md    Templat metadata + caption penuh
@@ -161,7 +185,7 @@ perkim-web/
 ├── data/
 │   ├── site.json               Alamat, telefon, waktu, media sosial
 │   ├── search-index.json       Indeks carian
-│   ├── motion.json             Inventori 33 komponen gerakan
+│   ├── motion.json             Inventori 35 komponen gerakan
 │   ├── kepimpinan.json         Satu-satunya sumber nama & jawatan
 │   ├── perkim.json             Maklumat PERKIM Kebangsaan
 │   ├── sitemap.json            Struktur menu laman rasmi
@@ -178,7 +202,7 @@ perkim-web/
 │       ├── kelas-perkim/       14 buku teks PERKIM Kebangsaan
 │       └── covers/             Kulit buku (jana daripada halaman 1 PDF)
 └── tools/
-    ├── serve.mjs               Pelayan statik tempatan (tanpa kebergantungan)
+    ├── serve.mjs               Pelayan statik tempatan + API /api/tetapan/*
     ├── check-motion.mjs        Audit inventori gerakan + fallback
     ├── generate-book.py        Jana semula PDF/kulit
     ├── prepare-logo.py         Jana saiz logo daripada sumber
@@ -186,6 +210,7 @@ perkim-web/
     ├── scrape_perkim.py        Ambil kandungan laman rasmi
     ├── bina_lokasi.py          Semak & jana peta daripada database_lokasi_perkim.md
     ├── bina_aktiviti.py        Jana aktiviti daripada folder program
+    ├── urus_program.py         Cipta program, imbas gambar, simpan senarai gambar
     ├── check-aktiviti.py       Semak struktur, sumber dan imej aktiviti
     └── check-site.py           Semak pautan, aset, JSON, tag
 ```
@@ -418,6 +443,56 @@ folder sumber. URL `/share/` menghasilkan amaran supaya diganti dengan URL post 
 
 ---
 
+## 5b. Halaman Tetapan tempatan
+
+Halaman `pages/tetapan.html` menyediakan aliran tanpa terminal untuk kerja harian program:
+
+1. **Program** — senarai semua folder yang dibaca penjana, dengan status, bilangan gambar,
+   nombor sorotan serta ralat atau amaran.
+2. **Cipta Program** — mencipta `program/<slug>/caption.md` dengan metadata asas, status
+   `draf` dan sumber lalai `Facebook PERKIM Kuala Langat`.
+3. **Import Gambar** — muat naik atau seret gambar ke dalam folder program, imbas fail yang
+   sudah ada, isi alt text dan kapsyen, susun urutan, kemudian simpan senarai ke `caption.md`.
+
+Butang **Kemaskini Program** menjalankan `tools/bina_aktiviti.py` dan menulis semula
+`data/aktiviti.json` secara atomik. Butang **Semak Tapak** menjalankan `tools/check-site.py`.
+
+### Syarat dan batasan
+
+- Item **Tetapan** dalam dropdown **Lain-lain** hanya dijana apabila hos ialah `localhost`
+  atau `127.0.0.1`. Di hos lain halaman memaparkan mod baca sahaja dan tidak memanggil API.
+- API `/api/tetapan/*` hanya wujud dalam `tools/serve.mjs`. Pelayan mesti dimulakan dengan
+  `start.bat` (Node.js) dan hanya mendengar pada `127.0.0.1`.
+- Permintaan POST mesti datang daripada origin pelayan yang sama. Unggahan gambar dihadkan
+  kepada 30 MB setiap fail dan hanya JPG, PNG, WebP atau AVIF yang sah dari segi magic bytes.
+- Alt text wajib untuk setiap gambar. Gambar pertama dalam senarai menjadi gambar kad
+  Aktiviti dan slaid pertama Sorotan.
+- Muat naik menyimpan fail ke `program/<slug>/` menggunakan nama fail yang dibersihkan dan
+  unik. Fail sedia ada tidak ditimpa.
+- `caption.md` disandarkan sebagai `caption.md.bak` sebelum senarai gambar disimpan.
+- Halaman ini tidak diterbitkan sebagai alat awam. GitHub Pages kekal baca sahaja kerana
+  tiada Python, Node atau akses tulis.
+
+### Aliran kerja
+
+1. Jalankan `start.bat` dan buka `http://127.0.0.1:8081/pages/tetapan.html`.
+2. Cipta program dalam tab **Cipta Program**.
+3. Pilih program dalam tab **Import Gambar**, muat naik gambar dan isi alt text.
+4. Tekan **Simpan Senarai Gambar**.
+5. Tekan **Kemaskini Program** untuk menjana `data/aktiviti.json`.
+6. Semak halaman Aktiviti dan Sorotan sebelum menukar status kepada `disahkan`.
+
+Jika perlu bekerja tanpa pelayar, arahan CLI yang setara ialah:
+
+```powershell
+python tools\urus_program.py cipta --data payload.json
+python tools\urus_program.py imbas --slug slug-program
+python tools\urus_program.py simpan-gambar --data galeri.json
+python tools\bina_aktiviti.py
+```
+
+---
+
 ## 6. Bahan bacaan PDF
 
 Rak buku menggunakan `flippy-pdf` + PDF.js yang dihoskan sendiri dalam `js/vendor/`.
@@ -494,7 +569,7 @@ ke atas). Komponen baharu hendaklah guna token ini, bukan nilai ms bertaburan.
 
 ### Inventori & audit
 
-`data/motion.json` menyenaraikan **33 komponen** interaktif: pemilih, pencetus, gerakan,
+`data/motion.json` menyenaraikan **35 komponen** interaktif: pemilih, pencetus, gerakan,
 fallback kurang-gerakan, saiz sasaran dan status. Semak dengan:
 
 ```powershell
@@ -531,6 +606,37 @@ penuh ada di `/pages/berita.html` dan `/pages/aktiviti.html`.
 OpenStreetMap (tiada API key). Tujuh keadaan: rehat, hover, tekan, fokus, memuat, ralat dan
 popup disekat. Panel pratonton dicipta malas pada hover/fokus pertama dan berpusing ke kiri
 (`.is-flipped`) apabila berdekatan tepi kanan supaya tidak melimpah keluar viewport.
+
+---
+
+## 6b. Modul masa, kalendar Hijrah dan waktu solat
+
+`web-api-module/` ialah pustaka ES module kendiri untuk tarikh Gregorian, tarikh Hijrah,
+masa Malaysia dan waktu solat. Masa menggunakan `Asia/Kuala_Lumpur` tanpa rangkaian;
+waktu solat serta tarikh Hijrah rasmi dibaca daripada e-Solat JAKIM bagi zon
+**SGR03 — Klang, Kuala Langat**. Cache pelayar dan jadual tahunan setempat memastikan laman
+tidak bergantung sepenuhnya pada API langsung.
+
+`js/modules/masa-solat-ui.js` memasang modul ini pada shell bersama semua halaman. Topbar
+memaparkan tarikh Gregorian dan Hijrah; bar di bawah navigasi menunjukkan waktu sistem
+(Asia/Kuala_Lumpur) serta solat seterusnya dengan waktu azan dan kiraan jam, minit dan saat,
+serta senarai lapan waktu yang boleh dikembangkan. Pada telefon, tarikh dipindahkan ke bar waktu solat supaya topbar kekal
+lapang. Makmal berasingan masih tersedia di `dev/web-api-module.html`. Semua waktu dipaparkan
+dalam format 12 jam `AM/PM`; nilai dalaman dan atribut HTML `datetime` kekal dalam format
+24 jam untuk pengiraan.
+
+Kad waktu menggunakan Inter berubah berat yang dihoskan sendiri, grid `auto-fit` fluid,
+angka tabular, label AM/PM berhierarki, permukaan kaca lembut dan penanda khas bagi solat
+seterusnya. Kemunculan berturutan, hover bertactile dan penukaran keadaan hanya menggerakkan
+`transform`/`opacity`, dengan fallback penuh untuk `prefers-reduced-motion`.
+
+```powershell
+node --test web-api-module/tests/web-api-module.test.mjs
+node web-api-module/scripts/kemas-kini-fallback.mjs
+```
+
+Fail fallback perlu dijana semula pada awal setiap tahun. Lihat
+`web-api-module/README.md` untuk kontrak API, urutan fallback, privasi dan konfigurasi.
 
 ---
 

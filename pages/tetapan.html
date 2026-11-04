@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tetapan | PERKIM Kuala Langat</title>
+  <meta name="description" content="Alat pentadbiran tempatan untuk mencipta program, mengimport gambar dan menjana data aktiviti.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1f7a34">
+  <link rel="icon" href="../assets/img/logo-perkim-64.png" sizes="64x64" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/logo-perkim-180.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="module" src="../js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Langkau ke kandungan</a>
+
+  <div class="draft-banner" role="note">
+    <div class="container draft-banner__inner">
+      <strong>Tempatan</strong>
+      <span>Halaman ini hanya berfungsi melalui <code>start.bat</code> pada komputer ini dan
+        tidak diterbitkan ke GitHub Pages.</span>
+    </div>
+  </div>
+
+  <div id="site-header"></div>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Jejak navigasi">
+          <ol>
+            <li><a href="../index.html">Utama</a></li>
+            <li><span aria-current="page">Tetapan</span></li>
+          </ol>
+        </nav>
+        <h1>Tetapan Sistem</h1>
+        <p>Cipta program baharu, import gambar dan jana semula <code>data/aktiviti.json</code>
+          daripada folder <code>program/</code>.</p>
+      </div>
+    </section>
+
+    <section class="container section" id="tetapan-app" data-tetapan>
+      <div class="notice" id="tetapan-asing" hidden>
+        <strong>Mod baca sahaja.</strong> Halaman Tetapan hanya boleh digunakan pada
+        <code>localhost</code> atau <code>127.0.0.1</code> melalui <code>start.bat</code>.
+        Laman awam GitHub Pages tidak boleh menjalankan Python atau menulis fail.
+      </div>
+
+      <div class="notice notice--ralat" id="tetapan-mod" hidden>
+        <strong>API Tetapan tidak tersedia.</strong>
+        <span id="tetapan-mod-teks">Pastikan pelayan dimulakan dengan <code>start.bat</code>
+          dan Node.js dipasang.</span>
+      </div>
+
+      <div class="tetapan-toolbar">
+        <div class="tetapan-toolbar__actions">
+          <button class="btn" type="button" id="tetapan-kemaskini" disabled>
+            Kemaskini Program
+          </button>
+          <button class="btn btn--ghost" type="button" id="tetapan-semak-tapak" disabled>
+            Semak Tapak
+          </button>
+          <button class="btn btn--ghost" type="button" id="tetapan-muat" disabled>
+            Muat Semula
+          </button>
+        </div>
+        <p class="tetapan-toolbar__status" id="tetapan-status" role="status" aria-live="polite">
+          Menyediakan…
+        </p>
+      </div>
+
+      <div class="stat-grid tetapan-ringkasan" id="tetapan-ringkasan"
+           aria-label="Ringkasan program">
+        <div class="stat">
+          <strong id="stat-program">—</strong>
+          <span>Jumlah program</span>
+        </div>
+        <div class="stat">
+          <strong id="stat-draf">—</strong>
+          <span>Draf</span>
+        </div>
+        <div class="stat">
+          <strong id="stat-disahkan">—</strong>
+          <span>Disahkan</span>
+        </div>
+        <div class="stat">
+          <strong id="stat-sorotan">—</strong>
+          <span>Sorotan</span>
+        </div>
+        <div class="stat">
+          <strong id="stat-gambar">—</strong>
+          <span>Gambar disenaraikan</span>
+        </div>
+      </div>
+
+      <div class="tetapan-tabs" role="tablist" aria-label="Bahagian Tetapan">
+        <button class="tetapan-tab" type="button" role="tab" id="tab-program"
+                aria-controls="panel-program" aria-selected="true">Program</button>
+        <button class="tetapan-tab" type="button" role="tab" id="tab-cipta"
+                aria-controls="panel-cipta" aria-selected="false" tabindex="-1">Cipta Program</button>
+        <button class="tetapan-tab" type="button" role="tab" id="tab-gambar"
+                aria-controls="panel-gambar" aria-selected="false" tabindex="-1">Import Gambar</button>
+      </div>
+
+      <section class="tetapan-panel" id="panel-program" role="tabpanel"
+               aria-labelledby="tab-program" tabindex="0">
+        <div class="tetapan-panel__head">
+          <div>
+            <h2>Senarai Program</h2>
+            <p>Semua folder dalam <code>program/</code> yang dibaca oleh penjana.</p>
+          </div>
+        </div>
+        <div class="tetapan-program-list" id="tetapan-program-list">
+          <p class="tetapan-kosong">Memuatkan senarai program…</p>
+        </div>
+      </section>
+
+      <section class="tetapan-panel" id="panel-cipta" role="tabpanel"
+               aria-labelledby="tab-cipta" tabindex="0" hidden>
+        <div class="tetapan-panel__head">
+          <div>
+            <h2>Cipta Program Baharu</h2>
+            <p>Sistem akan mencipta folder <code>program/&lt;slug&gt;/</code> dan fail
+              <code>caption.md</code> dengan status draf.</p>
+          </div>
+        </div>
+
+        <form class="form tetapan-form" id="form-cipta" novalidate>
+          <div class="form__row">
+            <div class="field">
+              <label for="cipta-slug">Slug <span class="req" aria-hidden="true">*</span></label>
+              <input id="cipta-slug" name="slug" type="text" required
+                     pattern="[a-z0-9]+(-[a-z0-9]+)*"
+                     placeholder="contoh: ziarah-kebajikan-2026" autocomplete="off">
+              <span class="field__hint">Huruf kecil, nombor dan sengkang. Menjadi nama folder.</span>
+            </div>
+            <div class="field">
+              <label for="cipta-tarikh">Tarikh <span class="req" aria-hidden="true">*</span></label>
+              <input id="cipta-tarikh" name="tarikh" type="date" required>
+            </div>
+          </div>
+
+          <div class="form__row">
+            <div class="field">
+              <label for="cipta-tajuk">Tajuk program <span class="req" aria-hidden="true">*</span></label>
+              <input id="cipta-tajuk" name="tajuk" type="text" required
+                     placeholder="Tajuk penuh program">
+            </div>
+            <div class="field">
+              <label for="cipta-kategori">Kategori <span class="req" aria-hidden="true">*</span></label>
+              <input id="cipta-kategori" name="kategori" type="text" required
+                     list="cipta-kategori-senarai" placeholder="Kebajikan">
+              <datalist id="cipta-kategori-senarai">
+                <option value="Kebajikan"></option>
+                <option value="Kesukarelawanan"></option>
+                <option value="Kepimpinan"></option>
+                <option value="Pendidikan"></option>
+                <option value="Dakwah"></option>
+                <option value="Kemasyarakatan"></option>
+                <option value="Belia"></option>
+              </datalist>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="cipta-ringkas">Ringkasan kad <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="cipta-ringkas" name="ringkas" required maxlength="400"
+                      rows="3" placeholder="Ringkasan pendek untuk kad Aktiviti (maksimum 400 aksara)."></textarea>
+            <span class="field__hint">Dipaparkan pada kad Aktiviti dan hasil carian.</span>
+          </div>
+
+          <div class="field">
+            <label for="cipta-facebook">URL Facebook <span class="req" aria-hidden="true">*</span></label>
+            <input id="cipta-facebook" name="facebook_url" type="url" required
+                   placeholder="https://www.facebook.com/...">
+            <span class="field__hint">Mesti pautan HTTPS facebook.com.</span>
+          </div>
+
+          <div class="form__row">
+            <div class="field">
+              <label for="cipta-lokasi">Lokasi</label>
+              <input id="cipta-lokasi" name="lokasi" type="text"
+                     placeholder="Pejabat PERKIM Kuala Langat">
+            </div>
+            <div class="field">
+              <label for="cipta-masa">Masa</label>
+              <input id="cipta-masa" name="masa" type="text"
+                     placeholder="10.00 pagi - 12.00 tengah hari">
+            </div>
+          </div>
+
+          <div class="form__row">
+            <div class="field">
+              <label for="cipta-kehadiran">Kehadiran</label>
+              <input id="cipta-kehadiran" name="kehadiran" type="text"
+                     placeholder="8 peserta baharu, 4 AJK">
+            </div>
+            <div class="field">
+              <label for="cipta-sorotan">Nombor sorotan</label>
+              <input id="cipta-sorotan" name="sorotan" type="number" min="1" step="1"
+                     placeholder="Kosongkan jika bukan sorotan">
+              <span class="field__hint">Nombor unik 1, 2, 3… untuk slaid halaman utama.</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="cipta-caption">Caption penuh <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="cipta-caption" name="caption" required rows="8"
+                      placeholder="Salin caption penuh post Facebook di sini. Pecahan perenggan akan dikekalkan."></textarea>
+          </div>
+
+          <div class="btn-row">
+            <button class="btn" type="submit" id="cipta-hantar" disabled>Cipta Program</button>
+            <button class="btn btn--ghost" type="reset" id="cipta-reset">Kosongkan</button>
+          </div>
+
+          <p class="form__status" id="cipta-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="tetapan-panel" id="panel-gambar" role="tabpanel"
+               aria-labelledby="tab-gambar" tabindex="0" hidden>
+        <div class="tetapan-panel__head">
+          <div>
+            <h2>Import Gambar</h2>
+            <p>Muat naik gambar atau salin terus ke folder program, kemudian imbas dan isi
+              alt text. Gambar pertama menjadi gambar kad Aktiviti dan slaid pertama Sorotan.</p>
+          </div>
+        </div>
+
+        <div class="tetapan-gambar__top">
+          <div class="field">
+            <label for="gambar-program">Program</label>
+            <select id="gambar-program" disabled>
+              <option value="">Pilih program…</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="gambar-fail">Muat naik gambar</label>
+            <input id="gambar-fail" type="file" multiple
+                   accept="image/jpeg,image/png,image/webp,image/avif" disabled>
+            <span class="field__hint">JPG, PNG, WebP atau AVIF · maksimum 30 MB setiap fail.</span>
+          </div>
+        </div>
+
+        <div class="tetapan-dropzone" id="gambar-dropzone" tabindex="0" role="button"
+             aria-label="Lepaskan gambar di sini atau tekan untuk memilih fail">
+          <strong>Lepaskan gambar di sini</strong>
+          <span>atau tekan untuk memilih fail</span>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn--ghost" type="button" id="gambar-imbas" disabled>
+            Imbas Gambar Dalam Folder
+          </button>
+          <button class="btn" type="button" id="gambar-simpan" disabled>
+            Simpan Senarai Gambar
+          </button>
+        </div>
+
+        <p class="tetapan-gambar__status" id="gambar-status" role="status" aria-live="polite"></p>
+        <div class="tetapan-gambar-list" id="gambar-senarai">
+          <p class="tetapan-kosong">Pilih program untuk mengimbas gambar.</p>
+        </div>
+      </section>
+
+      <section class="tetapan-log" aria-labelledby="log-title">
+        <div class="section__head">
+          <h2 class="section__title" id="log-title">Log Tindakan</h2>
+          <button class="btn btn--ghost btn--sm" type="button" id="tetapan-kosong-log" disabled>
+            Kosongkan Log
+          </button>
+        </div>
+        <pre class="tetapan-log__output" id="tetapan-log" tabindex="0">Belum ada tindakan.</pre>
+      </section>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+</html>

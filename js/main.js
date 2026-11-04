@@ -14,12 +14,15 @@ import { initForms } from './modules/forms.js';
 import { initMapButtons } from './modules/mapbtn.js';
 import { initTicker } from './modules/ticker.js';
 import { initSorotan } from './modules/sorotan.js';
+import { initMasaSolatUI } from './modules/masa-solat-ui.js';
+import { initTetapan } from './modules/tetapan.js';
 
 document.documentElement.classList.add('js-ready');
 
 document.addEventListener('DOMContentLoaded', async () => {
   await mountHeaderFooter();
   initNav();
+  initMasaSolatUI();
   initSearch();
   initForms();
   initMapButtons();
@@ -32,4 +35,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (document.querySelector('#aktiviti-list')) await initAktiviti();
   if (document.querySelector('#aktiviti-terkini')) await initAktivitiTerkini();
   if (document.querySelector('#bookshelf')) await initLibrary();
+  initTetapan();
 });

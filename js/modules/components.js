@@ -4,8 +4,12 @@
  */
 
 import { siteHref, siteUrl } from '../paths.js';
+import { formatMasa12Jam } from '../../web-api-module/index.js';
 
-export const MENU = [
+const LOCAL_HOSTNAMES = new Set(['localhost', '127.0.0.1']);
+const isLocalPreview = () => LOCAL_HOSTNAMES.has(location.hostname);
+
+const BASE_MENU = [
   { label: 'Utama', href: '/' },
   {
     label: 'Tentang',
@@ -66,6 +70,15 @@ export const MENU = [
     ],
   },
 ];
+
+// Alat pentadbiran hanya dipaparkan pada pratonton tempatan.
+const LAIN_LAIN = {
+  label: 'Lain-lain',
+  href: '/pages/tetapan.html',
+  sub: [{ label: 'Tetapan', href: '/pages/tetapan.html' }],
+};
+
+export const MENU = isLocalPreview() ? [...BASE_MENU, LAIN_LAIN] : BASE_MENU;
 
 const FOOTER_LINKS = [
   { label: 'Utama', href: '/' },
@@ -193,6 +206,7 @@ function menuItem(item) {
 function todayLabel() {
   try {
     return new Intl.DateTimeFormat('ms-MY', {
+      timeZone: 'Asia/Kuala_Lumpur',
       weekday: 'long',
       day: 'numeric',
       month: 'long',
@@ -204,10 +218,33 @@ function todayLabel() {
 }
 
 function todayISO() {
-  const now = new Date();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  return `${now.getFullYear()}-${month}-${day}`;
+  try {
+    const parts = new Intl.DateTimeFormat('en', {
+      timeZone: 'Asia/Kuala_Lumpur',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).formatToParts(new Date());
+    const value = Object.fromEntries(
+      parts.filter((part) => part.type !== 'literal').map((part) => [part.type, part.value])
+    );
+    return `${value.year}-${value.month}-${value.day}`;
+  } catch {
+    return new Date().toISOString().slice(0, 10);
+  }
+}
+
+function todayTime() {
+  try {
+    return new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Kuala_Lumpur',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23',
+    }).format(new Date());
+  } catch {
+    return '--:--';
+  }
 }
 
 function socialItems(site, className = 'social-link') {
@@ -282,10 +319,18 @@ export async function mountHeaderFooter() {
   const contact = site.hubungi || FALLBACK.hubungi;
 
   if (header) {
+    const initialDate = todayISO();
+    const initialDateLabel = todayLabel();
+    const initialTime = todayTime();
+    const initialTimeLabel = initialTime === '--:--' ? initialTime : formatMasa12Jam(initialTime);
     header.innerHTML = `
       <div class="topbar">
         <div class="container topbar__inner">
-          <p class="topbar__date"><time datetime="${todayISO()}">${esc(todayLabel())}</time></p>
+          <p class="topbar__date" data-calendar-display>
+            <time datetime="${initialDate}" data-gregorian-date>${esc(initialDateLabel)}</time>
+            <span class="topbar__date-separator" aria-hidden="true">·</span>
+            <span class="topbar__hijrah" data-hijrah-date>Tarikh Hijrah —</span>
+          </p>
           <div class="topbar__announce" data-ticker>
             <p class="topbar__announce-fallback">${esc(site.pengumuman || '')}</p>
           </div>
@@ -329,6 +374,81 @@ export async function mountHeaderFooter() {
           </button>
         </div>
       </nav>
+
+      <section class="prayerbar" data-prayerbar data-state="loading" aria-busy="true"
+               aria-label="Waktu solat">
+        <div class="container prayerbar__inner">
+          <div class="prayerbar__summary">
+            <button class="prayerbar__toggle m-focus" type="button"
+                    aria-expanded="false" aria-controls="prayerbar-details"
+                    data-prayer-toggle
+                    aria-label="Buka senarai waktu solat. Memuatkan waktu solat.">
+              <span class="prayerbar__next" data-prayer-next>
+                <time class="prayerbar__next-time" datetime="${initialTime}" data-system-time>${initialTimeLabel}</time>
+                <span class="prayerbar__next-meta">
+                  <span class="prayerbar__next-name" data-prayer-next-name>Memuatkan waktu solat…</span>
+                  <span class="prayerbar__next-azan" data-prayer-next-azan hidden></span>
+                  <span class="prayerbar__countdown" data-prayer-countdown hidden aria-hidden="true">
+                    <span>lagi</span> <strong>--</strong>
+                  </span>
+                </span>
+              </span>
+              <span class="visually-hidden" data-prayer-toggle-label>Lihat semua</span>
+              <span class="prayerbar__toggle-icon" aria-hidden="true"></span>
+            </button>
+          </div>
+          <div class="prayerbar__details" id="prayerbar-details" data-prayer-details hidden>
+            <div class="prayerbar__details-head">
+              <h2 class="prayerbar__details-title" id="prayerbar-title">Waktu solat</h2>
+            </div>
+            <div class="prayerbar__mobile-date" aria-label="Tarikh Malaysia">
+              <time datetime="${initialDate}" data-gregorian-date>${esc(initialDateLabel)}</time>
+              <span aria-hidden="true">·</span>
+              <span data-hijrah-date>Hijrah —</span>
+              <span aria-hidden="true">·</span>
+              <time datetime="${initialTime}" data-malaysia-time>${initialTimeLabel} MYT</time>
+            </div>
+            <dl class="prayerbar__times" aria-label="Senarai waktu solat hari ini">
+              <div class="prayerbar__time" data-prayer-item="imsak">
+                <dt>Imsak</dt><dd><time data-prayer-time="imsak">—</time></dd>
+              </div>
+              <div class="prayerbar__time" data-prayer-item="subuh">
+                <dt>Subuh</dt><dd><time data-prayer-time="subuh">—</time></dd>
+              </div>
+              <div class="prayerbar__time" data-prayer-item="syuruk">
+                <dt>Syuruk</dt><dd><time data-prayer-time="syuruk">—</time></dd>
+              </div>
+              <div class="prayerbar__time" data-prayer-item="dhuha">
+                <dt>Dhuha</dt><dd><time data-prayer-time="dhuha">—</time></dd>
+              </div>
+              <div class="prayerbar__time" data-prayer-item="zohor">
+                <dt>Zohor</dt><dd><time data-prayer-time="zohor">—</time></dd>
+              </div>
+              <div class="prayerbar__time" data-prayer-item="asar">
+                <dt>Asar</dt><dd><time data-prayer-time="asar">—</time></dd>
+              </div>
+              <div class="prayerbar__time" data-prayer-item="maghrib">
+                <dt>Maghrib</dt><dd><time data-prayer-time="maghrib">—</time></dd>
+              </div>
+              <div class="prayerbar__time" data-prayer-item="isyak">
+                <dt>Isyak</dt><dd><time data-prayer-time="isyak">—</time></dd>
+              </div>
+            </dl>
+            <div class="prayerbar__meta">
+              <p>
+                <a href="https://www.e-solat.gov.my/" target="_blank"
+                   rel="noopener noreferrer">Sumber: e-Solat JAKIM</a>
+                <span aria-hidden="true"> · </span>
+                <span data-prayer-source>Menunggu data</span>
+              </p>
+              <button class="prayerbar__refresh m-focus" type="button" data-prayer-refresh>
+                Semak semula
+              </button>
+            </div>
+            <p class="prayerbar__status" data-prayer-status role="status" hidden></p>
+          </div>
+        </div>
+      </section>
 
       <dialog class="search-dialog" id="site-search" aria-labelledby="search-title">
         <form method="dialog" class="search-dialog__head">
