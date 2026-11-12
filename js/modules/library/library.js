@@ -169,8 +169,9 @@ export async function initLibrary() {
       viewer.innerHTML = `
         <div class="book-error">
           <p><strong>Buku tidak dapat dimuatkan.</strong></p>
-          <p>Pastikan fail <code>${esc(book.pdf)}</code> wujud dan pelayan menyajikan
-             fail <code>.mjs</code> sebagai JavaScript.</p>
+          <p>Pastikan fail <code>${esc(book.pdf)}</code> wujud dan boleh diakses.
+             Untuk fail di CDN, bucket perlu membenarkan CORS; pelayan tempatan perlu
+             menyajikan fail <code>.mjs</code> sebagai JavaScript.</p>
           <button class="btn btn--sm" type="button" data-retry>Cuba lagi</button>
         </div>`;
       viewer.querySelector('[data-retry]')?.addEventListener('click', () => show(book.id));

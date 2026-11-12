@@ -20,7 +20,9 @@ export const SITE_ROOT = new URL('../', import.meta.url);
 export function siteUrl(path = '') {
   const value = String(path);
   if (/^[a-z][a-z0-9+.-]*:/i.test(value) || value.startsWith('//')) {
-    return new URL(value); // pautan luar (https:, mailto:, tel:) — biar seperti asal
+    // Pautan luar (https:, mailto:, tel:, //cdn/...) — biar seperti asal.
+    // Base hanya digunakan untuk URL protokol-relatif (//host/...).
+    return new URL(value, SITE_ROOT);
   }
   return new URL(value.replace(/^\/+/, ''), SITE_ROOT);
 }
