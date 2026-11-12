@@ -1,10 +1,11 @@
 /*
  * flippy-pdf v2.0.0 — https://github.com/wisam87/flippy-pdf (MIT)
- * Salinan vendored untuk projek ini. Satu-satunya perubahan:
- *   import * as pdfjsLib from 'pdfjs-dist';
- * ditukar kepada laluan tempatan js/vendor/pdfjs/pdf.min.mjs supaya projek
- * berjalan tanpa bundler dan tanpa CDN.
- * Jangan sunting logik di sini; kemas kini daripada pakej asal.
+ * Salinan vendored untuk projek ini. Dua perubahan tempatan:
+ *   1. import * as pdfjsLib from 'pdfjs-dist' ditukar kepada laluan tempatan
+ *      js/vendor/pdfjs/pdf.min.mjs supaya projek berjalan tanpa bundler/CDN.
+ *   2. Opsyen `pdfOptions` ditambah dan dihantar ke pdfjsLib.getDocument()
+ *      (contoh: disableRange / disableAutoFetch untuk isu R2).
+ * Jangan sunting logik lain di sini; kemas kini daripada pakej asal.
  */
 import * as pdfjsLib from '../pdfjs/pdf.min.mjs';
 
@@ -66,6 +67,9 @@ export class Flipbook {
       // global value set via setWorkerSrc() is used. There is no built-in
       // CDN fallback — load() throws if no worker has been configured.
       workerSrc: null,
+      // Opsyen tambahan untuk pdfjsLib.getDocument() (contoh: disableRange,
+      // disableAutoFetch). Dihantar tanpa diubah oleh load().
+      pdfOptions: {},
       ...options,
     };
     if (this.options.workerSrc) {
@@ -105,7 +109,10 @@ export class Flipbook {
     this._buildUI();
     this._setLoading(true, 'Loading PDF…');
     try {
-      const task = pdfjsLib.getDocument({ url: this.options.pdfUrl });
+      const task = pdfjsLib.getDocument({
+        url: this.options.pdfUrl,
+        ...this.options.pdfOptions,
+      });
       task.onProgress = ({ loaded, total }) => {
         if (total) {
           const pct = Math.round((loaded / total) * 100);
