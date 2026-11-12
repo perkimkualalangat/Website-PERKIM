@@ -1,0 +1,29 @@
+/* ==========================================================================
+   banner.css — banner hero full-bleed di halaman utama
+   Gambar: ajk-perkim.jpg (1080×769, ~1.4:1). Dipaparkan PENUH tanpa crop
+   dan mengisi lebar section — tiada had tinggi yang mengecilkannya.
+   ========================================================================== */
+
+.hero-banner {
+  /* Warna latar diselaraskan dengan tepi gambar supaya bila skrin lebih
+     lebar daripada 1920px, panel kiri/kanan menyatu dengan gambar. */
+  background: linear-gradient(180deg, #528794, #38606d);
+  border-top: 4px solid var(--c-gold);
+  border-bottom: 4px solid var(--c-gold);
+  overflow: hidden;
+}
+
+.hero-banner__img {
+  display: block;
+  width: 100%;
+  max-width: 1920px;
+  height: auto;
+  margin-inline: auto;
+}
+
+@media (max-width: 640px) {
+  .hero-banner {
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+  }
+}
