@@ -12,7 +12,7 @@
           "tajuk": "Bimbingan Asas Fardhu ‘Ain",
           "keterangan": "86 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/fardu-ain.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/fardu-ain.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/fardu-ain.pdf"
         }
       ]
     },
@@ -26,7 +26,7 @@
           "tajuk": "Pengajian Islam — Tahap Pra Asas",
           "keterangan": "46 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/pra-asas.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/pra-asas.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/pra-asas.pdf"
         }
       ]
     },
@@ -40,28 +40,28 @@
           "tajuk": "Akhlak — Tahap Asas",
           "keterangan": "66 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/asas-akhlak.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/asas-akhlak.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/asas-akhlak.pdf"
         },
         {
           "id": "asas-akidah",
           "tajuk": "Akidah — Tahap Asas",
           "keterangan": "92 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/asas-akidah.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/asas-akidah.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/asas-akidah.pdf"
         },
         {
           "id": "asas-fekah",
           "tajuk": "Fekah — Tahap Asas",
           "keterangan": "456 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/asas-fekah.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/asas-fekah.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/asas-fekah.pdf"
         },
         {
           "id": "asas-sirah",
           "tajuk": "Sirah — Tahap Asas",
           "keterangan": "44 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/asas-sirah.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/asas-sirah.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/asas-sirah.pdf"
         }
       ]
     },
@@ -75,28 +75,28 @@
           "tajuk": "Akhlak — Tahap Pertengahan",
           "keterangan": "149 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/pertengahan-akhlak.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/pertengahan-akhlak.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/pertengahan-akhlak.pdf"
         },
         {
           "id": "pertengahan-akidah",
           "tajuk": "Akidah — Tahap Pertengahan",
           "keterangan": "74 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/pertengahan-akidah.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/pertengahan-akidah.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/pertengahan-akidah.pdf"
         },
         {
           "id": "pertengahan-fekah",
           "tajuk": "Fekah — Tahap Pertengahan",
           "keterangan": "266 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/pertengahan-fekah.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/pertengahan-fekah.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/pertengahan-fekah.pdf"
         },
         {
           "id": "pertengahan-sirah",
           "tajuk": "Sirah — Tahap Pertengahan",
           "keterangan": "59 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/pertengahan-sirah.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/pertengahan-sirah.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/pertengahan-sirah.pdf"
         }
       ]
     },
@@ -110,28 +110,28 @@
           "tajuk": "Akhlak — Tahap Lanjutan",
           "keterangan": "109 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/lanjutan-akhlak.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/lanjutan-akhlak.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/lanjutan-akhlak.pdf"
         },
         {
           "id": "lanjutan-akidah",
           "tajuk": "Akidah — Tahap Lanjutan",
           "keterangan": "131 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/lanjutan-akidah.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/lanjutan-akidah.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/lanjutan-akidah.pdf"
         },
         {
           "id": "lanjutan-fekah",
           "tajuk": "Fekah — Tahap Lanjutan",
           "keterangan": "114 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/lanjutan-fekah.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/lanjutan-fekah.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/lanjutan-fekah.pdf"
         },
         {
           "id": "lanjutan-sirah",
           "tajuk": "Sirah — Tahap Lanjutan",
           "keterangan": "156 halaman · Edisi Pertama",
           "cover": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/covers/lanjutan-sirah.jpg",
-          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/kelas-perkim/lanjutan-sirah.pdf"
+          "pdf": "https://pub-1099249777ba499e8b9866ab815abb14.r2.dev/lanjutan-sirah.pdf"
         }
       ]
     }
