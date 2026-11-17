@@ -1,5 +1,5 @@
 /**
- * index.js — widget chatbot "PERKIM BOT".
+ * index.js — widget chatbot "Perkim-KLGT Bot".
  *
  * Modular:
  *   - api.js    : konfigurasi, endpoint dan aliran SSE
@@ -64,7 +64,7 @@ function binaWidget(konfigurasi) {
     menuTerbuka: true,
   };
 
-  const nama = String(konfigurasi.nama || 'PERKIM BOT');
+  const nama = String(konfigurasi.nama || 'Perkim-KLGT Bot');
   const whatsapp = String(konfigurasi.whatsapp || '');
   const telegram = String(konfigurasi.telegram || '');
   const menu = Array.isArray(konfigurasi.menu) ? konfigurasi.menu.filter((i) => i?.soalan) : [];
@@ -87,7 +87,7 @@ function binaWidget(konfigurasi) {
   launcherLogo.append(launcherImg);
 
   const launcherText = el('span', 'perkimbot-launcher__text');
-  launcherText.append(el('strong', '', 'PERKIM'), el('span', '', 'BOT'));
+  launcherText.append(el('strong', '', 'Perkim-KLGT'), el('span', '', 'Bot'));
   launcher.append(launcherLogo, launcherText);
 
   // ---------- Dialog ----------

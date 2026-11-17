@@ -1,5 +1,5 @@
 /**
- * nvidia-chat-worker.js — Cloudflare Worker untuk PERKIM BOT.
+ * nvidia-chat-worker.js — Cloudflare Worker untuk Perkim-KLGT Bot.
  *
  * Laluan:
  *   POST /api/chat             proksi streaming untuk widget laman
@@ -514,7 +514,7 @@ async function prosesTelegram(update, env) {
     await hantarTelegram(
       env,
       chatId,
-      'Saya PERKIM BOT, pembantu maya PERKIM Cawangan Kuala Langat.\n\n' +
+      'Saya Perkim-KLGT Bot, pembantu maya PERKIM Cawangan Kuala Langat.\n\n' +
         '/menu — senarai soalan pantas\n/reset — mula perbualan baharu\n/help — bantuan ini\n\n' +
         'Jangan hantar data peribadi murid. Untuk urusan rasmi, hubungi pejabat PERKIM Kuala Langat: 016-353 6126.'
     );

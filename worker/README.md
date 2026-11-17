@@ -1,4 +1,4 @@
-# PERKIM BOT — Worker NVIDIA + Telegram
+# Perkim-KLGT Bot — Worker NVIDIA + Telegram
 
 Modul chatbot untuk laman statik PERKIM Cawangan Kuala Langat. Kunci API NVIDIA
 hanya disimpan di pelayan (Cloudflare Worker), tidak pernah dihantar ke pelayar.
@@ -7,7 +7,7 @@ hanya disimpan di pelayan (Cloudflare Worker), tidak pernah dihantar ke pelayar.
 
 ```text
 Pelayar (GitHub Pages)
-   └── widget PERKIM BOT
+   └── widget Perkim-KLGT Bot
          └── POST /api/chat  ──┐
                                ├── Cloudflare Worker ── NVIDIA NIM
 Telegram (webhook)             │        └── data/chatbot-kontekst.json
@@ -36,7 +36,7 @@ node tools/serve.mjs
 node tools/chat-proxy.mjs
 ```
 
-Buka `http://127.0.0.1:8081/`. Butang **PERKIM BOT** muncul di bawah kanan.
+Buka `http://127.0.0.1:8081/`. Butang **Perkim-KLGT Bot** muncul di bawah kanan.
 Endpoint tempatan sudah ditetapkan dalam `data/chatbot.json`:
 
 ```json
@@ -97,7 +97,7 @@ Invoke-RestMethod https://perkim-bot.<subdomain>.workers.dev/health
 
 1. Buka Telegram, cari **@BotFather**.
 2. Hantar `/newbot`.
-3. Pilih nama paparan (contoh: `PERKIM BOT`) dan username yang berakhir
+3. Pilih nama paparan (contoh: `Perkim-KLGT Bot`) dan username yang berakhir
    dengan `bot` (contoh: `perkim_kualalangat_bot`).
 4. Simpan token daripada BotFather.
 

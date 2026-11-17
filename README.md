@@ -22,7 +22,7 @@ mengimport gambar dan menjana semula `data/aktiviti.json` tanpa perlu menaip ara
 Menu Tetapan dalam dropdown **Lain-lain** hanya muncul pada `localhost`/`127.0.0.1`;
 GitHub Pages kekal baca sahaja.
 
-**Kemas kini 17 November 2026:** widget **PERKIM BOT** ditambah pada semua halaman —
+**Kemas kini 17 November 2026:** widget **Perkim-KLGT Bot** ditambah pada semua halaman —
 chatbot AI berasaskan NVIDIA NIM dengan proksi tempatan (`tools/chat-proxy.mjs`), pangkalan
 pengetahuan `data/chatbot-kontekst.json`, dan worker Cloudflare untuk produksi. Lihat §6c.
 
@@ -105,7 +105,7 @@ gagal, pelayan tetap dimulakan dan ralat boleh dilihat di halaman Tetapan.
 > `tools/serve.mjs`. Jika `start.bat` jatuh balik kepada Python, halaman Tetapan membuka dalam
 > mod baca sahaja.
 >
-> **PERKIM BOT** memerlukan satu lagi terminal: `node tools/chat-proxy.mjs` (port 8788) dan
+> **Perkim-KLGT Bot** memerlukan satu lagi terminal: `node tools/chat-proxy.mjs` (port 8788) dan
 > `NVIDIA_API_KEY` dalam `.env`. Tanpanya, widget tetap muncul tetapi jawapan AI tidak tersedia.
 > Butiran dalam §6c.
 
@@ -155,7 +155,7 @@ perkim-web/
 │   ├── library.css             Rak buku + pembaca PDF
 │   ├── ascii-globe.css         Gaya peta bumi ASCII
 │   ├── tetapan.css             Gaya halaman Tetapan (panel, tab, galeri)
-│   ├── chatbot.css             Butang terapung + panel PERKIM BOT
+│   ├── chatbot.css             Butang terapung + panel Perkim-KLGT Bot
 │   └── vendor/flippy.css       Gaya enjin flippy-pdf
 ├── js/
 │   ├── main.js
@@ -174,7 +174,7 @@ perkim-web/
 │   │   ├── forms.js            Borang draf
 │   │   ├── library/library.js  Rak buku
 │   │   ├── library/engine-flippy.js
-│   │   ├── chatbot/index.js     Widget PERKIM BOT: panel, menu, keadaan
+│   │   ├── chatbot/index.js     Widget Perkim-KLGT Bot: panel, menu, keadaan
 │   │   ├── chatbot/api.js       Endpoint + klien SSE
 │   │   ├── chatbot/render.js    Pemaparan jawapan (teks selamat)
 │   │   └── utils.js
@@ -206,7 +206,7 @@ perkim-web/
 │   ├── aktiviti.json           Dijana daripada program/*/caption.md
 │   ├── books.json              Buku teks (5 kumpulan, 14 buku)
 │   ├── chatbot.json            Tetapan widget: nama, salam, menu, endpoint
-│   ├── chatbot-kontekst.json   Pangkalan pengetahuan PERKIM BOT
+│   ├── chatbot-kontekst.json   Pangkalan pengetahuan Perkim-KLGT Bot
 │   ├── database_lokasi_perkim.md  Sumber tunggal lokasi (sunting di sini)
 │   └── perkim-network.json     Dijana oleh bina_lokasi.py (jangan sunting)
 ├── assets/
@@ -662,7 +662,7 @@ Fail fallback perlu dijana semula pada awal setiap tahun. Lihat
 
 ---
 
-## 6c. Chatbot AI — PERKIM BOT
+## 6c. Chatbot AI — Perkim-KLGT Bot
 
 Widget chatbot terapung di bawah kanan semua halaman. Jawapan dijana oleh
 **NVIDIA NIM** (`nvidia/nemotron-3-ultra-550b-a55b`) berdasarkan
@@ -705,7 +705,7 @@ node tools/chat-proxy.mjs                   # proksi chatbot di :8788
 > menggunakan 8787. Jika anda tukar `CHAT_PROXY_PORT`, kemas kini
 > `endpoint.localhost` dalam `data/chatbot.json` supaya sama.
 
-Buka <http://127.0.0.1:8081/>, klik butang **PERKIM BOT**. Semak proksi:
+Buka <http://127.0.0.1:8081/>, klik butang **Perkim-KLGT Bot**. Semak proksi:
 
 ```powershell
 Invoke-RestMethod http://127.0.0.1:8788/health
@@ -796,7 +796,7 @@ arahan `/start`, `/menu`, `/reset`, `/help`. Menu Telegram dibaca daripada
 6. Kebenaran nama dan logo diperoleh.
 7. Tukar warna/tema jika panduan korporat rasmi berbeza.
 8. Uji pada telefon dan komputer, termasuk carian dan menu mudah alih.
-9. Uji PERKIM BOT: proksi tempatan, jawapan untuk setiap menu, dan tingkah laku apabila
+9. Uji Perkim-KLGT Bot: proksi tempatan, jawapan untuk setiap menu, dan tingkah laku apabila
    `endpoint.produksi` kosong. Pastikan tiada data peribadi dalam `data/chatbot-kontekst.json`.
 10. Barulah buang banner draf dan `noindex` — dengan kebenaran pihak cawangan.
 
