@@ -50,9 +50,9 @@
   ],
   "endpoint": {
     "localhost": "http://127.0.0.1:8788/api/chat",
-    "produksi": "https://perkim-bot.asyariff-kafa.workers.dev/api/chat"
+    "produksi": "https://perkim-klgt-bot.perkimkualalangat.workers.dev/api/chat"
   },
   "whatsapp": "https://wa.me/60163536126",
   "telegram": "",
-  "_nota_produksi": "Worker perkim-bot di-deploy pada akaun Cloudflare sedia ada. Tukar endpoint.produksi jika worker dipindahkan ke akaun/domain lain."
+  "_nota_produksi": "Worker perkim-klgt-bot di-deploy pada akaun Cloudflare PERKIM (subdomain perkimkualalangat). Kemas kini endpoint.produksi jika worker dipindahkan."
 }

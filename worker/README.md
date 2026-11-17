@@ -80,15 +80,15 @@ ALLOWED_ORIGINS = "https://perkimkualalangat.github.io"
 Selepas deploy, salin URL Worker ke `data/chatbot.json`:
 
 ```json
-"produksi": "https://perkim-bot.<subdomain>.workers.dev/api/chat"
+"produksi": "https://perkim-klgt-bot.<subdomain>.workers.dev/api/chat"
 ```
 
-**Status semasa:** `https://perkim-bot.asyariff-kafa.workers.dev/api/chat`.
+**Status semasa:** `https://perkim-klgt-bot.perkimkualalangat.workers.dev/api/chat`.
 
 Uji:
 
 ```powershell
-Invoke-RestMethod https://perkim-bot.<subdomain>.workers.dev/health
+Invoke-RestMethod https://perkim-klgt-bot.<subdomain>.workers.dev/health
 ```
 
 ## 3. Sambungan Telegram
@@ -122,7 +122,7 @@ npx wrangler deploy
 ```powershell
 $TOKEN  = "<token BotFather>"
 $SECRET = "<rahsia yang dijana tadi>"
-$URL    = "https://perkim-bot.<subdomain>.workers.dev/telegram/webhook"
+$URL    = "https://perkim-klgt-bot.<subdomain>.workers.dev/telegram/webhook"
 
 Invoke-RestMethod "https://api.telegram.org/bot$TOKEN/setWebhook" -Method Post -Body @{
   url                  = $URL

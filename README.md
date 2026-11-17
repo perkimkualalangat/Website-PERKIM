@@ -233,7 +233,7 @@ worker/                         Worker Cloudflare (produksi) + Telegram
 ├── nvidia-chat-worker.js       Laluan /api/chat, /telegram/webhook, /health
 ├── chat-core.mjs               Panggilan NVIDIA NIM + streaming + konteks
 ├── prompt.mjs                  Prompt sistem, had token, pengesahan mesej
-├── wrangler.toml               Konfigurasi deploy (perkim-bot)
+├── wrangler.toml               Konfigurasi deploy (perkim-klgt-bot)
 └── README.md                   Panduan deploy + Telegram
 ```
 
@@ -740,14 +740,13 @@ Kemudian isi URL Worker dalam `data/chatbot.json`:
 ```json
 "endpoint": {
   "localhost": "http://127.0.0.1:8788/api/chat",
-  "produksi": "https://perkim-bot.<subdomain>.workers.dev/api/chat"
+  "produksi": "https://perkim-klgt-bot.<subdomain>.workers.dev/api/chat"
 }
 ```
 
-**Status semasa:** `https://perkim-bot.asyariff-kafa.workers.dev/api/chat` — worker
-`perkim-bot` di-deploy pada akaun Cloudflare sedia ada (subdomain `asyariff-kafa`).
-Jika mahu URL berasingan, log masuk akaun Cloudflare lain dan deploy semula, kemudian
-kemas kini `produksi`.
+**Status semasa:** `https://perkim-klgt-bot.perkimkualalangat.workers.dev/api/chat` —
+worker `perkim-klgt-bot` di-deploy pada akaun Cloudflare PERKIM
+(`perkimkualalangat@gmail.com`), subdomain `perkimkualalangat`.
 
 `wrangler.toml` menetapkan `SITE_ORIGIN` dan `ALLOWED_ORIGINS` kepada
 `perkimkualalangat.github.io`. Worker mengambil `data/chatbot.json` dan

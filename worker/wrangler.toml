@@ -1,4 +1,4 @@
-name = "perkim-bot"
+name = "perkim-klgt-bot"
 main = "nvidia-chat-worker.js"
 compatibility_date = "2025-11-01"
 workers_dev = true
