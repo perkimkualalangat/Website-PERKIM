@@ -25,3 +25,13 @@ __pycache__/
 
 # Backup folder (auto-generated)
 backups/
+
+# Kredensial / rahsia setempat — JANGAN commit
+.env
+.env.local
+*.pem
+*.key
+
+# Artifak alat / agen
+.pawprints/
+node_modules/

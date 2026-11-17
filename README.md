@@ -681,7 +681,7 @@ git restore <fail>                 # buang perubahan yang belum dikomit
 git checkout <hash> -- <fail>      # pulihkan versi lama satu fail
 ```
 
-Sandaran di luar cakera (repo ini tiada remote):
+Sandaran di luar cakera (kekal berguna walaupun ada remote):
 
 ```powershell
 git bundle create ..\perkim-2026-10-31.bundle --all
@@ -729,6 +729,57 @@ Set-Location $prev; node tools\serve.mjs 8082
 ```
 
 Jangan simpan token GitHub dalam repo atau dalam `.git/config`.
+
+---
+
+## 7c. Push satu sentuhan
+
+Skrip dalam `git push one touch/` melakukan `add -A` → `commit` → `push` menggunakan token
+daripada `.env`. Token dihantar melalui `git -c http.extraheader=…` **setiap arahan sahaja** —
+ia tidak ditulis ke `.git/config` dan tidak masuk sejarah git.
+
+Persediaan sekali sahaja:
+
+1. Buat fine-grained PAT: GitHub → **Settings → Developer settings → Personal access
+   tokens → Fine-grained tokens**. Repository access: **hanya** `Website-PERKIM`.
+   Permissions → **Contents: Read and write**.
+2. Buka `git push one touch\.env` (sudah disediakan daripada `.env.example`) dan isi
+   `GITHUB_TOKEN=github_pat_…`. Fail `.env` di-ignore oleh git.
+3. Uji tanpa push: `push.bat --dry-run`
+
+Penggunaan harian:
+
+| Arahan | Maksud |
+| --- | --- |
+| `push.bat` | Commit automatik (mesej bertarikh) + push ke `main` |
+| `push.bat "Betulkan menu"` | Commit dengan mesej sendiri + push |
+| `push.bat --dry-run` | Senarai fail yang akan dikomit; tiada commit/push |
+| `push.bat --verify` | Uji token & akses repo sahaja; tiada commit/push |
+| `node "git push one touch\push.js" --root "C:\laluan"` | Paksa akar projek lain |
+
+Apa yang dijaga oleh skrip:
+
+- **Akar projek** dikesan automatik — folder ini atau ibu bapa terdekat yang ada `.git` —
+  jadi skrip boleh duduk dalam subfolder tanpa mencipta repo kedua.
+- **`.gitignore`** sentiasa ditambah `.env`; `GIT_SECRET_FILES` untuk pola tambahan
+  (`*.sqlite,*.pem,…`). Fail sulit yang sudah dijejak akan di-`rm --cached`.
+- **Dry-run** menggunakan index sementara, jadi index sebenar tidak berubah.
+- Jika push ditolak (remote ada commit baharu), skrip cuba `pull --rebase` sekali.
+- Token disorok (`***`) dalam semua mesej ralat.
+- Credential helper Git **dimatikan** untuk arahan skrip (`credential.helper=`,
+  `GIT_TERMINAL_PROMPT=0`), jadi ia tidak akan tergantung menunggu prompt.
+- `GITHUB_PAGES=true` memaparkan URL GitHub Pages selepas push berjaya.
+
+### Tukar token GitHub
+
+1. (Jika token lama terdedah) GitHub → Settings → Developer settings → Personal access
+   tokens → **Revoke/Delete** token lama.
+2. Buka `git push one touch\.env`, ganti baris `GITHUB_TOKEN=…` dengan token baharu.
+3. Uji: `push.bat --verify` → sepatutnya keluar `✅ Token sah & akses berjaya.`
+4. Push seperti biasa: `push.bat`
+
+Tiada tempat lain perlu diubah: `.git/config` tidak menyimpan token, tiada cache
+kredensial digunakan oleh skrip. Setiap komputer mempunyai `.env` sendiri.
 
 ---
 
