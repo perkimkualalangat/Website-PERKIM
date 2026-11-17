@@ -1,0 +1,587 @@
+/* ==========================================================================
+   chatbot.css — widget PERKIM BOT
+   Butang terapung minimalis di bawah kanan, panel perbualan dan menu soalan.
+   ========================================================================== */
+
+.perkimbot-launcher {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: auto;
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.38rem 0.95rem 0.38rem 0.42rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--c-text);
+  box-shadow: 0 10px 28px rgba(8, 51, 31, 0.18);
+  cursor: pointer;
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease),
+    border-color 0.18s var(--ease);
+}
+
+.perkimbot-launcher:hover {
+  transform: translateY(-2px);
+  border-color: var(--c-primary);
+  box-shadow: 0 14px 34px rgba(8, 51, 31, 0.24);
+}
+
+.perkimbot-launcher:focus-visible {
+  outline: 3px solid rgba(19, 122, 74, 0.35);
+  outline-offset: 3px;
+}
+
+.perkimbot-launcher[hidden] {
+  display: none;
+}
+
+.perkimbot-launcher__logo {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--c-primary-soft);
+  overflow: hidden;
+  flex: none;
+}
+
+.perkimbot-launcher__logo img {
+  width: 34px;
+  height: 34px;
+  display: block;
+}
+
+.perkimbot-launcher__text {
+  display: flex;
+  align-items: baseline;
+  gap: 0.28rem;
+  font-size: 0.76rem;
+  line-height: 1;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+}
+
+.perkimbot-launcher__text strong {
+  font-weight: 700;
+  color: var(--c-nav-bg);
+}
+
+.perkimbot-launcher__text span {
+  font-weight: 700;
+  color: var(--c-primary);
+}
+
+/* ---------- Panel ---------- */
+.perkimbot {
+  position: fixed;
+  inset: auto max(1rem, env(safe-area-inset-right)) 5.2rem auto;
+  margin: 0;
+  width: min(400px, calc(100vw - 2rem));
+  height: min(620px, calc(100dvh - 7rem));
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--c-bg);
+  color: var(--c-text);
+  box-shadow: 0 26px 70px rgba(6, 40, 26, 0.3);
+}
+
+.perkimbot[open] {
+  display: flex;
+  flex-direction: column;
+  animation: perkimbot-masuk 0.2s var(--ease);
+}
+
+.perkimbot::backdrop {
+  background: rgba(6, 40, 26, 0.28);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+@keyframes perkimbot-masuk {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Kepala ---------- */
+.perkimbot__head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0.75rem 0.7rem 0.7rem;
+  background: var(--c-nav-bg);
+  color: var(--c-nav-ink);
+  border-bottom: 3px solid var(--c-gold);
+  flex: none;
+}
+
+.perkimbot__logo {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ffffff;
+  padding: 3px;
+  flex: none;
+}
+
+.perkimbot__logo img {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+.perkimbot__ident {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.perkimbot__title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.perkimbot__status {
+  display: flex;
+  align-items: center;
+  gap: 0.32rem;
+  font-size: 0.65rem;
+  color: var(--c-nav-muted);
+  white-space: nowrap;
+}
+
+.perkimbot__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6ee7a0;
+  box-shadow: 0 0 0 3px rgba(110, 231, 160, 0.16);
+  flex: none;
+}
+
+.perkimbot__status.is-offline .perkimbot__status-dot {
+  background: #f2b84b;
+  box-shadow: 0 0 0 3px rgba(242, 184, 75, 0.16);
+}
+
+.perkimbot__menu-toggle {
+  padding: 0.3rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--c-nav-ink);
+  font: inherit;
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  flex: none;
+}
+
+.perkimbot__menu-toggle:hover,
+.perkimbot__menu-toggle:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  outline: none;
+}
+
+.perkimbot__close {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--c-nav-ink);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  flex: none;
+}
+
+.perkimbot__close:hover,
+.perkimbot__close:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  outline: none;
+}
+
+/* ---------- Log ---------- */
+.perkimbot__log {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.9rem 0.8rem;
+  background: #f7faf8;
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-border) transparent;
+}
+
+.perkimbot-msg {
+  display: flex;
+  margin-bottom: 0.62rem;
+}
+
+.perkimbot-msg:last-child {
+  margin-bottom: 0;
+}
+
+.perkimbot-msg--bot {
+  justify-content: flex-start;
+}
+
+.perkimbot-msg--user {
+  justify-content: flex-end;
+}
+
+.perkimbot-msg__bubble {
+  max-width: 86%;
+  padding: 0.55rem 0.72rem;
+  border-radius: 14px;
+  font-size: 0.84rem;
+  line-height: 1.48;
+  overflow-wrap: anywhere;
+}
+
+.perkimbot-msg--bot .perkimbot-msg__bubble {
+  background: #ffffff;
+  border: 1px solid var(--c-border);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 2px rgba(8, 51, 31, 0.04);
+}
+
+.perkimbot-msg--user .perkimbot-msg__bubble {
+  background: var(--c-primary);
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+}
+
+.perkimbot-msg__bubble p {
+  margin: 0 0 0.42rem;
+}
+
+.perkimbot-msg__bubble p:last-child {
+  margin-bottom: 0;
+}
+
+.perkimbot-msg__bubble ul,
+.perkimbot-msg__bubble ol {
+  margin: 0.25rem 0 0.45rem;
+  padding-left: 1.1rem;
+}
+
+.perkimbot-msg__bubble li {
+  margin: 0.15rem 0;
+}
+
+.perkimbot-msg__bubble a {
+  color: var(--c-primary-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.perkimbot-msg--user .perkimbot-msg__bubble a {
+  color: #ffffff;
+}
+
+.perkimbot-msg__bubble strong {
+  font-weight: 700;
+}
+
+.perkimbot-msg__bubble .perkimbot__quote {
+  padding-left: 0.6rem;
+  border-left: 3px solid var(--c-primary-soft);
+  color: var(--c-text-soft);
+}
+
+.perkimbot-typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.2rem 0;
+}
+
+.perkimbot-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-text-soft);
+  animation: perkimbot-taip 1.1s infinite ease-in-out;
+}
+
+.perkimbot-typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.perkimbot-typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes perkimbot-taip {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+/* ---------- Menu soalan ---------- */
+.perkimbot__menu {
+  flex: none;
+  max-height: 34%;
+  overflow-y: auto;
+  padding: 0.55rem 0.7rem 0.62rem;
+  border-top: 1px solid var(--c-border);
+  background: #ffffff;
+}
+
+.perkimbot__menu[hidden] {
+  display: none;
+}
+
+.perkimbot__menu-title {
+  margin: 0 0 0.38rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-text-soft);
+}
+
+.perkimbot__menu-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.34rem;
+}
+
+.perkimbot__menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  min-height: 34px;
+  padding: 0.35rem 0.48rem;
+  border: 1px solid var(--c-border);
+  border-radius: 9px;
+  background: #ffffff;
+  color: var(--c-text);
+  font: inherit;
+  font-size: 0.71rem;
+  line-height: 1.25;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease), background 0.15s var(--ease);
+}
+
+.perkimbot__menu-item:hover,
+.perkimbot__menu-item:focus-visible {
+  border-color: var(--c-primary);
+  background: var(--c-primary-soft);
+  outline: none;
+}
+
+.perkimbot__menu-item:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.perkimbot__menu-label {
+  min-width: 0;
+}
+
+.perkimbot__menu-arrow {
+  color: var(--c-primary);
+  font-size: 0.8rem;
+  flex: none;
+}
+
+/* ---------- Borang ---------- */
+.perkimbot__form {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.42rem;
+  flex: none;
+  padding: 0.55rem 0.7rem;
+  border-top: 1px solid var(--c-border);
+  background: #ffffff;
+}
+
+.perkimbot__input {
+  flex: 1;
+  min-width: 0;
+  min-height: 40px;
+  max-height: 132px;
+  padding: 0.55rem 0.68rem;
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  background: var(--c-bg-alt);
+  color: var(--c-text);
+  font: inherit;
+  font-size: 0.84rem;
+  line-height: 1.4;
+  resize: none;
+  overflow-y: auto;
+}
+
+.perkimbot__input:focus {
+  outline: 2px solid rgba(19, 122, 74, 0.28);
+  outline-offset: 1px;
+  border-color: var(--c-primary);
+  background: #ffffff;
+}
+
+.perkimbot__input::placeholder {
+  color: var(--c-text-soft);
+}
+
+.perkimbot__send {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--c-primary);
+  color: #ffffff;
+  cursor: pointer;
+  flex: none;
+  transition: background 0.15s var(--ease), transform 0.15s var(--ease);
+}
+
+.perkimbot__send:hover {
+  background: var(--c-primary-dark);
+  transform: translateY(-1px);
+}
+
+.perkimbot__send:focus-visible {
+  outline: 3px solid rgba(19, 122, 74, 0.3);
+  outline-offset: 2px;
+}
+
+.perkimbot__send:disabled {
+  opacity: 0.55;
+  cursor: wait;
+  transform: none;
+}
+
+/* ---------- Nota ---------- */
+.perkimbot__note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 0.6rem;
+  margin: 0;
+  padding: 0.38rem 0.8rem calc(0.48rem + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--c-border);
+  background: #ffffff;
+  color: var(--c-text-soft);
+  font-size: 0.62rem;
+  line-height: 1.4;
+  flex: none;
+}
+
+.perkimbot__note-links {
+  display: inline-flex;
+  gap: 0.55rem;
+}
+
+.perkimbot__note-links a {
+  color: var(--c-primary-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ---------- Telefon ---------- */
+@media (max-width: 520px) {
+  .perkimbot {
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+  }
+
+  .perkimbot[open] {
+    animation: none;
+  }
+
+  .perkimbot__head {
+    padding-top: calc(0.7rem + env(safe-area-inset-top));
+  }
+
+  .perkimbot__menu {
+    max-height: 32%;
+  }
+
+  .perkimbot-launcher__text {
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .perkimbot__menu-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .perkimbot-launcher,
+  .perkimbot__menu-item,
+  .perkimbot__send {
+    transition: none;
+  }
+
+  .perkimbot[open] {
+    animation: none;
+  }
+
+  .perkimbot-typing span {
+    animation: none;
+    opacity: 0.7;
+  }
+
+  .perkimbot__log {
+    scroll-behavior: auto;
+  }
+}
+
+@media print {
+  .perkimbot,
+  .perkimbot-launcher {
+    display: none !important;
+  }
+}
+
+body.perkimbot-open {
+  overflow: hidden;
+}

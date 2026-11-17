@@ -65,7 +65,7 @@ const DEMOS = [
   {
     id: 'borang-medan',
     title: 'Medan borang',
-    body: 'Fokus danTecno keadaan tidak sah.',
+    body: 'Fokus dan keadaan tidak sah.',
     html:
       '<div class="field" style="gap:.35rem">' +
       '<label for="lab-nama">Nama</label>' +

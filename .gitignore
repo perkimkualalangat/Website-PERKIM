@@ -26,11 +26,15 @@ __pycache__/
 # Backup folder (auto-generated)
 backups/
 
-# Kredensial / rahsia setempat — JANGAN commit
+# Kredensial / rahsia setempat - JANGAN commit
 .env
 .env.local
 *.pem
 *.key
+.dev.vars
+
+# Cloudflare Wrangler (state tempatan)
+.wrangler/
 
 # Artifak alat / agen
 .pawprints/

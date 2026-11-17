@@ -45,6 +45,18 @@ html.reduce-motion {
   --press-scale-sm: 1;
   --lift-y: 0px;
   --slide-x: 0px;
+  scroll-behavior: auto;
+}
+
+/* Kill-switch untuk togol manual — sama seperti fallback OS di bawah.
+   Tanpa ini, animasi yang durasinya hard-coded dan smooth scroll masih berjalan. */
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
 }
 
 /* ==========================================================================

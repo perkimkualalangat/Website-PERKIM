@@ -1,0 +1,25 @@
+name = "perkim-bot"
+main = "nvidia-chat-worker.js"
+compatibility_date = "2025-11-01"
+workers_dev = true
+
+[vars]
+MODEL = "nvidia/nemotron-3-ultra-550b-a55b"
+
+# Tukar kepada URL laman sebenar (tanpa garis miring di hujung).
+# Untuk GitHub Pages projek: https://<akaun>.github.io/<repo>
+SITE_ORIGIN = "https://perkimkualalangat.github.io/Website-PERKIM"
+
+# Origin pelayar yang dibenarkan memanggil /api/chat.
+# Boleh guna *.github.io atau .github.io untuk semua subdomain.
+ALLOWED_ORIGINS = "https://perkimkualalangat.github.io"
+
+# Kosong = bot Telegram terbuka kepada semua. Isi chat ID untuk hadkan.
+TELEGRAM_ALLOWED_CHAT_IDS = ""
+
+# Pilihan: simpan sejarah perbualan Telegram merentas isolate.
+# Buat namespace KV dahulu: npx wrangler kv namespace create CHAT_KV
+# Kemudian buka komen dan masukkan id yang diberi.
+# [kv_namespaces]
+# binding = "CHAT_KV"
+# id = "<KV_NAMESPACE_ID>"

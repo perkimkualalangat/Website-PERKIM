@@ -1,0 +1,173 @@
+{
+  "dikemaskini": "2026-11-17",
+  "nota": "Kandungan ini dihimpun daripada data awam laman PERKIM Kuala Langat. Item bertanda 'belum disahkan' tidak boleh dijawab sebagai fakta. Laman masih berstatus draf. Jangan tambah data peribadi ahli, peserta atau kakitangan.",
+  "fakta": [
+    {
+      "tajuk": "Identiti cawangan",
+      "teks": "Nama rasmi: PERKIM Cawangan Kuala Langat. PERKIM ialah singkatan Pertubuhan Kebajikan Islam Malaysia (Muslim Welfare Organisation Malaysia). Ini pejabat cawangan peringkat daerah di Kuala Langat, Selangor, yang menjalankan aktiviti dakwah, pendidikan, kebajikan, kemasyarakatan dan kerjasama.",
+      "sumber": "data/site.json"
+    },
+    {
+      "tajuk": "Alamat pejabat",
+      "teks": "Lot 2029, Jalan Haji Darini, Lorong 4, Kampung Sungai Lang Baru, 42700 Banting, Selangor. Pejabat terletak di kawasan Masjid Sungai Lang Baru.",
+      "sumber": "data/site.json, pages/hubungi.html"
+    },
+    {
+      "tajuk": "Hubungan",
+      "teks": "Telefon dan WhatsApp: 016-353 6126. E-mel: perkimkualalangat@gmail.com. Pautan WhatsApp: https://wa.me/60163536126.",
+      "sumber": "data/site.json, pages/hubungi.html"
+    },
+    {
+      "tajuk": "Waktu pejabat",
+      "teks": "Isnin hingga Khamis: 10:00 pagi hingga 4:00 petang. Jumaat: 9:00 pagi hingga 12:00 tengah hari. Sabtu dan Ahad: tutup. Sumber: Google Business Profile, disemak 30 Oktober 2026.",
+      "sumber": "data/site.json"
+    },
+    {
+      "tajuk": "Status laman",
+      "teks": "Laman ini masih berstatus draf. Sebahagian teks rasmi, visi dan misi cawangan belum disahkan oleh pihak cawangan. Jangan petik kandungan draf sebagai kenyataan rasmi.",
+      "sumber": "data/site.json, pages/tentang.html"
+    },
+    {
+      "tajuk": "Sejarah PERKIM kebangsaan",
+      "teks": "PERKIM didaftarkan pada 19 Ogos 1960. Pengasasnya Tunku Abdul Rahman Putra Al-Haj, yang menjadi penasihat sehingga 1971 dan Presiden sehingga 1989. Moto organisasi: 'Persaudaraan dalam Islam' (Brotherhood in Islam).",
+      "sumber": "data/perkim.json"
+    },
+    {
+      "tajuk": "Visi dan misi kebangsaan",
+      "teks": "Visi: menjadikan PERKIM sebuah NGO dakwah antarabangsa. Misi: menjadikan PERKIM NGO terkemuka yang menyokong institusi Islam di Malaysia dan peringkat antarabangsa.",
+      "sumber": "data/perkim.json"
+    },
+    {
+      "tajuk": "Lima teras PERKIM",
+      "teks": "Lima teras: (1) Dakwah — mempergiat aktiviti dakwah kepada rakyat Malaysia dan masyarakat antarabangsa; (2) Pendidikan — meningkatkan kefahaman Islam melalui pendidikan terancang; (3) Kebajikan — memastikan kebajikan masyarakat diurus dengan teratur; (4) Kerjasama — mempertingkat kerjasama dengan agensi kerajaan dan badan berkaitan; (5) Lain-lain — membina sistem pengurusan dan pentadbiran untuk mencapai matlamat PERKIM.",
+      "sumber": "data/perkim.json"
+    },
+    {
+      "tajuk": "Struktur organisasi",
+      "teks": "Struktur PERKIM: ibu pejabat kebangsaan (sekretariat) menyalurkan peruntukan; PERKIM Bahagian di peringkat negeri diketuai Pengerusi Bahagian; Cawangan di peringkat daerah diketuai Pengerusi Cawangan yang melapor kepada Bahagian; Wanita PERKIM Kebangsaan ialah sayap wanita. Laman PERKIM menyebut bahagian wujud di seluruh negara kecuali Sabah.",
+      "sumber": "data/perkim.json"
+    },
+    {
+      "tajuk": "Visi dan misi cawangan",
+      "teks": "Visi dan misi rasmi PERKIM Cawangan Kuala Langat belum disahkan; halaman Tentang masih menunggu teks rasmi. Jangan reka atau memetik visi/misi cawangan.",
+      "sumber": "pages/tentang.html"
+    },
+    {
+      "tajuk": "Kepimpinan cawangan 2026–2028",
+      "teks": "Pengerusi: Ustaz Aiman Azim bin Azafri. Timbalan Pengerusi 1: Encik Abdul Alim Hafez bin Bahru. Setiausaha: Cik Puan Faridah Hanim binti Mohd Ayub. AJK Kanan: Tuan Hamdan bin Yaacob dan Tuan Salim Yusof. Senarai ini mengikut rekod dalaman yang telah disahkan.",
+      "sumber": "data/kepimpinan.json"
+    },
+    {
+      "tajuk": "Jawatan belum disahkan",
+      "teks": "Jawatan Timbalan Pengerusi 2, Naib Pengerusi, 11 wakil AJK Cawangan Utama dan 3 wakil AJK Sayap Belia masih menunggu pengesahan rasmi. Laporan program menyebut Ustazah Norhazanah sebagai Timbalan Pengerusi II, tetapi jawatan itu belum disahkan dalam senarai kepimpinan rasmi.",
+      "sumber": "data/kepimpinan.json, data/aktiviti.json"
+    },
+    {
+      "tajuk": "Program Volunteer Gathering 1.0 2026",
+      "teks": "Volunteer Gathering 1.0 2026 — Edisi Srikandi (Muslimah) berlangsung pada 31 Oktober 2026, 10:00 pagi hingga 12:00 tengah hari, di Pejabat PERKIM Kuala Langat, Masjid Sungai Lang Baru. Seramai 8 peserta baharu dan 4 orang AJK hadir. Program memperkenalkan gerak kerja kesukarelawanan, dakwah dan kebajikan.",
+      "sumber": "data/aktiviti.json, pages/aktiviti.html"
+    },
+    {
+      "tajuk": "Program Townhall Zon 5 2026",
+      "teks": "Delegasi PERKIM Kuala Langat menyertai Townhall PERKIM Cawangan Zon 5 Negeri Selangor 2026 pada 25 Oktober 2026 di Royal Park Hotel, UNITEN Bangi, bertema 'Building a Winning Mission'. Seramai 14 delegasi hadir: 11 AJK dan 3 AJK Belia. Cawangan Zon 5 ialah Kuala Langat, Hulu Langat dan Sepang.",
+      "sumber": "data/aktiviti.json, pages/aktiviti.html"
+    },
+    {
+      "tajuk": "Kelas pengajian Islam",
+      "teks": "Kelas pengajian Islam PERKIM menggunakan buku teks PERKIM Kebangsaan Edisi Pertama dalam lima tahap: Fardhu 'Ain (Bimbingan Asas), Pra Asas, Asas, Pertengahan dan Lanjutan. Subjek pada tahap Asas hingga Lanjutan: Akhlak, Akidah, Fekah dan Sirah. Jumlah keseluruhan 14 buku.",
+      "sumber": "data/books.json, pages/bahan-bacaan.html"
+    },
+    {
+      "tajuk": "Bahan bacaan digital",
+      "teks": "Semua buku teks boleh dibaca terus di halaman Bahan Bacaan sebagai buku flip digital. Fail PDF dan kulit buku dihoskan di CDN Cloudflare R2. Tiada muat turun pukal disediakan di laman; gunakan pembaca flipbook.",
+      "sumber": "pages/bahan-bacaan.html, data/books.json"
+    },
+    {
+      "tajuk": "Jaringan dan badan gabungan",
+      "teks": "PERKIM bekerjasama dengan badan gabungan seperti MACMA, USIA, HIKMAH dan Darul Fitrah. Institusi pendidikan berkaitan: IDIP-KB, IDIP KL dan Tadika PERKIM Kampung Koh. Program luar termasuk International Waqf Da'wah Convention 2026 (IWDC) dan Tasputra PERKIM.",
+      "sumber": "data/perkim.json, pages/jaringan.html"
+    },
+    {
+      "tajuk": "Media sosial cawangan",
+      "teks": "Facebook: PERKIM Kuala Langat. Instagram: @perkimkualalangat. YouTube: @perkimkualalangat. WhatsApp: 016-353 6126. Akaun TikTok rasmi cawangan belum tersedia; pautan TikTok di laman menuju akaun PERKIM Kebangsaan.",
+      "sumber": "data/site.json"
+    },
+    {
+      "tajuk": "Waktu solat dan tetapan paparan",
+      "teks": "Laman menyediakan bar waktu solat untuk kawasan Kuala Langat dan halaman Tetapan untuk pilihan paparan (tema, saiz teks, kurang gerakan). Pilihan disimpan dalam pelayar pengguna sahaja. Data waktu solat diambil daripada sumber JAKIM e-Solat melalui modul API dalam pelayar.",
+      "sumber": "pages/tetapan.html, css/masa-solat.css"
+    },
+    {
+      "tajuk": "Keahlian dan pendaftaran",
+      "teks": "Maklumat rasmi tentang borang keahlian, yuran dan syarat pendaftaran belum disahkan di laman ini. Untuk keahlian, sumbangan atau urusan pendaftaran, hubungi pejabat melalui WhatsApp 016-353 6126 atau e-mel perkimkualalangat@gmail.com.",
+      "sumber": "tiada dalam data awam"
+    },
+    {
+      "tajuk": "Privasi data",
+      "teks": "Laman ini tidak menghantar data borang ke mana-mana pelayan; borang yang ada ialah demo. Pilihan paparan disimpan dalam storan pelayar. Jangan hantar data peribadi melalui chatbot; chatbot tidak menyimpan maklumat peribadi.",
+      "sumber": "js/modules/forms.js, pages/tetapan.html"
+    },
+    {
+      "tajuk": "Ibu pejabat kebangsaan",
+      "teks": "Ibu Pejabat PERKIM: Tingkat 4 & 6, Bangunan PERKIM, 150 Jalan Sultan Azlan Shah (Jalan Ipoh), 51200 Kuala Lumpur. Telefon: 03-4041 2482 dan 03-4042 6224. Faks: 03-4042 7403. E-mel: info@perkim.net.my.",
+      "sumber": "data/perkim.json"
+    },
+    {
+      "tajuk": "Had chatbot",
+      "teks": "Chatbot ini pembantu AI, bukan wakil rasmi PERKIM. Jawapan terhad kepada fakta dalam data awam laman. Untuk keputusan rasmi, pengesahan status, aduan individu atau urusan kewangan, rujuk pejabat PERKIM Kuala Langat.",
+      "sumber": "dasar laman"
+    }
+  ],
+  "halaman": [
+    {
+      "tajuk": "Utama",
+      "url": "index.html",
+      "keterangan": "Ringkasan cawangan, sorotan program, waktu solat dan pautan utama."
+    },
+    {
+      "tajuk": "Tentang Cawangan",
+      "url": "pages/tentang.html",
+      "keterangan": "Maklumat rasmi, alamat, telefon, waktu pejabat dan status pengesahan kandungan."
+    },
+    {
+      "tajuk": "Latar Belakang PERKIM",
+      "url": "pages/latar-belakang.html",
+      "keterangan": "Sejarah, visi, misi, lima teras, struktur organisasi dan ibu pejabat PERKIM Kebangsaan."
+    },
+    {
+      "tajuk": "Kepimpinan",
+      "url": "pages/kepimpinan.html",
+      "keterangan": "Barisan kepimpinan cawangan sesi 2026–2028 dan status pengesahan setiap jawatan."
+    },
+    {
+      "tajuk": "Aktiviti",
+      "url": "pages/aktiviti.html",
+      "keterangan": "Laporan ringkas program dan aktiviti cawangan dengan pautan Facebook."
+    },
+    {
+      "tajuk": "Berita & Media",
+      "url": "pages/berita.html",
+      "keterangan": "Indeks berita PERKIM Kebangsaan dan pautan ke laman rasmi."
+    },
+    {
+      "tajuk": "Bahan Bacaan",
+      "url": "pages/bahan-bacaan.html",
+      "keterangan": "14 buku teks kelas pengajian Islam dalam lima tahap, boleh dibaca sebagai flipbook."
+    },
+    {
+      "tajuk": "Jaringan PERKIM",
+      "url": "pages/jaringan.html",
+      "keterangan": "Peta jaringan cawangan negeri, cawangan daerah dan rakan antarabangsa."
+    },
+    {
+      "tajuk": "Hubungi",
+      "url": "pages/hubungi.html",
+      "keterangan": "Alamat, peta, WhatsApp, e-mel, waktu operasi dan nota pengesahan."
+    },
+    {
+      "tajuk": "Tetapan",
+      "url": "pages/tetapan.html",
+      "keterangan": "Pilihan paparan setempat dan tetapan waktu solat."
+    }
+  ]
+}

@@ -116,17 +116,22 @@ function loadEnv(file) {
   return o;
 }
 
-const ENV_CANDIDATES = [path.join(ROOT, '.env'), path.join(HERE, '.env')];
-const ENV_FILE = ENV_CANDIDATES.find(f => fs.existsSync(f));
+const ENV_FILES = [path.join(ROOT, '.env'), path.join(HERE, '.env')]
+  .filter((f, i, arr) => fs.existsSync(f) && arr.indexOf(f) === i);
 
-if (!ENV_FILE) {
+if (!ENV_FILES.length) {
   die(
     'Fail .env tiada. Salin .env.example kepada .env (dalam "'
     + path.relative(process.cwd(), HERE) + '" atau akar projek) dan isi token.'
   );
 }
 
-const E = loadEnv(ENV_FILE);
+/* Gabungkan: akar projek dahulu, kemudian folder skrip ini (menang). */
+const E = {};
+for (const f of ENV_FILES) Object.assign(E, loadEnv(f));
+
+const ENV_FILE = ENV_FILES[ENV_FILES.length - 1];
+const ENV_LABEL = ENV_FILES.map(f => path.relative(ROOT, f)).join(' + ');
 
 for (const k of ['GITHUB_USER', 'GITHUB_REPO']) {
   if (!E[k] || /^ISI_/.test(E[k])) {
@@ -265,7 +270,7 @@ if (isRepo) {
 console.log('📦 Akar projek : ' + ROOT);
 console.log('🌿 Cawangan    : ' + BRANCH);
 console.log('🔗 Remote      : ' + REMOTE);
-console.log('🔑 .env        : ' + ENV_FILE);
+console.log('🔑 .env        : ' + ENV_LABEL);
 if (DRY) console.log('🧪 Mod         : dry-run (tiada perubahan ditulis)');
 
 /* ---------- 5. Fail/pattern sulit ----------

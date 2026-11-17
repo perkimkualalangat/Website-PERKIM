@@ -1,0 +1,58 @@
+{
+  "aktif": true,
+  "nama": "PERKIM BOT",
+  "subjudul": "Pembantu maya PERKIM Kuala Langat",
+  "salam": "Assalamualaikum! Saya PERKIM BOT, pembantu maya laman PERKIM Cawangan Kuala Langat. Pilih menu di bawah atau taip soalan anda.",
+  "placeholder": "Taip soalan anda…",
+  "nota": "Jawapan dijana oleh AI dan mungkin tidak lengkap. Sahkan maklumat penting dengan pejabat PERKIM Kuala Langat.",
+  "menu_tajuk": "Menu soalan",
+  "menu": [
+    {
+      "id": "profil",
+      "label": "Profil & peranan",
+      "soalan": "Apakah latar belakang dan peranan PERKIM Cawangan Kuala Langat?"
+    },
+    {
+      "id": "program",
+      "label": "Program & aktiviti",
+      "soalan": "Apakah program dan aktiviti terkini PERKIM Kuala Langat?"
+    },
+    {
+      "id": "kelas",
+      "label": "Kelas pengajian",
+      "soalan": "Apakah tahap kelas pengajian Islam dan buku teks yang tersedia?"
+    },
+    {
+      "id": "buku",
+      "label": "Bahan bacaan",
+      "soalan": "Bagaimana saya boleh membaca buku teks kelas pengajian di laman ini?"
+    },
+    {
+      "id": "kepimpinan",
+      "label": "Kepimpinan",
+      "soalan": "Siapa pengerusi dan barisan kepimpinan PERKIM Kuala Langat?"
+    },
+    {
+      "id": "lokasi",
+      "label": "Lokasi & waktu",
+      "soalan": "Di mana pejabat PERKIM Kuala Langat dan apakah waktu operasinya?"
+    },
+    {
+      "id": "ahli",
+      "label": "Sertai / hubungi",
+      "soalan": "Bagaimana cara menyertai atau menghubungi PERKIM Kuala Langat?"
+    },
+    {
+      "id": "jaringan",
+      "label": "Jaringan PERKIM",
+      "soalan": "Apakah jaringan PERKIM di peringkat kebangsaan dan antarabangsa?"
+    }
+  ],
+  "endpoint": {
+    "localhost": "http://127.0.0.1:8788/api/chat",
+    "produksi": "https://perkim-bot.asyariff-kafa.workers.dev/api/chat"
+  },
+  "whatsapp": "https://wa.me/60163536126",
+  "telegram": "",
+  "_nota_produksi": "Worker perkim-bot di-deploy pada akaun Cloudflare sedia ada. Tukar endpoint.produksi jika worker dipindahkan ke akaun/domain lain."
+}

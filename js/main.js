@@ -16,6 +16,7 @@ import { initTicker } from './modules/ticker.js';
 import { initSorotan } from './modules/sorotan.js';
 import { initMasaSolatUI } from './modules/masa-solat-ui.js';
 import { initTetapan } from './modules/tetapan.js';
+import { initChatbot } from './modules/chatbot/index.js';
 
 document.documentElement.classList.add('js-ready');
 
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initMapButtons();
   initTicker();
   initSorotan();
+  await initChatbot();
 
   if (document.querySelector('#kepimpinan-grid')) await initKepimpinan();
   if (document.querySelector('#perkim-data')) await initPerkim();

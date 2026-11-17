@@ -22,6 +22,10 @@ mengimport gambar dan menjana semula `data/aktiviti.json` tanpa perlu menaip ara
 Menu Tetapan dalam dropdown **Lain-lain** hanya muncul pada `localhost`/`127.0.0.1`;
 GitHub Pages kekal baca sahaja.
 
+**Kemas kini 17 November 2026:** widget **PERKIM BOT** ditambah pada semua halaman —
+chatbot AI berasaskan NVIDIA NIM dengan proksi tempatan (`tools/chat-proxy.mjs`), pangkalan
+pengetahuan `data/chatbot-kontekst.json`, dan worker Cloudflare untuk produksi. Lihat §6c.
+
 ---
 
 ## 1. Entiti yang digunakan
@@ -100,6 +104,10 @@ gagal, pelayan tetap dimulakan dan ralat boleh dilihat di halaman Tetapan.
 > Halaman **Tetapan** memerlukan Node.js kerana API `/api/tetapan/*` hanya ada dalam
 > `tools/serve.mjs`. Jika `start.bat` jatuh balik kepada Python, halaman Tetapan membuka dalam
 > mod baca sahaja.
+>
+> **PERKIM BOT** memerlukan satu lagi terminal: `node tools/chat-proxy.mjs` (port 8788) dan
+> `NVIDIA_API_KEY` dalam `.env`. Tanpanya, widget tetap muncul tetapi jawapan AI tidak tersedia.
+> Butiran dalam §6c.
 
 Secara manual:
 
@@ -123,6 +131,7 @@ menunjuk ke projek MADANI, bukan projek ini.
 ```
 perkim-web/
 ├── start.bat                   Pelayan pralihat (Node atau Python)
+├── .env.example                Contoh kunci chatbot (salin ke .env)
 ├── index.html                  Utama + status laman
 ├── pages/
 │   ├── tentang.html            Profil cawangan (placeholder)
@@ -146,6 +155,7 @@ perkim-web/
 │   ├── library.css             Rak buku + pembaca PDF
 │   ├── ascii-globe.css         Gaya peta bumi ASCII
 │   ├── tetapan.css             Gaya halaman Tetapan (panel, tab, galeri)
+│   ├── chatbot.css             Butang terapung + panel PERKIM BOT
 │   └── vendor/flippy.css       Gaya enjin flippy-pdf
 ├── js/
 │   ├── main.js
@@ -164,6 +174,9 @@ perkim-web/
 │   │   ├── forms.js            Borang draf
 │   │   ├── library/library.js  Rak buku
 │   │   ├── library/engine-flippy.js
+│   │   ├── chatbot/index.js     Widget PERKIM BOT: panel, menu, keadaan
+│   │   ├── chatbot/api.js       Endpoint + klien SSE
+│   │   ├── chatbot/render.js    Pemaparan jawapan (teks selamat)
 │   │   └── utils.js
 │   ├── ascii-globe.js          Komponen peta (canvas, penanda, panel)
 │   ├── ascii-globe-land.js     Data darat Natural Earth (dimuat dahulu)
@@ -192,6 +205,8 @@ perkim-web/
 │   ├── berita.json             Indeks 17 berita terpilih
 │   ├── aktiviti.json           Dijana daripada program/*/caption.md
 │   ├── books.json              Buku teks (5 kumpulan, 14 buku)
+│   ├── chatbot.json            Tetapan widget: nama, salam, menu, endpoint
+│   ├── chatbot-kontekst.json   Pangkalan pengetahuan PERKIM BOT
 │   ├── database_lokasi_perkim.md  Sumber tunggal lokasi (sunting di sini)
 │   └── perkim-network.json     Dijana oleh bina_lokasi.py (jangan sunting)
 ├── assets/
@@ -203,6 +218,7 @@ perkim-web/
 │       └── covers/             Kulit buku (jana daripada halaman 1 PDF)
 └── tools/
     ├── serve.mjs               Pelayan statik tempatan + API /api/tetapan/*
+    ├── chat-proxy.mjs          Proksi chatbot tempatan (127.0.0.1:8788)
     ├── check-motion.mjs        Audit inventori gerakan + fallback
     ├── generate-book.py        Jana semula PDF/kulit
     ├── prepare-logo.py         Jana saiz logo daripada sumber
@@ -213,6 +229,12 @@ perkim-web/
     ├── urus_program.py         Cipta program, imbas gambar, simpan senarai gambar
     ├── check-aktiviti.py       Semak struktur, sumber dan imej aktiviti
     └── check-site.py           Semak pautan, aset, JSON, tag
+worker/                         Worker Cloudflare (produksi) + Telegram
+├── nvidia-chat-worker.js       Laluan /api/chat, /telegram/webhook, /health
+├── chat-core.mjs               Panggilan NVIDIA NIM + streaming + konteks
+├── prompt.mjs                  Prompt sistem, had token, pengesahan mesej
+├── wrangler.toml               Konfigurasi deploy (perkim-bot)
+└── README.md                   Panduan deploy + Telegram
 ```
 
 > Arkib penuh (`data/perkim/`) dan surat dalaman (`surat/`) **tidak** disalin ke folder aktif
@@ -640,6 +662,128 @@ Fail fallback perlu dijana semula pada awal setiap tahun. Lihat
 
 ---
 
+## 6c. Chatbot AI — PERKIM BOT
+
+Widget chatbot terapung di bawah kanan semua halaman. Jawapan dijana oleh
+**NVIDIA NIM** (`nvidia/nemotron-3-ultra-550b-a55b`) berdasarkan
+`data/chatbot-kontekst.json`. Kunci API **tidak pernah** masuk ke pelayar.
+
+### Seni bina
+
+```text
+Widget web ──POST /api/chat──┐
+                             ├── Proksi tempatan / Cloudflare Worker ── NVIDIA NIM
+Telegram webhook ────────────┘            └── data/chatbot-kontekst.json
+```
+
+| Laluan | Fungsi |
+| --- | --- |
+| `js/modules/chatbot/index.js` | Widget, menu soalan, keadaan perbualan, `window.PerkimBot` |
+| `js/modules/chatbot/api.js` | Pilih endpoint, hantar mesej, baca respons SSE |
+| `js/modules/chatbot/render.js` | Papar jawapan dengan selamat (tiada `innerHTML` untuk teks AI) |
+| `css/chatbot.css` | Gaya butang dan panel |
+| `data/chatbot.json` | Nama, salam, menu, endpoint, WhatsApp |
+| `data/chatbot-kontekst.json` | Pangkalan pengetahuan: 22 fakta + 10 halaman |
+| `tools/chat-proxy.mjs` | Proksi tempatan `127.0.0.1:8788` |
+| `worker/` | Worker Cloudflare + webhook Telegram |
+
+Endpoint dipilih oleh `tentukanEndpoint()` dalam `api.js`: `localhost` untuk
+`localhost`/`127.0.0.1`, selebihnya `produksi`. Jika `produksi` kosong, widget
+memaparkan mesej luar talian berserta pautan WhatsApp dan e-mel — ia tidak
+mengalami ralat senyap.
+
+### Jalankan secara tempatan
+
+Dua terminal:
+
+```powershell
+start.bat                                   # pelayan laman di :8081
+node tools/chat-proxy.mjs                   # proksi chatbot di :8788
+```
+
+> Port 8788 dipilih supaya tidak bertembung dengan proksi projek lain yang biasa
+> menggunakan 8787. Jika anda tukar `CHAT_PROXY_PORT`, kemas kini
+> `endpoint.localhost` dalam `data/chatbot.json` supaya sama.
+
+Buka <http://127.0.0.1:8081/>, klik butang **PERKIM BOT**. Semak proksi:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8788/health
+# {"ok":true,"model":"...","kunci":true}
+```
+
+`kunci:true` bermakna `NVIDIA_API_KEY` dibaca, bukan sahaja fail `.env` wujud.
+Jika `kunci:false`, isi kunci sebenar dalam `.env` di akar projek:
+
+```dotenv
+NVIDIA_API_KEY=nvapi-...
+NVIDIA_MODEL=nvidia/nemotron-3-ultra-550b-a55b
+CHAT_PROXY_PORT=8788
+CHAT_ALLOWED_ORIGINS=https://perkimkualalangat.github.io
+```
+
+Dapatkan kunci di <https://build.nvidia.com>. **Jangan** commit `.env`; ia sudah
+disenaraikan dalam `.gitignore` dan `tools/serve.mjs` memulangkan 404 untuk fail
+tersembunyi.
+
+### Deploy Worker
+
+```powershell
+cd worker
+npx wrangler login
+npx wrangler secret put NVIDIA_API_KEY
+npx wrangler deploy
+```
+
+Kemudian isi URL Worker dalam `data/chatbot.json`:
+
+```json
+"endpoint": {
+  "localhost": "http://127.0.0.1:8788/api/chat",
+  "produksi": "https://perkim-bot.<subdomain>.workers.dev/api/chat"
+}
+```
+
+**Status semasa:** `https://perkim-bot.asyariff-kafa.workers.dev/api/chat` — worker
+`perkim-bot` di-deploy pada akaun Cloudflare sedia ada (subdomain `asyariff-kafa`).
+Jika mahu URL berasingan, log masuk akaun Cloudflare lain dan deploy semula, kemudian
+kemas kini `produksi`.
+
+`wrangler.toml` menetapkan `SITE_ORIGIN` dan `ALLOWED_ORIGINS` kepada
+`perkimkualalangat.github.io`. Worker mengambil `data/chatbot.json` dan
+`data/chatbot-kontekst.json` daripada laman itu (cache lima minit), jadi laman
+mesti sudah diterbitkan sebelum worker dapat menjawab.
+
+### Mengubah menu dan pengetahuan
+
+- Menu: sunting array `menu` dalam `data/chatbot.json` (`id`, `label`, `soalan`).
+  Kod tidak perlu disentuh; `id` mesti unik dan pendek (had `callback_data`
+  Telegram 64 bait).
+- Fakta: tambah item dalam `fakta[]` (`tajuk`, `teks`, `sumber`) atau `halaman[]`
+  dalam `data/chatbot-kontekst.json`. Tanda item belum disahkan dengan perkataan
+  "belum disahkan" supaya bot enggan menjawab sebagai fakta.
+- Jangan tambah data peribadi ahli, peserta atau kakitangan.
+
+### Telegram (pilihan)
+
+`worker/README.md` mengandungi langkah penuh: cipta bot dengan **@BotFather**,
+tetapkan `TELEGRAM_BOT_TOKEN` + `TELEGRAM_WEBHOOK_SECRET`, daftar webhook, dan
+arahan `/start`, `/menu`, `/reset`, `/help`. Menu Telegram dibaca daripada
+`data/chatbot.json` yang sama.
+
+### Privasi dan had
+
+- Perbualan tidak disimpan dalam pelayar; sejarah hanya dalam memori halaman
+  (8 mesej terakhir) dan dihantar semula setiap permintaan.
+- Worker menghadkan saiz badan (32 KB), bilangan mesej (8), panjang setiap mesej
+  (2000 aksara), konteks (14 000 aksara), `max_tokens` 600 dan had kadar.
+- Jawapan AI boleh tersilap. Widget memaparkan nota supaya pengguna mengesahkan
+  maklumat penting dengan pejabat.
+- Untuk kos, pantau penggunaan NVIDIA; turunkan `maxTokens` dalam
+  `worker/prompt.mjs` jika perlu.
+
+---
+
 ## 7. Sebelum terbit
 
 1. Semua nama dan jawatan disahkan secara bertulis.
@@ -652,7 +796,9 @@ Fail fallback perlu dijana semula pada awal setiap tahun. Lihat
 6. Kebenaran nama dan logo diperoleh.
 7. Tukar warna/tema jika panduan korporat rasmi berbeza.
 8. Uji pada telefon dan komputer, termasuk carian dan menu mudah alih.
-9. Barulah buang banner draf dan `noindex` — dengan kebenaran pihak cawangan.
+9. Uji PERKIM BOT: proksi tempatan, jawapan untuk setiap menu, dan tingkah laku apabila
+   `endpoint.produksi` kosong. Pastikan tiada data peribadi dalam `data/chatbot-kontekst.json`.
+10. Barulah buang banner draf dan `noindex` — dengan kebenaran pihak cawangan.
 
 ---
 
